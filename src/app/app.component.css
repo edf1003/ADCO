@@ -6,7 +6,7 @@
 }
 
 .resource-list ul {
-    text-align: left;
+    text-align: center;
     margin: 0 auto;
     width: 300px;
 }
@@ -15,6 +15,11 @@
   color: black;
   line-height: 30px;
 }
+
+header{
+  margin-top: 15px;
+}
+
 
 footer {
   bottom: 10px;
