@@ -2,7 +2,7 @@
   font-family: Helvetica, Arial, sans-serif;
   font-size: larger;
   padding: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .resource-list ul {
@@ -23,8 +23,4 @@ footer {
   width: 100%;
   position: fixed;
   text-align: center;
-}
-
-footer img {
-    width: 20px;
 }
