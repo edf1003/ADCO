@@ -66,7 +66,7 @@ The variables below give you the ability to change the gradient colors of the bl
 
 ## Remove Styling
 
-If you decide that our styling is not for you, all you'll need to do is remove the [demo-styling.css](https://github.com/netlify-templates/angular-quickstart/blob/tn/designUpdates/src/demo-styling.css) file. 
+If you decide that our styling is not for you, all you'll need to do is remove the [demo-styling.scss](https://github.com/netlify-templates/angular-quickstart/blob/tn/designUpdates/src/demo-styling.scss) file. 
 
 ## Testing
 

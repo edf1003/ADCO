@@ -1,46 +1,4 @@
 <svg id="background" width='1728' height='1235' viewBox="0 0 1728 1235" fill='none' xmlns='http://www.w3.org/2000/svg'><g opacity='0.75' filter='url(#filter0_f_39_143)'><circle cy='1000' r='264' fill='url(#paint0_linear_39_143)'/></g><g opacity='0.65' filter='url(#filter1_f_39_143)'><circle cx='1720' cy='264' r='379' fill='url(#paint1_linear_39_143)'/></g><defs><filter id='filter0_f_39_143' x='-485' y='515' width='970' height='970' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'><feFlood flood-opacity='0' result='BackgroundImageFix'/><feBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/><feGaussianBlur stdDeviation='110.5' result='effect1_foregroundBlur_39_143'/></filter><filter id='filter1_f_39_143' x='1120' y='-336' width='1200' height='1200' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'><feFlood flood-opacity='0' result='BackgroundImageFix'/><feBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape'/><feGaussianBlur stdDeviation='110.5' result='effect1_foregroundBlur_39_143'/></filter><linearGradient id='paint0_linear_39_143' x1='196.5' y1='902' x2='-2.55853e-05' y2='1264' gradientUnits='userSpaceOnUse'><stop stop-color="var(--bttm-left-blur-1)"/><stop offset='1' stop-color="var(--bttm-left-blur-2)"/></linearGradient><linearGradient id='paint1_linear_39_143' x1='1720' y1='-115' x2='1720' y2='643' gradientUnits='userSpaceOnUse'><stop stop-color="var(--top-right-blur-1)"/><stop offset='1' stop-color="var(--top-right-blur-2)" /></linearGradient></defs></svg>
 <div id="content">
-  <div class="header">
-    <h2 style="font-weight: 500;">TFG - GII 22.40 Aplicación web para realizar análisis de componentes principales, de clustering y de detección de outliers.</h2>
-  </div>
-  <nav>
-      <a>Información</a>
-      <a>Datos</a>
-      <a>3 primeros componentes</a>
-      <a>Resultados</a>
-      <a>Outliers</a>
-      <div class="animation start-Menu"></div>
-  </nav>
-  <div id="resumeTFG">
-    <h3>Introducción al tema:</h3>
-    <p>
-      El objetivo de este proyecto es crear una aplicación web capaz de realizar análisis de componentes principales, de clustering y de detección de outliers
-      sobre un conjunto de datos aportados por el usuario. Para ello, la aplicación deberá poder calcular diferentes tipos de distancias entre puntos, incluyendo la
-      distancia de Mahalanobis. La implementación de esta aplicación requiere llevar a cabo varios análisis matemáticos, a partir de datos proporcionados por el usuario.<br><br>
-      En particular, la aplicación deberá:</p>
-      <ul>
-        <ul>- Graficar los datos de diferentes formas.</ul>
-        <ul>- Llevar a cabo un análisis de componentes principales.</ul>
-        <ul>- Incluir gráficas para los 3 primeros componentes principales.</ul>
-        <ul>- Llevar a cabo un análisis de clustering utilizando diferentes algoritmos (DBSCAN, OPTICS, etc.), basados en diferentes tipos de distancias (euclídea, euclídea normalizada, Mahalanobis, etc.).</ul>
-        <ul>- Graficar los resultados de diferentes formas.</ul>
-        <ul>- Detectar outliers en los datos, usando diferentes tipos de distancias (euclídea, euclídea normalizada, Mahalanobis, etc.).</ul>
-     </ul>
-     <p><br>
-       La aplicación web se pondrá a disposición de la comunidad científica de forma gratuita.
-       La aplicación debe ser web, gratuita, y cederse bajo licencia GNU GPL 3.0.
-       Se realizará sobre Angular (HTML, CSS y JS).
-    </p>
-
-
-  </div>
-  <footer class="footer">
-    <ul>
-      <ul style="font-weight: bold;">Alumno:</ul>
-      <ul>Enrique Diez Fernández.</ul><br>
-      <ul style="font-weight: bold;">Tutores:</ul>
-      <ul>Luis Rodrigo Izquierdo Millán.</ul>
-      <ul>José Manuel Galán Ordax.</ul>
-    </ul>
-  </footer>
+  <app-page-information></app-page-information>
 </div>
