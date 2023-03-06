@@ -1,0 +1,11 @@
+<div *ngIf="valor<10 && valor !== 0">
+  <p>Introduce el nombre de las diferentes variables:</p>
+  <div class="listofinputs">
+    <div *ngFor="let i of inputsArray">
+      <mat-form-field>
+        <mat-label>Label name</mat-label>
+        <input matInput type="text" required>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

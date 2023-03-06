@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: 'app-numberofvariables',
@@ -8,18 +8,24 @@ import { Component } from "@angular/core";
 
 export class numberofvariables {
 
-  valor: number = 0;
+  @Input() valor: number = 0;
+  @Output() valorActualizado = new EventEmitter<number>();
+
+  constructor() {}
 
   guardarValor() {
     if(this.valor>=10){
       var alerta = document.getElementById('alert');
       if (alerta !== null){
         alerta.style.opacity = '100%';
+        this.valor = 0;
+        this.valorActualizado.emit(this.valor);
       }
     } else {
       var alerta = document.getElementById('alert');
       if (alerta !== null){
         alerta.style.opacity = '0%';
+        this.valorActualizado.emit(this.valor);
       }
     }
   }

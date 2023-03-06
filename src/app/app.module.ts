@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { footerAuth } from 'src/components/footer/footer.component';
 import { menuSelector } from 'src/components/menuSelector/menuSelector.component';
@@ -28,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatButtonModule } from '@angular/material/button';
     footerAuth,
     pageTitle,
     data,
-    numberofvariables
+    numberofvariables,
+    AddvariablesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatSliderModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

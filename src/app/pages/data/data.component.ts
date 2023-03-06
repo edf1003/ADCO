@@ -8,5 +8,11 @@ import { Component } from "@angular/core";
 
 export class data {
 
+  valor: number = 0;
+
+  actualizarValor(nuevoValor: number) {
+    this.valor = nuevoValor;
+  }
+
 }
 
