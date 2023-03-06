@@ -92,7 +92,7 @@ For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testin
 [[plugins]]
   package = "netlify-plugin-cypress"
 -  [plugins.inputs.postBuild]
--    enable = false
+-    enable = true
 -
 -  [plugins.inputs]
 -    enable = false 
