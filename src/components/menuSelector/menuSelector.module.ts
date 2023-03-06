@@ -18,4 +18,4 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class MenuSelectorModule { }

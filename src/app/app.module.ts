@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { footerAuth } from 'src/components/footer/footer.component';
 import { menuSelector } from 'src/components/menuSelector/menuSelector.component';
 import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
 import { data } from '../app/pages/data/data.component'
+import { numberofvariables } from './pages/data/numberofvariables/numberofvariables.component';
+
+
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,8 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
-
-
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -31,11 +37,14 @@ import { MatIconModule } from '@angular/material/icon';
     menuSelector,
     footerAuth,
     pageTitle,
-    data
+    data,
+    numberofvariables
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
     MatAutocompleteModule,
@@ -47,7 +56,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatRadioModule,
     MatSelectModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

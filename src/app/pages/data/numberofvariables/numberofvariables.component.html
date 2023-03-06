@@ -1,0 +1,9 @@
+<h3>Número de variables:</h3>
+<div class="introducevariables">
+  <mat-form-field appearance="fill">
+    <mat-label>Introduce un valor</mat-label>
+    <input  matInput [(ngModel)]="valor" name="valor" type="number" required maxlength="2">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="guardarValor()">Enviar</button>
+</div>
+<p id="alert" style="opacity: 0%;">Por favor, escoge un número menor de 10.</p>
