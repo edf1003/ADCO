@@ -1,86 +1,11 @@
-
-/*----------------------Menu Start----------------------------------*/
-nav{
-  position: relative;
-  width: 100%;
-  height: 70px;
-  background-color: #34495e;
-  font-size: 0px;
-  margin-bottom: 3%;
-  padding-top: 8px;
+.template{
+  width: 200px;
+  max-width: 200px;
 }
 
-nav a{
-  line-height: 50px;
-  height: 100%;
-  font-size: 20px;
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-  text-decoration: none;
-  text-transform: uppercase;
-  text-align: center;
-  color: white;
-  cursor: pointer;
+.gitlogo{
+  width: 45px;
+  height: 25px;
 }
 
-nav .animation {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  z-index: 0;
-  transition: all .5s ease 0s;
 
-}
-
-a:nth-child(1){
-  width: 20%;
-}
-
-a:nth-child(2){
-  width: 20%;
-}
-
-a:nth-child(3){
-  width: 20%;
-}
-
-a:nth-child(4){
-  width: 20%;
-}
-
-a:nth-child(5){
-  width: 20%;
-}
-
-nav .start-Menu, a:nth-child(1):hover~.animation {
-  width: 20%;
-  left: 0%;
-  background-color: #1abc9c;
-}
-
-nav a:nth-child(2):hover~.animation {
-  width: 20%;
-  left: 20%;
-  background-color: #e74c3c;
-}
-
-nav a:nth-child(3):hover~.animation {
-  width: 20%;
-  left: 40%;
-  background-color: #3498db;
-}
-
-nav a:nth-child(4):hover~.animation {
-  width: 20%;
-  left: 60%;
-  background-color: #9b59b6;
-}
-
-nav a:nth-child(5):hover~.animation {
-  width: 20%;
-  left: 80%;
-  background-color: #e57e22;
-}
-
-/*----------------menu End-----------------------------*/

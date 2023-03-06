@@ -1,10 +1,20 @@
-<div>
-  <nav>
-    <a>Información</a>
-    <a>Datos</a>
-    <a>3 primeros componentes</a>
-    <a>Resultados</a>
-    <a>Outliers</a>
-    <div class="animation start-Menu"></div>
-  </nav>
-</div>
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Información"><app-page-information></app-page-information></mat-tab>
+  <mat-tab label="Datos"></mat-tab>
+  <mat-tab label="ACP"> </mat-tab>
+  <mat-tab label="Clustering"></mat-tab>
+  <mat-tab label="Outliers"></mat-tab>
+  <mat-tab disabled="">
+    <ng-template mat-tab-label class="template">
+      <a href="https://github.com/edf1003/TFG" style="text-decoration: none; color:black;">
+      <img class="gitlogo" src="../../assets/img/gitlogo.jpg">
+      GitHub
+    </a>
+    </ng-template></mat-tab>
+</mat-tab-group>
+
+
+
+
+
+
