@@ -19,7 +19,7 @@
     "@angular/localize": "^13.3.11",
     "@angular/material": "^13.3.9",
     "@angular/platform-browser": "~13.3.0",
-    "@angular/platform-browser-dynamic": "^13.3.11",
+    "@angular/platform-browser-dynamic": "^13.3.12",
     "@angular/router": "~13.3.0",
     "@popperjs/core": "^2.11.6",
     "animate.css": "^4.1.1",
