@@ -31,11 +31,13 @@
 <table *ngIf="buttonPush">
     <thead>
       <tr>
+        <th>ID</th>
         <th *ngFor="let label of cabeceraTabla">{{ label }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let paquetededatos of datosTabla">
+        <td></td>
         <td *ngFor="let data of paquetededatos">{{ data }}</td>
       </tr>
     </tbody>

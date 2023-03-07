@@ -11,6 +11,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  counter-reset: rowNumber;
 }
 
 table th, table td {
@@ -26,4 +27,9 @@ table th {
 
 table td:first-child {
   font-weight: bold;
+}
+
+tr td:first-child:before {
+  counter-increment: rowNumber;
+  content: counter(rowNumber);
 }
