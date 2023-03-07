@@ -10,9 +10,6 @@ import { numberofvariables } from './pages/data/numberofvariables/numberofvariab
 import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
 
 
-
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { information } from './pages/information/information.component';

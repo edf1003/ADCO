@@ -14,7 +14,9 @@ export class AddvariablesComponent implements OnChanges {
   formulariodecabeceras: FormGroup;
   formulariodedatos: FormGroup;
 
-  buttonPush: boolean = false
+  buttonPush: boolean = false;
+  isdisabledlabels: boolean = false;
+  anydataisempty: boolean = false;
 
   cabeceraTabla: string[] = [];
   datosTabla: string[][] = []; //Array de objetros paquetededatos
@@ -51,16 +53,30 @@ export class AddvariablesComponent implements OnChanges {
         this.formulariodecabeceras.get("label" + i)?.disable()
       }
     }
+    this.isdisabledlabels = true;
 
   }
 
   setdata(){
     this.paquetedatos = []
+    this.anydataisempty = false;
     for (let i = 0;i < this.valor; i++) {
       this.paquetedatos.push(this.formulariodedatos.get("data" + i)?.value);
+      if(this.formulariodedatos.get("data" + i)?.value === ""){
+        this.anydataisempty = true
+        var alerta = document.getElementById('alert2');
+        if (alerta !== null){
+          alerta.style.opacity = '100%';
+        }
+      }
       this.formulariodedatos.get("data" + i)?.setValue("");
     }
-    this.datosTabla.push(this.paquetedatos)
-
+    if(this.anydataisempty === false){
+      this.datosTabla.push(this.paquetedatos)
+      var alerta = document.getElementById('alert2');
+        if (alerta !== null){
+          alerta.style.opacity = '0%';
+        }
+    }
   }
 }

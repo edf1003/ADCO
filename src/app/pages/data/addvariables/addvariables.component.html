@@ -7,13 +7,14 @@
         <input matInput [formControlName]="'label' + i" type="text" required >
       </mat-form-field>
     </div>
-    <button mat-raised-button type="submit" color="primary">Enviar</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="isdisabledlabels">Enviar</button>
   </form>
 
+<br><br>
 
 <div *ngIf="buttonPush">
   <p>Introduce el valor de las variables:</p>
-    <form [formGroup]="formulariodedatos" (submit)="setdata()" class="listofinputs">
+    <form [formGroup]="formulariodedatos" (submit)="setdata()" class="listofinputs" >
     <div *ngFor="let input of inputsArray; let i = index">
       <mat-form-field>
         <mat-label>Variable {{i}}</mat-label>
@@ -22,11 +23,12 @@
     </div>
     <button mat-raised-button type="submit" color="primary">Introducir</button>
   </form>
+  <p id="alert2" style="opacity: 0%;">No puedes introducir valores vacios.</p>
 </div>
 
-
 <br><br>
-  <table *ngIf="buttonPush">
+
+<table *ngIf="buttonPush">
     <thead>
       <tr>
         <th *ngFor="let label of cabeceraTabla">{{ label }}</th>
