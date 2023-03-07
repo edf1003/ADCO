@@ -26,6 +26,8 @@ export class numberofvariables {
       if (alerta !== null){
         alerta.style.opacity = '0%';
         this.valorActualizado.emit(this.valor);
+        var boton = document.getElementById('botonGuardar') as HTMLButtonElement;
+        boton.disabled = true;
       }
     }
   }

@@ -1,11 +1,43 @@
 <div *ngIf="valor<10 && valor !== 0">
   <p>Introduce el nombre de las diferentes variables:</p>
-  <div class="listofinputs">
-    <div *ngFor="let i of inputsArray">
+    <form [formGroup]="formulariodecabeceras" (submit)="creartabla()" class="listofinputs">
+    <div *ngFor="let input of inputsArray; let i = index">
       <mat-form-field>
-        <mat-label>Label name</mat-label>
-        <input matInput type="text" required>
+        <mat-label>Variable {{i}}</mat-label>
+        <input matInput [formControlName]="'label' + i" type="text" required >
       </mat-form-field>
     </div>
-  </div>
+    <button mat-raised-button type="submit" color="primary">Enviar</button>
+  </form>
+
+
+<div *ngIf="buttonPush">
+  <p>Introduce el valor de las variables:</p>
+    <form [formGroup]="formulariodedatos" (submit)="setdata()" class="listofinputs">
+    <div *ngFor="let input of inputsArray; let i = index">
+      <mat-form-field>
+        <mat-label>Variable {{i}}</mat-label>
+        <input matInput [formControlName]="'data' + i" type="number" required >
+      </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit" color="primary">Introducir</button>
+  </form>
 </div>
+
+
+<br><br>
+  <table *ngIf="buttonPush">
+    <thead>
+      <tr>
+        <th *ngFor="let label of cabeceraTabla">{{ label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paquetededatos of datosTabla">
+        <td *ngFor="let data of paquetededatos">{{ data }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+

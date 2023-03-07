@@ -2,6 +2,6 @@
 <div id="datauser">
   <h3><strong>Introducción de datos</strong></h3>
   <app-numberofvariables [valor]="valor" (valorActualizado)="actualizarValor($event)"></app-numberofvariables>
-  <app-addvariables [valor]="valor"></app-addvariables>
+  <app-addvariables *ngIf="valor !== null" [valor]="valor"></app-addvariables>
 </div>
 

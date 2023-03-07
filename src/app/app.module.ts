@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { footerAuth } from 'src/components/footer/footer.component';
 import { menuSelector } from 'src/components/menuSelector/menuSelector.component';
 import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
 import { data } from '../app/pages/data/data.component'
 import { numberofvariables } from './pages/data/numberofvariables/numberofvariables.component';
+import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
 
 
 
@@ -28,7 +29,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { AddvariablesComponent } from './pages/data/addvariables/addvariables.co
     pageTitle,
     data,
     numberofvariables,
-    AddvariablesComponent
+    AddvariablesComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,9 @@ import { AddvariablesComponent } from './pages/data/addvariables/addvariables.co
     MatSliderModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

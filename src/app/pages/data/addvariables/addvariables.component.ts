@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-addvariables',
@@ -8,18 +9,58 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 export class AddvariablesComponent implements OnChanges {
 
   @Input() valor: number = 0;
-  inputsArray: any[] = new Array(this.valor);
+  inputsArray: any[] = new Array(this.valor); //Array para poder iterar sobre un numero "valor" de labels.
 
-  constructor() {}
+  formulariodecabeceras: FormGroup;
+  formulariodedatos: FormGroup;
+
+  buttonPush: boolean = false
+
+  cabeceraTabla: string[] = [];
+  datosTabla: string[][] = []; //Array de objetros paquetededatos
+  paquetedatos: string[] = []; //Array de datos de una fila
+
+  constructor() {
+    this.formulariodecabeceras = new FormGroup({});
+    this.formulariodedatos = new FormGroup({});
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.valor<10){
-      this.inputsArray = new Array(this.valor);
-    }
-    else{
-      this.valor = 0
-      this.inputsArray = new Array(0);
+    if(this.valor){
+      if (this.valor<10){
+        this.inputsArray = new Array(this.valor);
+        for (let i = 0;i < this.valor; i++) {
+          const control = new FormControl('');
+          this.formulariodecabeceras.addControl("label" + i, control);
+          const controldata = new FormControl('',  Validators.compose([Validators.required, Validators.min(1)]));
+          this.formulariodedatos.addControl("data" + i, controldata );
+        }
+      }
+      else{
+        this.valor = 0
+        this.inputsArray = new Array(0);
+      }
     }
   }
 
+  creartabla(){
+    this.buttonPush = true;
+    for (let i = 0;i < this.valor; i++) {
+      if(this.formulariodecabeceras.get("label" + i)?.enabled){
+        this.cabeceraTabla.push(this.formulariodecabeceras.get("label" + i)?.value);
+        this.formulariodecabeceras.get("label" + i)?.disable()
+      }
+    }
+
+  }
+
+  setdata(){
+    this.paquetedatos = []
+    for (let i = 0;i < this.valor; i++) {
+      this.paquetedatos.push(this.formulariodedatos.get("data" + i)?.value);
+      this.formulariodedatos.get("data" + i)?.setValue("");
+    }
+    this.datosTabla.push(this.paquetedatos)
+
+  }
 }

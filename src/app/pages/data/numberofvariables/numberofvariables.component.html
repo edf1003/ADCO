@@ -4,6 +4,6 @@
     <mat-label>Introduce un valor</mat-label>
     <input  matInput [(ngModel)]="valor" name="valor" type="number" required maxlength="2">
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="guardarValor()">Enviar</button>
+  <button mat-raised-button color="primary" (click)="guardarValor()" id="botonGuardar" disabled="false">Enviar</button>
 </div>
 <p id="alert" style="opacity: 0%;">Por favor, escoge un número menor de 10.</p>
