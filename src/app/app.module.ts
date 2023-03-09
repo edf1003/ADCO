@@ -38,7 +38,7 @@ import { MatTableModule } from '@angular/material/table';
     pageTitle,
     data,
     numberofvariables,
-    AddvariablesComponent,
+    AddvariablesComponent
   ],
   imports: [
     BrowserModule,

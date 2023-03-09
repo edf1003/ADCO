@@ -16,7 +16,7 @@ table {
 
 table th, table td {
   padding: 8px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid black;
 }
 
@@ -32,4 +32,9 @@ table td:first-child {
 tr td:first-child:before {
   counter-increment: rowNumber;
   content: counter(rowNumber);
+}
+
+.buttonEnd {
+  display: flex;
+  justify-content: right;
 }

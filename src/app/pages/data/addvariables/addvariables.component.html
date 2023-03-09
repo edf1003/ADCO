@@ -31,17 +31,24 @@
 <table *ngIf="buttonPush">
     <thead>
       <tr>
-        <th>ID</th>
+        <th style="width: 10%;">ID</th>
         <th *ngFor="let label of cabeceraTabla">{{ label }}</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let paquetededatos of datosTabla">
+      <tr *ngFor="let paquetededatos of datosTabla; let i = index">
         <td></td>
         <td *ngFor="let data of paquetededatos">{{ data }}</td>
+        <td style="width: 15%;">
+          <button mat-flat-button type="button" color="primary" style="margin-inline: 10px;" (click)="editcolumn(i)">Editar</button>
+          <button mat-flat-button type="button" color="warn" style="margin-inline: 10px;" (click)="deletecolumn(i)">Eliminar</button></td>
       </tr>
     </tbody>
   </table>
-
+<br><br>
+<div class="buttonEnd">
+  <button *ngIf="buttonPush" mat-raised-button type="button" color="primary" [disabled]="disabledbuttonend">Enviar Datos</button>
+</div>
 </div>
 

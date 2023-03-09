@@ -17,6 +17,7 @@ export class AddvariablesComponent implements OnChanges {
   buttonPush: boolean = false;
   isdisabledlabels: boolean = false;
   anydataisempty: boolean = false;
+  disabledbuttonend: boolean = true;
 
   cabeceraTabla: string[] = [];
   datosTabla: string[][] = []; //Array de objetros paquetededatos
@@ -70,6 +71,7 @@ export class AddvariablesComponent implements OnChanges {
         }
       }
       this.formulariodedatos.get("data" + i)?.setValue("");
+      this.disabledbuttonend = false;
     }
     if(this.anydataisempty === false){
       this.datosTabla.push(this.paquetedatos)
@@ -79,4 +81,14 @@ export class AddvariablesComponent implements OnChanges {
         }
     }
   }
+
+  deletecolumn(index: number){
+    this.datosTabla.splice(index,1);
+  }
+
+  editcolumn(index: number){
+    this.datosTabla[index];
+    window.alert("Future Feature.")
+  }
+
 }
