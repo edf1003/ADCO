@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { AcpComponent } from './pages/acp/acp.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatTableModule } from '@angular/material/table';
     pageTitle,
     data,
     numberofvariables,
-    AddvariablesComponent
+    AddvariablesComponent,
+    AcpComponent
   ],
   imports: [
     BrowserModule,

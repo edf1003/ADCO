@@ -1,0 +1,23 @@
+<div class="descripcion">
+  <h2>Definición</h2>
+    <p>ACP (Análisis de Componentes Principales), construye una transformación lineal que elige un nuevo sistema de coordenadas para el conjunto de datos original cuya varianza más grande se fija
+      en el primer eje (llamado el primer componente principal), la varianza grande en segundo lugar en el segundo eje y así sucesivamente. Para construir
+      esta transformación lineal, primero debe construir la matriz de covarianza o la matriz de coeficiente de correlación. Debido a la simetría de esta matriz,
+      existe una base adecuada para sus vectores propios. La transformación que convierte las coordenadas antiguas en las coordenadas de la nueva base es una
+      transformación lineal necesaria para reducir la dimensionalidad de los datos. Además, las coordenadas en la nueva base de datos producen el componente
+      factorial subyacente de los datos originales.</p>
+      <p>ACP es especialmente útil para reducir el tamaño de los conjuntos de datos. Los primeros componentes principales describen la mayor parte de la
+      varianza en los datos (cuanto más estrechamente correlacionadas están las variables iniciales). Estas subsecciones a veces contienen el aspecto
+      "más importante" de la información y se pueden omitir otros elementos. Existen diferentes métodos para estimar el número de componentes principales
+      significativos; El método más apropiado dependerá de la estructura de correlación en los datos originales.</p>
+  <br>
+
+  <p><strong>Introduce el nuevo número de variables:</strong></p>
+  <form [formGroup]="formulariodenumero" (submit)="setnumberofnewlabels()" class="listofinputs">
+    <mat-form-field>
+      <mat-label>Numero de variables</mat-label>
+      <input matInput [formControlName]="'numberofnewlabels'" type="number" required >
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary" style="margin-left: 20px;">Introducir</button>
+  </form>
+</div>

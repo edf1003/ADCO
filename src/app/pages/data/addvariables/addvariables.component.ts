@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { sendDataTable } from '../../../services/sendDataTable.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-addvariables',
@@ -17,13 +19,14 @@ export class AddvariablesComponent implements OnChanges {
   buttonPush: boolean = false;
   isdisabledlabels: boolean = false;
   anydataisempty: boolean = false;
-  disabledbuttonend: boolean = true;
+  optionFileBool: boolean = false;
+  optionManualBool: boolean = false;
 
-  cabeceraTabla: string[] = [];
-  datosTabla: string[][] = []; //Array de objetros paquetededatos
+  cabeceraTabla: Array<string> = [];
+  datosTabla: Array<Array<any>> = []; //Array de objetros paquetededatos
   paquetedatos: string[] = []; //Array de datos de una fila
 
-  constructor() {
+  constructor(private sendData: sendDataTable) {
     this.formulariodecabeceras = new FormGroup({});
     this.formulariodedatos = new FormGroup({});
   }
@@ -38,6 +41,8 @@ export class AddvariablesComponent implements OnChanges {
           const controldata = new FormControl('',  Validators.compose([Validators.required, Validators.min(1)]));
           this.formulariodedatos.addControl("data" + i, controldata );
         }
+        this.optionFileBool = false;
+        this.optionManualBool = !this.optionFileBool;
       }
       else{
         this.valor = 0
@@ -71,7 +76,6 @@ export class AddvariablesComponent implements OnChanges {
         }
       }
       this.formulariodedatos.get("data" + i)?.setValue("");
-      this.disabledbuttonend = false;
     }
     if(this.anydataisempty === false){
       this.datosTabla.push(this.paquetedatos)
@@ -91,4 +95,24 @@ export class AddvariablesComponent implements OnChanges {
     window.alert("Future Feature.")
   }
 
+  sendDatos(){
+    this.sendData.setDatosTabla(this.datosTabla);
+  }
+
+  onFileSelected(event: any): void {
+    let archivo = event.target.files[0];
+    let lector = new FileReader();
+    lector.onload = (e: any) => {
+      let datos = new Uint8Array(e.target.result);
+      let libro = XLSX.read(datos, { type: 'array' });
+      let hoja = libro.Sheets[libro.SheetNames[0]];
+      let json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+      this.cabeceraTabla = json[0] as Array<string>;
+      this.datosTabla = json.slice(1) as Array<Array<any>>;
+      this.valor = this.cabeceraTabla.length;
+      this.optionFileBool = true;
+      this.optionManualBool = !this.optionFileBool;
+    };
+    lector.readAsArrayBuffer(archivo);
+  }
 }
