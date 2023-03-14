@@ -1,6 +1,5 @@
-<app-page-title></app-page-title>
-<div id="datauser">
-  <h3><strong>Introducción de datos</strong></h3>
+<div class="datauser">
+  <h2>Introducción de datos</h2>
   <app-numberofvariables [valor]="valor" (valorActualizado)="actualizarValor($event)"></app-numberofvariables>
   <app-addvariables *ngIf="valor !== null" [valor]="valor"></app-addvariables>
 </div>
