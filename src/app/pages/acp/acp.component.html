@@ -12,10 +12,10 @@
       significativos; El método más apropiado dependerá de la estructura de correlación en los datos originales.</p>
   <br>
 
-  <p><strong>Introduce el nuevo número de variables:</strong></p>
+  <p><strong>Introduce el número de componentes principales:</strong></p>
   <form [formGroup]="formulariodenumero" (submit)="setnumberofnewlabels()" class="listofinputs">
     <mat-form-field>
-      <mat-label>Numero de variables</mat-label>
+      <mat-label>Numero de CP</mat-label>
       <input matInput [formControlName]="'numberofnewlabels'" type="number" required >
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary" style="margin-left: 20px;">Introducir</button>

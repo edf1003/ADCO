@@ -1,5 +1,6 @@
 <div *ngIf="!optionManualBool">
   <input type="file" (change)="onFileSelected($event)">
+  <br><br><p>Recuerda que el archivo debe de ser tipo Excel (.xlsx) y la primera fila debe contener el nombre de las variables.</p>
 </div>
 
 <div *ngIf="(valor<10 && valor !== 0) && !optionFileBool">
