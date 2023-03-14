@@ -28,7 +28,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { AcpComponent } from './pages/acp/acp.component';
-import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -63,7 +62,6 @@ import { NgChartsModule } from 'ng2-charts';
     MatButtonModule,
     ReactiveFormsModule,
     MatTableModule,
-    NgChartsModule
 
   ],
   providers: [],
