@@ -14,6 +14,7 @@ export class AcpComponent  implements OnDestroy {
   formulariodenumero: FormGroup;
   datosTabla: string[][] = [];
   private datosTablaSub: Subscription;
+  twoLabels: boolean = false;
 
   constructor(private sendData: sendDataTable) {
     this.formulariodenumero = new FormGroup({});
@@ -22,6 +23,9 @@ export class AcpComponent  implements OnDestroy {
     this.datosTablaSub = this.sendData.getDatosTabla().subscribe(datos => {
       this.datosTabla = datos;
       });
+    if (this.datosTabla.length === 2){
+      this.twoLabels = true;
+    }
   }
 
 
@@ -31,13 +35,8 @@ export class AcpComponent  implements OnDestroy {
 
   setnumberofnewlabels(){
     this.numberofnewlabels = this.formulariodenumero.get("numberofnewlabels")?.value;
-    this.datosTablaSub = this.sendData.getDatosTabla().subscribe(datos => {
-      this.datosTabla = datos;
-      });
-    window.alert(this.datosTabla[0]);
+    if(this.datosTabla[0].length===2){
+      this.twoLabels = true;
+    }
   }
-
-
-
-
 }

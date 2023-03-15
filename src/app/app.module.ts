@@ -8,6 +8,7 @@ import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
 import { data } from '../app/pages/data/data.component'
 import { numberofvariables } from './pages/data/numberofvariables/numberofvariables.component';
 import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
+import { ScarttChartComponent } from '../components/scartt-chart/scartt-chart.component'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { AcpComponent } from './pages/acp/acp.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { AcpComponent } from './pages/acp/acp.component';
     data,
     numberofvariables,
     AddvariablesComponent,
-    AcpComponent
+    AcpComponent,
+    ScarttChartComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +65,7 @@ import { AcpComponent } from './pages/acp/acp.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatTableModule,
+    NgChartsModule
 
   ],
   providers: [],
