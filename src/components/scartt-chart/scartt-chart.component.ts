@@ -4,11 +4,11 @@ import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
 @Component({
   selector: 'app-scartt-chart',
   templateUrl: './scartt-chart.component.html',
-  styleUrls: ['./scartt-chart.component.css']
+  styleUrls: ['./scartt-chart.component.scss']
 })
 export class ScarttChartComponent implements OnInit{
 
-  @Input() scarttChartData: string[][] = [];
+  @Input() scarttChartData: number[][] = [];
 
   public chartOptions: ChartOptions = {
     responsive: true,
@@ -33,7 +33,6 @@ export class ScarttChartComponent implements OnInit{
   public chartType: ChartType = 'scatter';
   public chartLabels: string[] = [];
   public chartLegend = false;
-
   public chartData: ChartDataset[] = [];
 
   constructor() {}
@@ -43,18 +42,18 @@ export class ScarttChartComponent implements OnInit{
   }
 
   agregarPuntos() {
-    const puntos = [];
-    for (let i = 0; i < this.scarttChartData.length; i++) {
-      const x = parseInt(this.scarttChartData[i][0]);
-      const y = parseInt(this.scarttChartData[i][1]);
-      puntos.push({ x: x, y: y });
+    const puntos = this.scarttChartData.map(([xStr, yStr]) => {
+      const x = +xStr;
+      const y = +yStr;
       this.chartLabels.push(`(${x}, ${y})`);
-    }
+      return {x, y};
+    });
     this.chartData.push({
       data: puntos,
       label: 'Puntos',
       pointRadius: 8,
       pointHoverRadius: 8,
+      pointBackgroundColor: '#73C6B6'
     });
   }
 

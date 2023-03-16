@@ -5,9 +5,9 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class sendDataTable {
-  private datosTablaSubject = new BehaviorSubject<string[][]>([]);
+  private datosTablaSubject = new BehaviorSubject<number[][]>([]);
 
-  setDatosTabla(datos: string[][]) {
+  setDatosTabla(datos: number[][]) {
     this.datosTablaSubject.next(datos);
   }
 
