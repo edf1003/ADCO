@@ -53,6 +53,7 @@ export class ScarttChartComponent implements OnInit{
       label: 'Puntos',
       pointRadius: 8,
       pointHoverRadius: 8,
+      pointHoverBackgroundColor: '#73C6B6',
       pointBackgroundColor: '#73C6B6'
     });
   }

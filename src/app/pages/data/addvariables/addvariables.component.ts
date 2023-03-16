@@ -97,7 +97,6 @@ export class AddvariablesComponent implements OnChanges {
 
   sendDatos(){
     this.sendData.setDatosTabla(this.datosTabla);
-    window.alert("Ya puedes acceder a ACP.")
   }
 
   onFileSelected(event: any): void {

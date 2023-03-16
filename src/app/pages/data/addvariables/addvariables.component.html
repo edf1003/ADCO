@@ -45,7 +45,7 @@
         <tr *ngFor="let paquetededatos of datosTabla; let i = index">
           <td></td>
           <td *ngFor="let data of paquetededatos">{{ data }}</td>
-          <td style="width: 15%;">
+          <td style="width: 20%;">
             <button mat-flat-button type="button" color="primary" style="margin-inline: 10px;" (click)="editcolumn(i)">Editar</button>
             <button mat-flat-button type="button" color="warn" style="margin-inline: 10px;" (click)="deletecolumn(i)">Eliminar</button></td>
         </tr>
@@ -53,6 +53,6 @@
     </table>
   <br><br>
   <div class="buttonEnd">
-    <button *ngIf="buttonPush || optionFileBool" mat-raised-button type="button" color="primary" (click)="sendDatos()">Enviar Datos</button>
+    <button *ngIf="buttonPush || optionFileBool" matStepperNext mat-raised-button type="button" color="primary" (click)="sendDatos()">Enviar Datos</button>
   </div>
 
