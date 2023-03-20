@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartDataset, ChartOptions, ChartType } from 'chart.js';
+import { ChartDataset, ChartOptions, ChartType, ScriptableScaleContext } from 'chart.js';
 
 @Component({
   selector: 'app-scartt-chart',
@@ -14,13 +14,37 @@ export class ScarttChartComponent implements OnInit{
     responsive: true,
     scales: {
       x: {
+        ticks: {
+          color: 'rgba(0,0,0,0.6)',
+        },
+        grid: {
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
+        },
         display: true,
         title: {
           display: true,
           text: 'X Axis Label'
-        }
+        },
       },
       y: {
+        ticks: {
+          color: 'rgba(0,0,0,0.6)'
+        },
+        grid:{
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
+        },
         display: true,
         title: {
           display: true,
