@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { sendDataTable } from '../../services/sendDataTable.service';
 import { Subscription } from 'rxjs';
-import { PCA, PredictOptions } from "ml-pca";
+import { PCA, PredictOptions, PCAOptions } from "ml-pca";
 import { data } from '../data/data.component';
 
 @Component({
@@ -37,6 +37,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
   pcaStandDev:  any;
   resultPCA: any;
   pcaInvert: any;
+  resultPCAStand: any;
 
 
   constructor(private sendData: sendDataTable) {
@@ -78,7 +79,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
   setnumberofnewlabels(){
     this.numberofnewlabels = this.formulariodenumero.get("numberofnewlabels")?.value;
     this.sendIsPressed = true;
-    var pca = new PCA(this.datosTabla);
+    const pca = new PCA(this.datosTabla, { center: true });
     this.pcaCumuVal = pca.getCumulativeVariance();
     this.pcaEigenValues = pca.getEigenvalues();
     this.pcaEigenVectors = pca.getEigenvectors().to2DArray();
@@ -87,7 +88,11 @@ export class AcpComponent  implements OnDestroy, OnInit {
     this.pcaStandDev = pca.getStandardDeviations();
     this.resultPCA = pca.predict(this.datosTabla).to2DArray();
 
-    this.standarizedData()
+    this.standarizedDataset = this.standardizeArray(this.datosTabla);
+
+    var pcaStand = new PCA(this.standarizedDataset, {center:true});
+    this.resultPCAStand = pcaStand.predict(this.standarizedDataset).to2DArray();
+
 
     if(this.datosTabla[0].length===2){
       this.twoLabels = true;
@@ -98,21 +103,21 @@ export class AcpComponent  implements OnDestroy, OnInit {
       this.isOne = false;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset2.push([this.resultPCA[i][0],this.resultPCA[i][1]]);
-        this.dataset2Stand.push([this.standarizedDataset[i][0],this.standarizedDataset[i][1]])
+        this.dataset2Stand.push([this.resultPCAStand[i][0],this.resultPCAStand[i][1]])
       }
     } else if(this.numberofnewlabels === 1){
       this.isTwo = false;
       this.isOne = true;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset1.push([this.resultPCA[i][0],0]);
-        this.dataset1Stand.push([this.standarizedDataset[i][0],0]);
+        this.dataset1Stand.push([this.resultPCAStand[i][0],0]);
       }
     } else {
       this.isTwo = false;
       this.isOne = false;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset1.push([this.resultPCA[i][0],0]);
-        this.dataset1Stand.push([this.standarizedDataset[i][0],0]);
+        this.dataset1Stand.push([this.resultPCAStand[i][0],0]);
       }
     }
   }
@@ -121,29 +126,38 @@ export class AcpComponent  implements OnDestroy, OnInit {
     this.showPredictions = !this.showPredictions;
   }
 
-  standarizedData(){
-    let mediaValues: number[] = [];
-    for(let i = 0; i<this.datosTabla[0].length; i++){
-      mediaValues[i] = 0;
-      for(let j = 0; j<this.datosTabla.length; j++){
-        mediaValues[i] = mediaValues[i] + this.datosTabla[j][i];
+  standardizeArray(arr: number[][]): number[][] {
+    const n = arr.length;
+    const m = arr[0].length;
+    const means = new Array(m).fill(0);
+    const stds = new Array(m).fill(0);
+
+    // calcular la media y la desviación estándar de cada columna
+    for (let j = 0; j < m; j++) {
+      let sum = 0;
+      for (let i = 0; i < n; i++) {
+        sum += arr[i][j];
       }
-      mediaValues[i] = mediaValues[i] / this.datosTabla.length;
+      const mean = sum / n;
+      means[j] = mean;
+
+      let variance = 0;
+      for (let i = 0; i < n; i++) {
+        variance += (arr[i][j] - mean) ** 2;
+      }
+      const std = Math.sqrt(variance / n);
+      stds[j] = std;
     }
 
-    for (let i = 0; i < this.datosTabla.length; i++) {
-      this.standarizedDataset[i] = [];
-    }
-    for (let i = 0; i < this.datosTabla.length; i++) {
-      for (let j = 0; j < this.datosTabla[0].length; j++) {
-        this.standarizedDataset[i][j] = 0;
+    // normalizar los datos utilizando el z-score
+    const standardizedArr = new Array(n);
+    for (let i = 0; i < n; i++) {
+      standardizedArr[i] = new Array(m);
+      for (let j = 0; j < m; j++) {
+        standardizedArr[i][j] = (arr[i][j] - means[j]) / stds[j];
       }
     }
 
-    for(let i = 0; i<this.standarizedDataset.length; i++){
-       for(let j = 0; j<this.standarizedDataset[0].length; j++){
-        this.standarizedDataset[i][j] = ((this.resultPCA[i][j] - mediaValues[j])/this.pcaStandDev[j]);
-      }
-    }
+    return standardizedArr;
   }
 }
