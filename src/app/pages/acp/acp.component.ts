@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { sendDataTable } from '../../services/sendDataTable.service';
 import { Subscription } from 'rxjs';
 import { PCA, PredictOptions } from "ml-pca";
+import { data } from '../data/data.component';
 
 @Component({
   selector: 'app-acp',
@@ -16,6 +17,9 @@ export class AcpComponent  implements OnDestroy, OnInit {
   datosTabla: number[][] = [];
   dataset1: number[][] = [];
   dataset2: number[][] = [];
+  dataset1Stand: number[][] = [];
+  dataset2Stand: number[][] = [];
+  standarizedDataset: number[][] = [];
   private datosTablaSub: Subscription;
   twoLabels: boolean = false;
   sendIsPressed: boolean = false;
@@ -65,8 +69,8 @@ export class AcpComponent  implements OnDestroy, OnInit {
     if (numberofnewlabels >= this.datosTabla.length) {
       boton.disabled = true;
       this.isMayor = true;
-    } else {
       boton.disabled = false;
+    } else {
       this.isMayor = false;
     }
   }
@@ -83,6 +87,8 @@ export class AcpComponent  implements OnDestroy, OnInit {
     this.pcaStandDev = pca.getStandardDeviations();
     this.resultPCA = pca.predict(this.datosTabla).to2DArray();
 
+    this.standarizedData()
+
     if(this.datosTabla[0].length===2){
       this.twoLabels = true;
     }
@@ -92,23 +98,52 @@ export class AcpComponent  implements OnDestroy, OnInit {
       this.isOne = false;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset2.push([this.resultPCA[i][0],this.resultPCA[i][1]]);
+        this.dataset2Stand.push([this.standarizedDataset[i][0],this.standarizedDataset[i][1]])
       }
     } else if(this.numberofnewlabels === 1){
       this.isTwo = false;
       this.isOne = true;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset1.push([this.resultPCA[i][0],0]);
+        this.dataset1Stand.push([this.standarizedDataset[i][0],0]);
       }
     } else {
       this.isTwo = false;
       this.isOne = false;
       for (var i = 0; i< this.datosTabla.length; i++) {
         this.dataset1.push([this.resultPCA[i][0],0]);
+        this.dataset1Stand.push([this.standarizedDataset[i][0],0]);
       }
     }
   }
 
   showPredictionsFun(){
     this.showPredictions = !this.showPredictions;
+  }
+
+  standarizedData(){
+    let mediaValues: number[] = [];
+    for(let i = 0; i<this.datosTabla[0].length; i++){
+      mediaValues[i] = 0;
+      for(let j = 0; j<this.datosTabla.length; j++){
+        mediaValues[i] = mediaValues[i] + this.datosTabla[j][i];
+      }
+      mediaValues[i] = mediaValues[i] / this.datosTabla.length;
+    }
+
+    for (let i = 0; i < this.datosTabla.length; i++) {
+      this.standarizedDataset[i] = [];
+    }
+    for (let i = 0; i < this.datosTabla.length; i++) {
+      for (let j = 0; j < this.datosTabla[0].length; j++) {
+        this.standarizedDataset[i][j] = 0;
+      }
+    }
+
+    for(let i = 0; i<this.standarizedDataset.length; i++){
+       for(let j = 0; j<this.standarizedDataset[0].length; j++){
+        this.standarizedDataset[i][j] = ((this.resultPCA[i][j] - mediaValues[j])/this.pcaStandDev[j]);
+      }
+    }
   }
 }

@@ -80,20 +80,38 @@
         <h2>Datos Finales:</h2>
         <app-scartt-chart [scarttChartData]="dataset2"></app-scartt-chart><br>
       </div>
+      <div *ngIf="!isMayor && isOne" style="width: 40%; margin: 10px; padding: 10px;">
+        <h2>Datos Finales Estandarizados:</h2>
+        <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart><br>
+      </div>
+      <div *ngIf="!isMayor && isTwo" style="width: 40%; margin: 10px; padding: 10px;">
+        <h2>Datos Finales Estandarizados:</h2>
+        <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart><br>
+      </div>
     </div>
 
     <div style="display: flex; flex-direction: row; text-align: left; justify-content: space-around;">
-      <button mat-raised-button color="primary" (click)="showPredictionsFun()">Mostrar Predicciones</button>
+      <button mat-raised-button color="primary" (click)="showPredictionsFun()">Mostrar Predicciones y Valores Estandarizados</button>
     </div>
 
 
     <div *ngIf="showPredictions" style="display: flex; flex-direction: row; text-align: center; justify-content: space-around;">
       <div>
-        <br><br><h3><strong>Predictions</strong></h3><br>
+        <br><br><h3><strong>Predicciones</strong></h3><br>
         <table>
           <tbody>
             <tr *ngFor="let row of resultPCA">
               <td *ngFor="let pred of row">{{ pred }}  </td>
+            </tr>
+          </tbody>
+        </table><br><br>
+      </div>
+      <div>
+        <br><br><h3><strong>Valores Estandarizados</strong></h3><br>
+        <table>
+          <tbody>
+            <tr *ngFor="let row of standarizedDataset">
+              <td *ngFor="let vs of row">{{ vs }}  </td>
             </tr>
           </tbody>
         </table><br><br>
