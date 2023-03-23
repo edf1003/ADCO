@@ -50,7 +50,7 @@ export class ScarttChartComponent implements OnInit{
           display: true,
           text: 'Y Axis Label'
         }
-      }
+      },
     }
   };
 

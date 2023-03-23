@@ -57,3 +57,14 @@ tr td:first-child:before {
 .drag-and-drop:hover {
   background-color: #f5f5f5;
 }
+
+.introducevariables {
+  display: flex;
+  flex-direction: row;
+
+    button{
+      margin-left: 20px;
+      height: fit-content;
+      align-self: center;
+    }
+  }

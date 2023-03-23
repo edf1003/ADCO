@@ -33,7 +33,6 @@ export class AcpComponent  implements OnDestroy, OnInit {
   pcaEigenValues:  any;
   pcaEigenVectors: any;
   pcaExplVar:  any;
-  pcaLoad: any;
   pcaStandDev:  any;
   resultPCA: any;
   pcaInvert: any;
@@ -67,7 +66,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
   verificarCantidadLabels() {
     const numberofnewlabels = this.formulariodenumero.controls['numberofnewlabels'].value;
     var boton = document.getElementById("submitButtom") as HTMLButtonElement;
-    if (numberofnewlabels >= this.datosTabla.length) {
+    if (numberofnewlabels > this.datosTabla[0].length) {
       boton.disabled = true;
       this.isMayor = true;
       boton.disabled = false;
@@ -79,19 +78,17 @@ export class AcpComponent  implements OnDestroy, OnInit {
   setnumberofnewlabels(){
     this.numberofnewlabels = this.formulariodenumero.get("numberofnewlabels")?.value;
     this.sendIsPressed = true;
-    const pca = new PCA(this.datosTabla, { center: true });
+    const pca = new PCA(this.datosTabla, { center: true, scale: false });
     this.pcaCumuVal = pca.getCumulativeVariance();
     this.pcaEigenValues = pca.getEigenvalues();
     this.pcaEigenVectors = pca.getEigenvectors().to2DArray();
     this.pcaExplVar = pca.getExplainedVariance();
-    this.pcaLoad = pca.getLoadings().to2DArray();
     this.pcaStandDev = pca.getStandardDeviations();
     this.resultPCA = pca.predict(this.datosTabla).to2DArray();
 
-    this.standarizedDataset = this.standardizeArray(this.datosTabla);
 
-    var pcaStand = new PCA(this.standarizedDataset, {center:true});
-    this.resultPCAStand = pcaStand.predict(this.standarizedDataset).to2DArray();
+    var pcaStand = new PCA(this.datosTabla, {center:true, scale: true});
+    this.resultPCAStand = pcaStand.predict(this.datosTabla).to2DArray();
 
 
     if(this.datosTabla[0].length===2){
@@ -124,40 +121,5 @@ export class AcpComponent  implements OnDestroy, OnInit {
 
   showPredictionsFun(){
     this.showPredictions = !this.showPredictions;
-  }
-
-  standardizeArray(arr: number[][]): number[][] {
-    const n = arr.length;
-    const m = arr[0].length;
-    const means = new Array(m).fill(0);
-    const stds = new Array(m).fill(0);
-
-    // calcular la media y la desviación estándar de cada columna
-    for (let j = 0; j < m; j++) {
-      let sum = 0;
-      for (let i = 0; i < n; i++) {
-        sum += arr[i][j];
-      }
-      const mean = sum / n;
-      means[j] = mean;
-
-      let variance = 0;
-      for (let i = 0; i < n; i++) {
-        variance += (arr[i][j] - mean) ** 2;
-      }
-      const std = Math.sqrt(variance / n);
-      stds[j] = std;
-    }
-
-    // normalizar los datos utilizando el z-score
-    const standardizedArr = new Array(n);
-    for (let i = 0; i < n; i++) {
-      standardizedArr[i] = new Array(m);
-      for (let j = 0; j < m; j++) {
-        standardizedArr[i][j] = (arr[i][j] - means[j]) / stds[j];
-      }
-    }
-
-    return standardizedArr;
   }
 }

@@ -6,7 +6,6 @@ import { footerAuth } from 'src/components/footer/footer.component';
 import { menuSelector } from 'src/components/menuSelector/menuSelector.component';
 import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
 import { data } from '../app/pages/data/data.component'
-import { numberofvariables } from './pages/data/numberofvariables/numberofvariables.component';
 import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
 import { ScarttChartComponent } from '../components/scartt-chart/scartt-chart.component'
 
@@ -41,7 +40,6 @@ import { NgChartsModule } from 'ng2-charts';
     footerAuth,
     pageTitle,
     data,
-    numberofvariables,
     AddvariablesComponent,
     AcpComponent,
     ScarttChartComponent
