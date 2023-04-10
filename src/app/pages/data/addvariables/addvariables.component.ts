@@ -139,6 +139,11 @@ export class AddvariablesComponent{
     for (let e of this.datosReset){
       this.datosTabla.push(e);
     }
+    if (this.datosTabla[0].length <= this.datosTabla.length){
+      this.isWiderThanHiger = true;
+    } else {
+      this.isWiderThanHiger = false;
+    }
   }
 
   setDatosReset() {

@@ -121,7 +121,7 @@ export class ScarttChartComponent implements OnInit{
   }
 
   getX() {
-    let maxX = 0;
+    let maxX = 10;
     for (let i = 0; i<this.scarttChartData.length ; i++){
       if (Math.abs(this.scarttChartData[i][0])>maxX){
         maxX = Math.abs(this.scarttChartData[i][0]);
@@ -131,7 +131,7 @@ export class ScarttChartComponent implements OnInit{
   }
 
   getY() {
-    let maxY = 0;
+    let maxY = 10;
     for (let i = 0; i<this.scarttChartData.length ; i++){
       if (Math.abs(this.scarttChartData[i][1])>maxY){
         maxY = Math.abs(this.scarttChartData[i][1]);
