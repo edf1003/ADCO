@@ -27,6 +27,8 @@ export class AcpComponent  implements OnDestroy, OnInit {
   showPredictions: boolean = false;
   isOne: boolean = false;
   isTwo: boolean = false;
+  lenghtOfData: any;
+  isStandarizezACP: boolean = false;
 
   //All PCA values
   pcaCumuVal:  any;
@@ -76,6 +78,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
   }
 
   setnumberofnewlabels(){
+    this.lenghtOfData = Array.from({length: this.datosTabla[0].length}, (_, i) => i);
     this.numberofnewlabels = this.formulariodenumero.get("numberofnewlabels")?.value;
     this.sendIsPressed = true;
     const pca = new PCA(this.datosTabla, { center: true, scale: false });
@@ -121,5 +124,19 @@ export class AcpComponent  implements OnDestroy, OnInit {
 
   showPredictionsFun(){
     this.showPredictions = !this.showPredictions;
+    let showACP = document.getElementById("ShowACP");
+    if (this.showPredictions){
+      showACP!.textContent = "Ocultar Componentes Principales";
+    }
+    else {
+      showACP!.textContent = "Mostrar Componentes Principales";
+    }
   }
+
+  standarizeACP(){
+    this.isStandarizezACP = !this.isStandarizezACP;
+  }
+
+
+
 }

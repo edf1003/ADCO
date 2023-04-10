@@ -7,7 +7,8 @@ import { menuSelector } from 'src/components/menuSelector/menuSelector.component
 import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
 import { data } from '../app/pages/data/data.component'
 import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
-import { ScarttChartComponent } from '../components/scartt-chart/scartt-chart.component'
+import { ScarttChartComponent } from '../components/scartt-chart/scartt-chart.component';
+import { NumberFormatPipe } from '../pipes/numberFormat'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,7 +43,8 @@ import { NgChartsModule } from 'ng2-charts';
     data,
     AddvariablesComponent,
     AcpComponent,
-    ScarttChartComponent
+    ScarttChartComponent,
+    NumberFormatPipe
   ],
   imports: [
     BrowserModule,

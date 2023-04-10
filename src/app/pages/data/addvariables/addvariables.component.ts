@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/cor
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { sendDataTable } from '../../../services/sendDataTable.service';
 import * as XLSX from 'xlsx';
+import { PCA } from 'ml-pca';
 
 @Component({
   selector: 'app-addvariables',
@@ -23,11 +24,13 @@ export class AddvariablesComponent {
   optionManualBool: boolean = false;
   disabledinput: boolean = false;
   isFirstTime: boolean = true;
+  isStandarized: boolean = false;
 
   cabeceraTabla: Array<string> = [];
   datosTabla: Array<Array<any>> = [];
   datosReset: Array<Array<any>> = []; //Array de objetros paquetededatos
   paquetedatos: string[] = []; //Array de datos de una fila
+  pcaStandDev:  Array<Array<number>> = [];
 
   constructor(private sendData: sendDataTable) {
     this.formulariodecabeceras = new FormGroup({});
@@ -108,7 +111,12 @@ export class AddvariablesComponent {
   }
 
   sendDatos(){
-    this.sendData.setDatosTabla(this.datosTabla);
+    if (!this.isStandarized){
+      this.sendData.setDatosTabla(this.datosTabla);
+    }
+    else {
+      this.sendData.setDatosTabla(this.pcaStandDev);
+    }
   }
 
   resetDatos(){
@@ -145,6 +153,44 @@ export class AddvariablesComponent {
       this.optionManualBool = !this.optionFileBool;
     };
     lector.readAsArrayBuffer(archivo);
-
   }
+
+  standarizeDataTable() {
+    const nFilas = this.datosTabla.length;
+    const nColumnas = this.datosTabla[0].length;
+    const medias = Array<number>(nColumnas).fill(0);
+    const desviaciones = Array<number>(nColumnas).fill(0);
+
+    // Calcular la media de cada columna
+    for (let j = 0; j < nColumnas; j++) {
+      let suma = 0;
+      for (let i = 0; i < nFilas; i++) {
+        suma += this.datosTabla[i][j];
+      }
+      medias[j] = suma / nFilas;
+    }
+
+    // Calcular la desviación estándar de cada columna
+    for (let j = 0; j < nColumnas; j++) {
+      let suma = 0;
+      for (let i = 0; i < nFilas; i++) {
+        suma += Math.pow((this.datosTabla[i][j] - medias[j]), 2);
+      }
+      desviaciones[j] = Math.sqrt(suma / nFilas);
+    }
+
+    // Crear una nueva matriz para almacenar los datos estandarizados
+    this.pcaStandDev = new Array<Array<number>>();
+    for (let i = 0; i < nFilas; i++) {
+      this.pcaStandDev[i] = new Array<number>();
+    }
+
+    // Estandarizar los datos y agregarlos a la nueva matriz
+    for (let i = 0; i < nFilas; i++) {
+      for (let j = 0; j < nColumnas; j++) {
+        this.pcaStandDev[i][j] = (this.datosTabla[i][j] - medias[j]) / desviaciones[j];
+      }
+    }
+      this.isStandarized = !this.isStandarized;
+    }
 }

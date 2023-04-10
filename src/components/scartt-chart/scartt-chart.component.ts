@@ -9,14 +9,22 @@ import { ChartDataset, ChartOptions, ChartType, ScriptableScaleContext } from 'c
 export class ScarttChartComponent implements OnInit{
 
   @Input() scarttChartData: number[][] = [];
+  showComponent: boolean = false;
 
   public chartOptions: ChartOptions = {
+    aspectRatio: 1,
     responsive: true,
     scales: {
       x: {
+        position: 'bottom',
+        pointLabels: {centerPointLabels: true},
+        beginAtZero: true,
         ticks: {
           color: 'rgba(0,0,0,0.6)',
+          align: 'end',
+          crossAlign: 'center',
         },
+        bounds: 'ticks',
         grid: {
           color: (context) => {
             if (context.tick.value === 0){
@@ -28,14 +36,20 @@ export class ScarttChartComponent implements OnInit{
         },
         display: true,
         title: {
-          display: true,
+          display: false,
           text: 'X Axis Label'
         },
       },
       y: {
+        position: 'bottom',
+        pointLabels: {centerPointLabels: true},
+        beginAtZero: true,
         ticks: {
-          color: 'rgba(0,0,0,0.6)'
+          color: 'rgba(0,0,0,0.6)',
+          align: 'end',
+          crossAlign: 'center',
         },
+        bounds: 'ticks',
         grid:{
           color: (context) => {
             if (context.tick.value === 0){
@@ -47,11 +61,11 @@ export class ScarttChartComponent implements OnInit{
         },
         display: true,
         title: {
-          display: true,
+          display: false,
           text: 'Y Axis Label'
         }
       },
-    }
+    },
   };
 
   public chartType: ChartType = 'scatter';
@@ -62,14 +76,37 @@ export class ScarttChartComponent implements OnInit{
   constructor() {}
 
   ngOnInit(): void {
-      this.agregarPuntos();
+    this.agregarPuntos();
+    const xMax = this.getX();
+    const xMin = xMax * -1;
+    const yMax = this.getY();
+    const yMin = yMax * -1;
+    if (this.chartOptions.scales){
+      this.chartOptions.scales = { x: { max: xMax, min: xMin, grid:{
+        color: (context) => {
+          if (context.tick.value === 0){
+            return 'rgba(0,0,0,1)';
+          } else {
+            return 'rgba(0,0,0,0.2)';
+          }
+        },
+      }},  y: { max: yMax, min: yMin, grid:{
+        color: (context) => {
+          if (context.tick.value === 0){
+            return 'rgba(0,0,0,1)';
+          } else {
+            return 'rgba(0,0,0,0.2)';
+          }
+        },
+      }}};
+    }
+    this.showComponent = true;
   }
 
   agregarPuntos() {
     const puntos = this.scarttChartData.map(([xStr, yStr]) => {
       const x = +xStr;
       const y = +yStr;
-      this.chartLabels.push(`(${x}, ${y})`);
       return {x, y};
     });
     this.chartData.push({
@@ -78,8 +115,28 @@ export class ScarttChartComponent implements OnInit{
       pointRadius: 8,
       pointHoverRadius: 8,
       pointHoverBackgroundColor: '#73C6B6',
-      pointBackgroundColor: '#73C6B6'
+      pointBackgroundColor: '#73C6B6',
+      pointBorderColor: '#73C6B6',
     });
   }
 
+  getX() {
+    let maxX = 0;
+    for (let i = 0; i<this.scarttChartData.length ; i++){
+      if (Math.abs(this.scarttChartData[i][0])>maxX){
+        maxX = Math.abs(this.scarttChartData[i][0]);
+      }
+    }
+    return Math.ceil(maxX / 10) * 10;
+  }
+
+  getY() {
+    let maxY = 0;
+    for (let i = 0; i<this.scarttChartData.length ; i++){
+      if (Math.abs(this.scarttChartData[i][1])>maxY){
+        maxY = Math.abs(this.scarttChartData[i][1]);
+      }
+    }
+    return Math.ceil(maxY / 10) * 10;
+  }
 }

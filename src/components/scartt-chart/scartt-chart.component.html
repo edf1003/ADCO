@@ -1,4 +1,4 @@
-    <canvas baseChart
+    <canvas *ngIf="showComponent" baseChart
             [datasets]="chartData"
             [labels]="chartLabels"
             [options]="chartOptions"
