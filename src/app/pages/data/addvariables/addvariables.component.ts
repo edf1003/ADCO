@@ -1,15 +1,14 @@
-import { Component, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { sendDataTable } from '../../../services/sendDataTable.service';
 import * as XLSX from 'xlsx';
-import { PCA } from 'ml-pca';
 
 @Component({
   selector: 'app-addvariables',
   templateUrl: './addvariables.component.html',
   styleUrls: ['./addvariables.component.scss']
 })
-export class AddvariablesComponent {
+export class AddvariablesComponent{
 
   valor: number = 0;
   inputsArray: any[] = new Array(this.valor); //Array para poder iterar sobre un numero "valor" de labels.
@@ -25,6 +24,7 @@ export class AddvariablesComponent {
   disabledinput: boolean = false;
   isFirstTime: boolean = true;
   isStandarized: boolean = false;
+  isWiderThanHiger: boolean = false;
 
   cabeceraTabla: Array<string> = [];
   datosTabla: Array<Array<any>> = [];
@@ -80,6 +80,11 @@ export class AddvariablesComponent {
       }
     }
     this.isdisabledlabels = true;
+    if (this.datosTabla[0].length <= this.datosTabla.length){
+      this.isWiderThanHiger = true;
+    } else {
+      this.isWiderThanHiger = false;
+    }
 
   }
 
@@ -104,19 +109,29 @@ export class AddvariablesComponent {
           alerta.style.opacity = '0%';
         }
     }
+    if (this.datosTabla[0].length <= this.datosTabla.length){
+      this.isWiderThanHiger = true;
+    } else {
+      this.isWiderThanHiger = false;
+    }
   }
 
   deletecolumn(index: number){
     this.datosTabla.splice(index,1);
+    if (this.datosTabla[0].length <= this.datosTabla.length){
+      this.isWiderThanHiger = true;
+    } else {
+      this.isWiderThanHiger = false;
+    }
   }
 
   sendDatos(){
-    if (!this.isStandarized){
-      this.sendData.setDatosTabla(this.datosTabla);
-    }
-    else {
-      this.sendData.setDatosTabla(this.pcaStandDev);
-    }
+      if (!this.isStandarized){
+        this.sendData.setDatosTabla(this.datosTabla);
+      }
+      else {
+        this.sendData.setDatosTabla(this.pcaStandDev);
+      }
   }
 
   resetDatos(){
@@ -151,6 +166,11 @@ export class AddvariablesComponent {
       this.valor = this.cabeceraTabla.length;
       this.optionFileBool = true;
       this.optionManualBool = !this.optionFileBool;
+      if (this.datosTabla[0].length <= this.datosTabla.length){
+        this.isWiderThanHiger = true;
+      } else {
+        this.isWiderThanHiger = false;
+      }
     };
     lector.readAsArrayBuffer(archivo);
   }

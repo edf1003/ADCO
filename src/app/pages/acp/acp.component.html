@@ -43,15 +43,15 @@
       </table>
     </div><br><br>
     <div>
-      <div>
-        <h2>Autovectores</h2>
+      <h2>Autovectores</h2>
+      <div class="tableForScroll">
         <table>
           <tbody>
             <tr *ngFor="let row of pcaEigenVectors">
               <td *ngFor="let data of row">{{ data | numberFormat }}</td>
             </tr>
           </tbody>
-        </table><br><br>
+        </table>
       </div>
     </div>
 
@@ -77,7 +77,7 @@
     <div *ngIf="showPredictions">
       <div *ngIf="!isStandarizezACP" style="text-align: start; align-items: start;">
         <br><br><h2>Componentes Principales</h2>
-        <div>
+        <div class="tableForScroll">
           <table>
             <thead>
               <tr>
@@ -91,13 +91,13 @@
                 <td *ngFor="let pred of row">{{ pred | numberFormat }}  </td>
               </tr>
             </tbody>
-          </table><br><br>
-          <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
-        </div>
+          </table>
+        </div><br><br>
+        <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
       </div>
       <div *ngIf="isStandarizezACP">
         <br><br><h2>Componentes Principales Estandarizados</h2>
-        <div>
+        <div class="tableForScroll">
           <table>
             <thead>
               <tr>
@@ -111,9 +111,9 @@
                 <td *ngFor="let vs of row">{{ vs | numberFormat }}  </td>
               </tr>
             </tbody>
-          </table><br><br>
-          <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
-        </div>
+          </table>
+        </div><br><br>
+        <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
       </div>
     </div>
   </div>

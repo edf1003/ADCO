@@ -67,4 +67,12 @@ tr td:first-child:before {
       height: fit-content;
       align-self: center;
     }
-  }
+}
+
+
+.tableForScroll {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+  padding: 10px;
+}
