@@ -60,13 +60,21 @@
         <h2>Datos iniciales:</h2>
         <app-scartt-chart [scarttChartData]="datosTabla"></app-scartt-chart>
       </div>
-      <div *ngIf="!isMayor && isOne" style="width: 40%; margin: 10px; padding: 10px;">
+      <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
         <h2>Datos Finales:</h2>
         <app-scartt-chart [scarttChartData]="dataset1"></app-scartt-chart><br>
       </div>
-      <div *ngIf="!isMayor && isTwo" style="width: 40%; margin: 10px; padding: 10px;">
+      <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
         <h2>Datos Finales:</h2>
         <app-scartt-chart [scarttChartData]="dataset2"></app-scartt-chart><br>
+      </div>
+      <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
+        <h2>Datos Finales Estandarizados:</h2>
+        <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart><br>
+      </div>
+      <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
+        <h2>Datos Finales Estandarizados:</h2>
+        <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart><br>
       </div>
     </div>
 
