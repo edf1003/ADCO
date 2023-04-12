@@ -76,6 +76,7 @@
 </div>
 <br><br>
 <div class="buttonEnd">
+  <p *ngIf="(buttonPush || optionFileBool) && !isWiderThanHiger">Los datos deben de contener un número mayor o igual de filas que de columnas.</p>
   <button *ngIf="buttonPush || optionFileBool" mat-raised-button type="button" color="primary" style="margin: 5px;" (click)="resetDatos()">Restablecer Datos</button>
   <button *ngIf="(buttonPush || optionFileBool) && isWiderThanHiger" matStepperNext mat-raised-button type="button" color="primary" style="margin: 5px;" (click)="sendDatos()">Enviar Datos</button>
 </div>

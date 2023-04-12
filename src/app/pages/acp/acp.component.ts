@@ -24,11 +24,13 @@ export class AcpComponent  implements OnDestroy, OnInit {
   twoLabels: boolean = false;
   sendIsPressed: boolean = false;
   isMayor: boolean = false;
-  showPredictions: boolean = false;
+  showPredictions: boolean = true;
   isOne: boolean = false;
   isTwo: boolean = false;
   lenghtOfData: any;
   isStandarizezACP: boolean = false;
+  showProperties: boolean = true;
+  showEigenVectors: boolean = true;
 
   //All PCA values
   pcaCumuVal:  any;
@@ -125,16 +127,41 @@ export class AcpComponent  implements OnDestroy, OnInit {
   showPredictionsFun(){
     this.showPredictions = !this.showPredictions;
     let showACP = document.getElementById("ShowACP");
-    if (this.showPredictions){
-      showACP!.textContent = "Ocultar Componentes Principales";
+    let showACP2 = document.getElementById("ShowACP2");
+    if (!this.showPredictions){
+      showACP!.textContent = "Ocultar";
+      showACP2!.textContent = "Ocultar";
     }
     else {
-      showACP!.textContent = "Mostrar Componentes Principales";
+      showACP!.textContent = "Mostrar";
+      showACP2!.textContent = "Mostrar";
     }
   }
 
   standarizeACP(){
     this.isStandarizezACP = !this.isStandarizezACP;
+  }
+
+  showPropertiesTable(){
+    this.showProperties = !this.showProperties;
+    let showProperties = document.getElementById("showProperties");
+    if (this.showProperties){
+      showProperties!.textContent = "Ocultar";
+    }
+    else {
+      showProperties!.textContent = "Mostrar";
+    }
+  }
+
+  showEigenVectorsTable(){
+    this.showEigenVectors = !this.showEigenVectors;
+    let showEigenVectors = document.getElementById("showEigenVectors");
+    if (this.showEigenVectors){
+      showEigenVectors!.textContent = "Ocultar";
+    }
+    else {
+      showEigenVectors!.textContent = "Mostrar";
+    }
   }
 
 

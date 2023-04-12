@@ -23,8 +23,11 @@
   <p *ngIf="isMayor">El nuevo número de componentes principales, tiene que ser menor que el número de variables de la tabla original.</p>
 
   <div class="PCA" *ngIf="sendIsPressed && !isMayor"><br><br>
-    <h2>Propiedades</h2>
-    <div style="display: flex; flex-direction: row; text-align: left;">
+    <div style="display: flex; align-items: baseline;">
+      <h2>Propiedades</h2>
+      <button mat-button color="primary" id="showProperties" (click)="showPropertiesTable()">Ocultar</button>
+    </div>
+    <div *ngIf="showProperties" style="display: flex; flex-direction: row; text-align: left;">
       <table>
         <thead>
           <tr>
@@ -43,8 +46,11 @@
       </table>
     </div><br><br>
     <div>
-      <h2>Autovectores</h2>
-      <div class="tableForScroll">
+      <div style="display: flex; align-items: baseline;">
+        <h2>Autovectores</h2>
+        <button mat-button color="primary" id="showEigenVectors" (click)="showEigenVectorsTable()">Ocultar</button>
+      </div>
+      <div *ngIf="showEigenVectors" class="tableForScroll">
         <table>
           <tbody>
             <tr *ngFor="let row of pcaEigenVectors">
@@ -53,39 +59,53 @@
           </tbody>
         </table>
       </div>
-    </div><br>
+    </div><br><br>
 
-    <div style="display: flex; flex-direction: row; text-align: start; justify-content: flex-start;">
-      <div *ngIf="twoLabels && !isMayor" style="width: 40%; margin: 10px; padding: 10px;">
-        <h2>Datos iniciales:</h2>
+    <div style="display: flex;">
+      <div *ngIf="twoLabels && !isMayor" style="width: 40%; padding: 10px;">
+        <div style="display: flex; align-items: baseline;">
+          <h2>Datos iniciales:</h2>
+          <button mat-button color="primary" style="margin: 10px" id="standarizar" (click)="standarizeACP()">Estandarizar</button>
+        </div>
         <app-scartt-chart [scarttChartData]="datosTabla"></app-scartt-chart>
       </div>
-      <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
-        <h2>Datos Finales:</h2>
+      <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%;">
+        <div style="display: flex; align-items: baseline;">
+          <h2>Datos Finales:</h2>
+          <button mat-button color="primary" style="margin: 10px" id="standarizar" (click)="standarizeACP()">Estandarizar</button>
+        </div>
         <app-scartt-chart [scarttChartData]="dataset1"></app-scartt-chart><br>
       </div>
-      <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
-        <h2>Datos Finales:</h2>
+      <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%;">
+        <div style="display: flex; align-items: baseline;">
+          <h2>Datos Finales:</h2>
+          <button mat-button color="primary" style="margin: 10px" id="standarizar" (click)="standarizeACP()">Estandarizar</button>
+        </div>
         <app-scartt-chart [scarttChartData]="dataset2"></app-scartt-chart><br>
       </div>
-      <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
-        <h2>Datos Finales Estandarizados:</h2>
+      <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%;">
+        <div style="display: flex; align-items: baseline;">
+          <h2>Datos Finales Estandarizados:</h2>
+          <button mat-button color="primary" style="margin: 10px" id="standarizar" (click)="standarizeACP()">Estandarizar</button>
+        </div>
         <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart><br>
       </div>
-      <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%; margin: 10px; padding: 10px;">
-        <h2>Datos Finales Estandarizados:</h2>
+      <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%;">
+        <div style="display: flex; align-items: baseline;">
+          <h2>Datos Finales Estandarizados:</h2>
+          <button mat-button color="primary" style="margin: 10px" id="standarizar" (click)="standarizeACP()">Estandarizar</button>
+        </div>
         <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart><br>
       </div>
-    </div>
+    </div><br><br>
 
-    <div style="display: flex; flex-direction: row; text-align: start;">
-      <button mat-raised-button color="primary" id="ShowACP" (click)="showPredictionsFun()">Mostrar Componentes Principales</button>
-    </div>
-
-    <div *ngIf="showPredictions">
+    <div>
       <div *ngIf="!isStandarizezACP" style="text-align: start; align-items: start;">
-        <br><br><h2>Componentes Principales</h2>
-        <div class="tableForScroll">
+        <div style="display: flex; align-items: baseline;">
+          <br><br><h2>Componentes Principales</h2>
+          <button mat-button color="primary" id="ShowACP" (click)="showPredictionsFun()">Ocultar</button>
+        </div>
+        <div *ngIf="!showPredictions" class="tableForScroll">
           <table>
             <thead>
               <tr>
@@ -101,11 +121,13 @@
             </tbody>
           </table>
         </div><br><br>
-        <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
       </div>
-      <div *ngIf="isStandarizezACP">
-        <br><br><h2>Componentes Principales Estandarizados</h2>
-        <div class="tableForScroll">
+      <div *ngIf="isStandarizezACP" >
+        <div style="display: flex; align-items: baseline;">
+          <br><br><h2>Componentes Principales Estandarizados</h2>
+          <button mat-button color="primary" id="ShowACP2" (click)="showPredictionsFun()">Ocultar</button>
+        </div>
+        <div *ngIf="!showPredictions" class="tableForScroll">
           <table>
             <thead>
               <tr>
@@ -121,7 +143,6 @@
             </tbody>
           </table>
         </div><br><br>
-        <button mat-raised-button color="primary" (click)="standarizeACP()">Estandarizar</button><br><br>
       </div>
     </div>
   </div>

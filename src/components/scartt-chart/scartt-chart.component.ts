@@ -121,21 +121,27 @@ export class ScarttChartComponent implements OnInit{
   }
 
   getX() {
-    let maxX = 10;
+    let maxX = 1;
     for (let i = 0; i<this.scarttChartData.length ; i++){
       if (Math.abs(this.scarttChartData[i][0])>maxX){
         maxX = Math.abs(this.scarttChartData[i][0]);
       }
     }
+    if (maxX < 10){
+      return Math.ceil(maxX) + 0.5;
+    }
     return Math.ceil(maxX / 10) * 10;
   }
 
   getY() {
-    let maxY = 10;
+    let maxY = 1;
     for (let i = 0; i<this.scarttChartData.length ; i++){
       if (Math.abs(this.scarttChartData[i][1])>maxY){
         maxY = Math.abs(this.scarttChartData[i][1]);
       }
+    }
+    if (maxY < 10){
+      return Math.ceil(maxY) + 0.5;
     }
     return Math.ceil(maxY / 10) * 10;
   }
