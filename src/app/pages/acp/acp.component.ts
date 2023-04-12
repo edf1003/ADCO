@@ -128,7 +128,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
     this.showPredictions = !this.showPredictions;
     let showACP = document.getElementById("ShowACP");
     let showACP2 = document.getElementById("ShowACP2");
-    if (!this.showPredictions){
+    if (this.showPredictions){
       showACP!.textContent = "Ocultar";
       showACP2!.textContent = "Ocultar";
     }
