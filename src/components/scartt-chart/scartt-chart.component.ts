@@ -35,10 +35,6 @@ export class ScarttChartComponent implements OnInit{
           },
         },
         display: true,
-        title: {
-          display: false,
-          text: 'X Axis Label'
-        },
       },
       y: {
         position: 'bottom',
@@ -60,10 +56,6 @@ export class ScarttChartComponent implements OnInit{
           },
         },
         display: true,
-        title: {
-          display: false,
-          text: 'Y Axis Label'
-        }
       },
     },
   };
@@ -90,6 +82,10 @@ export class ScarttChartComponent implements OnInit{
             return 'rgba(0,0,0,0.2)';
           }
         },
+      },
+      title: {
+        display: true,
+        text: 'PCA1'
       }},  y: { max: yMax, min: yMin, grid:{
         color: (context) => {
           if (context.tick.value === 0){
@@ -98,6 +94,9 @@ export class ScarttChartComponent implements OnInit{
             return 'rgba(0,0,0,0.2)';
           }
         },
+      },title: {
+        display: true,
+        text: 'PCA2'
       }}};
     }
     this.showComponent = true;
