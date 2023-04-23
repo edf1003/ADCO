@@ -31,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { AcpComponent } from './pages/acp/acp.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ClusteringComponent } from './pages/clustering/clustering.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { NgChartsModule } from 'ng2-charts';
     AddvariablesComponent,
     AcpComponent,
     ScarttChartComponent,
-    NumberFormatPipe
+    NumberFormatPipe,
+    ClusteringComponent
   ],
   imports: [
     BrowserModule,

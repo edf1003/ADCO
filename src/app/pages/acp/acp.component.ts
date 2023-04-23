@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { sendDataTable } from '../../services/sendDataTable.service';
 import { Subscription } from 'rxjs';
 import { PCA, PredictOptions, PCAOptions } from "ml-pca";
+import { PCAdata } from '../../services/PCAdata.service';
 import { data } from '../data/data.component';
 
 @Component({
@@ -43,7 +44,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
   resultPCAStand: any;
 
 
-  constructor(private sendData: sendDataTable) {
+  constructor(private sendData: sendDataTable, private pcadata: PCAdata) {
     this.formulariodenumero = new FormGroup({});
     const control = new FormControl('');
     this.formulariodenumero.addControl("numberofnewlabels", control);
@@ -107,6 +108,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
         this.dataset2.push([this.resultPCA[i][0],this.resultPCA[i][1]]);
         this.dataset2Stand.push([this.resultPCAStand[i][0],this.resultPCAStand[i][1]])
       }
+      this.pcadata.setDatosTabla(this.dataset2);
     } else if(this.numberofnewlabels === 1){
       this.isTwo = false;
       this.isOne = true;
@@ -114,6 +116,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
         this.dataset1.push([this.resultPCA[i][0],0]);
         this.dataset1Stand.push([this.resultPCAStand[i][0],0]);
       }
+      this.pcadata.setDatosTabla(this.dataset1);
     } else {
       this.isTwo = false;
       this.isOne = false;
@@ -121,6 +124,7 @@ export class AcpComponent  implements OnDestroy, OnInit {
         this.dataset1.push([this.resultPCA[i][0],0]);
         this.dataset1Stand.push([this.resultPCAStand[i][0],0]);
       }
+      this.pcadata.setDatosTabla(this.dataset1);
     }
   }
 
