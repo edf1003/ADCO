@@ -117,6 +117,7 @@ export class AddvariablesComponent{
   }
 
   deletecolumn(index: number){
+    this.setDatosReset();
     this.datosTabla.splice(index,1);
     if (this.datosTabla[0].length <= this.datosTabla.length){
       this.isWiderThanHiger = true;

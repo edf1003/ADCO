@@ -1,0 +1,38 @@
+.content {
+  margin: 50px;
+}
+
+$table-bg: #9ec3e7;
+$table-bg-alt: #cfe1f2;
+$table-header-bg: #2e4b6a;
+
+table {
+  width: 70%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: $table-header-bg;
+    color: #fff;
+  }
+
+  tr:nth-child(even) {
+    background-color: $table-bg-alt;
+  }
+
+  tr:nth-child(odd) {
+    background-color: $table-bg;
+  }
+}
+
+
+.tableForScroll {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}

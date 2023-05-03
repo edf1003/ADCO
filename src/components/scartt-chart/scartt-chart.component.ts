@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChartDataset, ChartOptions, ChartType, ScriptableScaleContext } from 'chart.js';
+import { ChartDataset, ChartOptions, ChartType, ScatterDataPoint, ScriptableScaleContext } from 'chart.js';
 
 @Component({
   selector: 'app-scartt-chart',
@@ -9,7 +9,12 @@ import { ChartDataset, ChartOptions, ChartType, ScriptableScaleContext } from 'c
 export class ScarttChartComponent implements OnInit{
 
   @Input() scarttChartData: number[][] = [];
+  @Input() isClustering: boolean = false;
+  @Input() clusterMap: number[] = [];
   showComponent: boolean = false;
+  colors: string[] = [];
+  isXNegative: boolean = false;
+  isYNegative: boolean = false;
 
   public chartOptions: ChartOptions = {
     aspectRatio: 1,
@@ -68,36 +73,70 @@ export class ScarttChartComponent implements OnInit{
   constructor() {}
 
   ngOnInit(): void {
-    this.agregarPuntos();
+    if (!this.isClustering){
+      this.agregarPuntos();
+    } else
+      this.separateClusters();
+
     const xMax = this.getX();
     const xMin = xMax * -1;
     const yMax = this.getY();
     const yMin = yMax * -1;
-    if (this.chartOptions.scales){
-      this.chartOptions.scales = { x: { max: xMax, min: xMin, grid:{
-        color: (context) => {
-          if (context.tick.value === 0){
-            return 'rgba(0,0,0,1)';
-          } else {
-            return 'rgba(0,0,0,0.2)';
-          }
+
+    if(!this.isXNegative && !this.isYNegative ){
+      if (this.chartOptions.scales){
+        this.chartOptions.scales = { x: { max: xMax, min: 0, grid:{
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
         },
-      },
-      title: {
-        display: true,
-        text: 'PCA1'
-      }},  y: { max: yMax, min: yMin, grid:{
-        color: (context) => {
-          if (context.tick.value === 0){
-            return 'rgba(0,0,0,1)';
-          } else {
-            return 'rgba(0,0,0,0.2)';
-          }
+        title: {
+          display: true,
+          text: 'X'
+        }},  y: { max: yMax, min: 0, grid:{
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
+        },title: {
+          display: true,
+          text: 'Y'
+        }}};
+      }
+    } else {
+      if (this.chartOptions.scales){
+        this.chartOptions.scales = { x: { max: xMax, min: xMin, grid:{
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
         },
-      },title: {
-        display: true,
-        text: 'PCA2'
-      }}};
+        title: {
+          display: true,
+          text: 'X'
+        }},  y: { max: yMax, min: yMin, grid:{
+          color: (context) => {
+            if (context.tick.value === 0){
+              return 'rgba(0,0,0,1)';
+            } else {
+              return 'rgba(0,0,0,0.2)';
+            }
+          },
+        },title: {
+          display: true,
+          text: 'Y'
+        }}};
+      }
     }
     this.showComponent = true;
   }
@@ -119,12 +158,54 @@ export class ScarttChartComponent implements OnInit{
     });
   }
 
+  agregarPuntoClustering(color: string, point: number[]) {
+    const scatterDataPoint: ScatterDataPoint = {
+      x: point[0],
+      y: point[1]
+    };
+    this.chartData.push({
+      data: [scatterDataPoint],
+      label: 'Puntos',
+      pointRadius: 8,
+      pointHoverRadius: 8,
+      pointHoverBackgroundColor: color,
+      pointBackgroundColor: color,
+      pointBorderColor: color,
+    });
+  }
+
+  separateClusters() {
+    this.showComponent = false;
+    const colorMap: { [key: number]: string } = {
+      "-2": "#FF0000",
+      "0": "#00FF00",
+      "1": "#0000FF",
+      "2": "#FFFF00",
+      "3": "#FF00FF",
+      "4": "#00FFFF",
+      "5": "#FFA500",
+      "6": "#800080",
+      "7": "#008000",
+      "8": "#000080"
+    };
+
+    for (let i = 0; i < this.scarttChartData.length; i++) {
+      const cluster = this.clusterMap[i].toString();
+      const color = colorMap[cluster];
+      const point: [number, number] = [this.scarttChartData[i][0], this.scarttChartData[i][1]]
+      this.agregarPuntoClustering(color, point);
+    }
+    this.showComponent = true;
+  }
+
   getX() {
     let maxX = 1;
     for (let i = 0; i<this.scarttChartData.length ; i++){
       if (Math.abs(this.scarttChartData[i][0])>maxX){
         maxX = Math.abs(this.scarttChartData[i][0]);
       }
+      if(this.scarttChartData[i][0]<0)
+        this.isXNegative = true;
     }
     if (maxX < 10){
       return Math.ceil(maxX) + 0.5;
@@ -138,6 +219,8 @@ export class ScarttChartComponent implements OnInit{
       if (Math.abs(this.scarttChartData[i][1])>maxY){
         maxY = Math.abs(this.scarttChartData[i][1]);
       }
+      if(this.scarttChartData[i][1]<0)
+        this.isYNegative = true;
     }
     if (maxY < 10){
       return Math.ceil(maxY) + 0.5;

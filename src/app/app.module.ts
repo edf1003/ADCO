@@ -32,6 +32,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AcpComponent } from './pages/acp/acp.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ClusteringComponent } from './pages/clustering/clustering.component';
+import { DistancesComponent } from './pages/clustering/distances/distances.component';
+import { ClusteringMethodsComponent } from './pages/clustering/clustering-methods/clustering-methods.component';
+import { DbscanComponent } from './pages/clustering/clustering-methods/dbscan/dbscan.component';
+import { OpticsComponent } from './pages/clustering/clustering-methods/optics/optics.component';
 
 
 @NgModule({
@@ -46,7 +50,11 @@ import { ClusteringComponent } from './pages/clustering/clustering.component';
     AcpComponent,
     ScarttChartComponent,
     NumberFormatPipe,
-    ClusteringComponent
+    ClusteringComponent,
+    DistancesComponent,
+    ClusteringMethodsComponent,
+    DbscanComponent,
+    OpticsComponent
   ],
   imports: [
     BrowserModule,
