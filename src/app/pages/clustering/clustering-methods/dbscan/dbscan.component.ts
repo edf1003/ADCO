@@ -18,12 +18,13 @@ export class DbscanComponent {
   distancesEucl: number[][] = [];
   distancesEuclNor: number[][] = [];
   initialPoints: number[][] = [];
-  private distancesEuclSub: Subscription;
-  private distancesEuclNorSub: Subscription;
+  distanceType: string = "";
+  private distancesSub: Subscription;
   private initalPointsSub: Subscription;
   labels: number[] = [];
   clusterIndex = 0;
   showResults: boolean = false;
+  refreshScatter: boolean = true;
 
   constructor(
     private senddistances: sendDistances,
@@ -33,10 +34,10 @@ export class DbscanComponent {
       distance: new FormControl(),
       minPoints: new FormControl(),
     });
-    this.distancesEuclSub = this.senddistances.getEuclideanDistances().subscribe(datos => {
+    this.distancesSub = this.senddistances.getEuclideanDistances().subscribe(datos => {
       this.distancesEucl = datos;
     });
-    this.distancesEuclNorSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
+    this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
       this.distancesEuclNor = datos;
     });
     this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
@@ -49,7 +50,10 @@ export class DbscanComponent {
     this.showResults = false;
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
-    this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints);
+    if (this.senddistances.getDistanceType() === "Euclidea normalizada") {
+      this.dbscan(this.distancesEuclNor, this.distanceMax, this.minPoints);}
+    else if (this.senddistances.getDistanceType() === "Euclidea") {
+      this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints); }
     this.showResults = true;
   }
 
@@ -81,7 +85,8 @@ export class DbscanComponent {
     }
 
     this.labels = labels;
-    //this.dbscanGroups();
+    this.refreshScatter = false;
+    this.refreshScatter = true;
   }
 
   findNeighbors(pointIndex: number, distances: number[][], eps: number): number[] {

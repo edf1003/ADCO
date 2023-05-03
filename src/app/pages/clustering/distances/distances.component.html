@@ -34,9 +34,9 @@
   </div>
 </div>
 <div *ngIf="distance === 'Euclidea normalizada'">
-  <div style="display: inline-block;">
+  <div style="display: flex; flex-direction: row; align-items: baseline;">
     <h2>Distancias euclideas normalizadas:</h2>
-    <button mat-button color="primary" id="ShowEucNorDis" (click)="showEucNorDist()">Ocultar</button><br>
+    <button mat-button color="primary" id="showEucNorDis" (click)="showEucNorDist()">Ocultar</button><br>
   </div>
   <div *ngIf="showEucNorDis" class="tableForScroll">
     <table>
@@ -58,7 +58,7 @@
   </div>
 </div>
 <div *ngIf="distance === 'Mahalanobis'">
-  <div style="display: inline-block;">
+  <div style="display: flex; flex-direction: row; align-items: baseline;">
     <h2>Distancias de Mahalanobis:</h2>
     <button mat-button color="primary" id="ShowMahDis" (click)="showMahDist()">Ocultar</button><br>
   </div>

@@ -38,6 +38,7 @@ export class DistancesComponent implements OnInit {
   }
 
   selectDistance(distance: string){
+    this.sendDistances.setDistancetype(distance);
     this.distance = distance;
     this.lenghtOfData = Array.from({length: this.initialDataset.length}, (_, i) => i);
     this.euclideanDistances();
@@ -101,11 +102,11 @@ export class DistancesComponent implements OnInit {
 
   showEucNorDist(){
     this.showEucNorDis = !this.showEucNorDis;
-    var a = document.getElementById('showEucNorDis');
+    var b = document.getElementById('showEucNorDis');
     if (this.showEucNorDis)
-      a!.textContent = "Ocultar";
+      b!.textContent = "Ocultar";
     else
-      a!.textContent = "Mostrar";
+      b!.textContent = "Mostrar";
   }
 
   showMahDist(){

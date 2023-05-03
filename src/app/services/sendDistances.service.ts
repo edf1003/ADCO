@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class sendDistances {
   private euclideanDistances = new BehaviorSubject<number[][]>([]);
   private euclideanNormalizedDistances = new BehaviorSubject<number[][]>([]);
+  private distanceType :string = "";
 
   setEuclideanDistances(distances: number[][]) {
     this.euclideanDistances.next(distances);
@@ -22,6 +23,13 @@ export class sendDistances {
 
   getEuclideanNormalizedDistances() {
     return this.euclideanNormalizedDistances.asObservable();
+  }
+
+  setDistancetype(distance: string){
+    this.distanceType = distance;
+  }
+  getDistanceType() {
+    return this.distanceType;
   }
 
 }

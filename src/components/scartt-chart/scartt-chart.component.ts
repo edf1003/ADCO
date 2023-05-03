@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartDataset, ChartOptions, ChartType, ScatterDataPoint, ScriptableScaleContext } from 'chart.js';
 
 @Component({
@@ -6,7 +6,7 @@ import { ChartDataset, ChartOptions, ChartType, ScatterDataPoint, ScriptableScal
   templateUrl: './scartt-chart.component.html',
   styleUrls: ['./scartt-chart.component.scss']
 })
-export class ScarttChartComponent implements OnInit{
+export class ScarttChartComponent implements OnInit, OnChanges{
 
   @Input() scarttChartData: number[][] = [];
   @Input() isClustering: boolean = false;
@@ -139,6 +139,12 @@ export class ScarttChartComponent implements OnInit{
       }
     }
     this.showComponent = true;
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if(simpleChanges['clusterMap']){
+      this.separateClusters();
+    }
   }
 
   agregarPuntos() {
