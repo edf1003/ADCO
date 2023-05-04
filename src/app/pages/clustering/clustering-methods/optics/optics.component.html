@@ -1,3 +1,6 @@
+<p>El parámetro "Número mínimo de vecinos" es necesario para definir qué se considera un "cluster" en el algoritmo OPTICS.
+  Si un punto tiene al menos n vecinos dentro del radio de búsqueda "Distancia máxima", se considera "core point"
+  y se agrega al cluster correspondiente. Si un punto no tiene suficientes vecinos, se considera "outlier".</p>
 <form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
   <div style="display: flex; align-items: last baseline;">
     <mat-form-field appearance="fill" style="margin-right: 10px;">
@@ -5,9 +8,29 @@
       <input matInput formControlName="distance" type="number" required>
     </mat-form-field>
     <mat-form-field appearance="fill" style="margin-right: 10px;">
-      <mat-label>Puntos mínimos por grupo</mat-label>
+      <mat-label>Número mínimo de vecinos</mat-label>
       <input matInput formControlName="minPoints" type="number" required>
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary">Introducir</button>
   </div>
 </form>
+<div *ngIf="showResults">
+  <p>Existen {{clusterIndex}} grupos de clustering.</p>
+    <div>
+      <h3><strong>Outliers:</strong></h3>
+      <span *ngFor="let label of labels; let i = index" style="display: inline-block;">
+        <ng-container *ngIf="label === -2">{{i + 1}}, </ng-container>
+      </span>
+    </div><br>
+    <div *ngFor="let grupo of [].constructor(clusterIndex); let i = index">
+      <h3><strong>Grupo {{i}}:</strong></h3>
+      <div>
+        <span *ngFor="let label of labels; let i2 = index" style="display: inline-block;">
+          <ng-container *ngIf="label === i">{{i2 + 1}}, </ng-container>
+        </span>
+      </div><br>
+    </div>
+  <div style="width: 40%;" *ngIf="initialPoints[0].length === 2">
+    <app-scartt-chart [scarttChartData]="initialPoints" [isClustering]="true" [clusterMap]="labels"></app-scartt-chart><br>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { forEach } from 'mathjs';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 })
 export class DbscanComponent {
 
+  @Output() labels: number[] = [];
   distanceForm: FormGroup;
   distanceMax: number = 0;
   minPoints: number = 0;
@@ -21,10 +22,8 @@ export class DbscanComponent {
   distanceType: string = "";
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
-  labels: number[] = [];
   clusterIndex = 0;
   showResults: boolean = false;
-  refreshScatter: boolean = true;
 
   constructor(
     private senddistances: sendDistances,
@@ -47,7 +46,6 @@ export class DbscanComponent {
 
 
   saveParameters(){
-    this.showResults = false;
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
     if (this.senddistances.getDistanceType() === "Euclidea normalizada") {
@@ -85,8 +83,6 @@ export class DbscanComponent {
     }
 
     this.labels = labels;
-    this.refreshScatter = false;
-    this.refreshScatter = true;
   }
 
   findNeighbors(pointIndex: number, distances: number[][], eps: number): number[] {

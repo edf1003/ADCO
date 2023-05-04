@@ -143,6 +143,7 @@ export class ScarttChartComponent implements OnInit, OnChanges{
 
   ngOnChanges(simpleChanges: SimpleChanges) {
     if(simpleChanges['clusterMap']){
+      this.chartData = [];
       this.separateClusters();
     }
   }
@@ -182,17 +183,22 @@ export class ScarttChartComponent implements OnInit, OnChanges{
 
   separateClusters() {
     this.showComponent = false;
+    const colors: string[] = [
+      "#FF0000","#00FF00","#0000FF","#FFFF00","#FF00FF","#00FFFF","#FFA500",
+      "#800080","#008000","#000080","#8B0000","#FFC0CB","#FF69B4","#FFD700",
+      "#ADFF2F","#00FF7F","#008080","#A52A2A","#696969","#D3D3D3","#FF1493",
+      "#1E90FF","#20B2AA","#9370DB","#FA8072","#778899","#BDB76B","#FF7F50",
+      "#6A5ACD","#F4A460"
+    ];
+
     const colorMap: { [key: number]: string } = {
-      "-2": "#FF0000",
-      "0": "#00FF00",
-      "1": "#0000FF",
-      "2": "#FFFF00",
-      "3": "#FF00FF",
-      "4": "#00FFFF",
-      "5": "#FFA500",
-      "6": "#800080",
-      "7": "#008000",
-      "8": "#000080"
+      "-2": colors[0],"0": colors[1],"1": colors[2],"2": colors[3],"3": colors[4],
+      "4": colors[5],"5": colors[6],"6": colors[7],"7": colors[8],"8": colors[9],
+      "9": colors[10],"10": colors[11],"11": colors[12],"12": colors[13],"13": colors[14],
+      "14": colors[15],"15": colors[16],"16": colors[17],"17": colors[18],"18": colors[19],
+      "19": colors[20],"20": colors[21],"21": colors[22],"22": colors[23],"23": colors[24],
+      "24": colors[25],"25": colors[26],"26": colors[27],"27": colors[28],"28": colors[29],
+      "29": colors[30]
     };
 
     for (let i = 0; i < this.scarttChartData.length; i++) {
