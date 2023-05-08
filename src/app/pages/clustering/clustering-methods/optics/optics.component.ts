@@ -17,6 +17,7 @@ export class OpticsComponent implements OnInit {
   labels: number[] = [];
   distancesEucl: number[][] = [];
   distancesEuclNor: number[][] = [];
+  distancesMaha: number[][] = [];
   initialPoints: number[][] = [];
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
@@ -38,6 +39,9 @@ export class OpticsComponent implements OnInit {
     this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
       this.distancesEuclNor = datos;
     });
+    this.distancesSub = this.senddistances.getMahalanobisDistances().subscribe(datos => {
+      this.distancesMaha = datos;
+    });
     this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
       this.initialPoints = datos;
     });
@@ -53,6 +57,8 @@ export class OpticsComponent implements OnInit {
       this.optics(this.distancesEuclNor, this.distanceMax, this.minPoints);
     } else if (this.senddistances.getDistanceType() === "Euclidea") {
       this.optics(this.distancesEucl, this.distanceMax, this.minPoints);
+    } else if (this.senddistances.getDistanceType() === "Mahalanobis") {
+      this.optics(this.distancesMaha, this.distanceMax, this.minPoints);
     }
     this.showResults = true;
   }

@@ -18,11 +18,12 @@ export class DbscanComponent {
   minPoints: number = 0;
   distancesEucl: number[][] = [];
   distancesEuclNor: number[][] = [];
+  distancesMaha: number[][] = [];
   initialPoints: number[][] = [];
   distanceType: string = "";
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
-  clusterIndex = 0;
+  clusterIndex = 10;
   showResults: boolean = false;
 
   constructor(
@@ -39,6 +40,9 @@ export class DbscanComponent {
     this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
       this.distancesEuclNor = datos;
     });
+    this.distancesSub = this.senddistances.getMahalanobisDistances().subscribe(datos => {
+      this.distancesMaha = datos;
+    });
     this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
       this.initialPoints = datos;
     });
@@ -52,6 +56,8 @@ export class DbscanComponent {
       this.dbscan(this.distancesEuclNor, this.distanceMax, this.minPoints);}
     else if (this.senddistances.getDistanceType() === "Euclidea") {
       this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints); }
+    else if (this.senddistances.getDistanceType() === "Mahalanobis") {
+      this.dbscan(this.distancesMaha, this.distanceMax, this.minPoints); }
     this.showResults = true;
   }
 

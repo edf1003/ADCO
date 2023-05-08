@@ -1,22 +1,13 @@
-<p>La distancia máxima establece el alcance máximo de la vecindad de un punto.
-   Si un punto está a una distancia mayor que la distancia máxima de su vecino más cercano,
-   se considera como un "outlier" y no se agrupa con ningún cluster. Por otra parte se define el mínimo de puntos que se necesitan,
-   para crear un nuevo cluster con los puntos que entre ellos estén dentro de esta distancia máxima</p>
 <form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
   <div style="display: flex; align-items: last baseline;">
     <mat-form-field appearance="fill" style="margin-right: 10px;">
-      <mat-label>Distancia máxima</mat-label>
-      <input matInput formControlName="distance" type="number" required>
-    </mat-form-field>
-    <mat-form-field appearance="fill" style="margin-right: 10px;">
-      <mat-label>Puntos mínimos por grupo</mat-label>
-      <input matInput formControlName="minPoints" type="number" required>
+      <mat-label>Número de clusters</mat-label>
+      <input matInput formControlName="numberOfClusters" type="number" required>
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary">Introducir</button>
   </div>
 </form>
 <div *ngIf="showResults">
-  <p>Existen {{clusterIndex}} grupos de clustering.</p>
   <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <div style="width: 50%;">
       <div>
@@ -25,7 +16,7 @@
           <ng-container *ngIf="label === -2">{{i + 1}}, </ng-container>
         </span>
       </div><br>
-      <div *ngFor="let grupo of [].constructor(clusterIndex); let i = index">
+      <div *ngFor="let grupo of [].constructor(distanceForm.value.numberOfClusters); let i = index">
         <h3><strong>Grupo {{i}}:</strong></h3>
         <div>
           <span *ngFor="let label of labels; let i2 = index" style="display: inline-block;">
@@ -39,4 +30,3 @@
     </div>
   </div>
 </div>
-

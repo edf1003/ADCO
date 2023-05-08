@@ -12,7 +12,7 @@
 <div *ngIf="distance === 'Euclidea'">
   <div style="display: flex; flex-direction: row; align-items: baseline;">
     <h2>Distancias euclideas:</h2>
-    <button mat-button color="primary" id="ShowEuDis" (click)="showEucDist()">Ocultar</button><br>
+    <button mat-button color="primary" id="ShowEuDis" (click)="showEucDist()">Mostrar</button><br>
   </div>
   <div *ngIf="showEucDis" class="tableForScroll">
     <table>
@@ -36,7 +36,7 @@
 <div *ngIf="distance === 'Euclidea normalizada'">
   <div style="display: flex; flex-direction: row; align-items: baseline;">
     <h2>Distancias euclideas normalizadas:</h2>
-    <button mat-button color="primary" id="showEucNorDis" (click)="showEucNorDist()">Ocultar</button><br>
+    <button mat-button color="primary" id="showEucNorDis" (click)="showEucNorDist()">Mostrar</button><br>
   </div>
   <div *ngIf="showEucNorDis" class="tableForScroll">
     <table>
@@ -60,7 +60,7 @@
 <div *ngIf="distance === 'Mahalanobis'">
   <div style="display: flex; flex-direction: row; align-items: baseline;">
     <h2>Distancias de Mahalanobis:</h2>
-    <button mat-button color="primary" id="ShowMahDis" (click)="showMahDist()">Ocultar</button><br>
+    <button mat-button color="primary" id="ShowMahDis" (click)="showMahDist()">Mostrar</button><br>
   </div>
   <div *ngIf="showMahDis" class="tableForScroll">
     <table>

@@ -36,6 +36,7 @@ import { DistancesComponent } from './pages/clustering/distances/distances.compo
 import { ClusteringMethodsComponent } from './pages/clustering/clustering-methods/clustering-methods.component';
 import { DbscanComponent } from './pages/clustering/clustering-methods/dbscan/dbscan.component';
 import { OpticsComponent } from './pages/clustering/clustering-methods/optics/optics.component';
+import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/kmeans.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { OpticsComponent } from './pages/clustering/clustering-methods/optics/op
     DistancesComponent,
     ClusteringMethodsComponent,
     DbscanComponent,
-    OpticsComponent
+    OpticsComponent,
+    KmeansComponent
   ],
   imports: [
     BrowserModule,

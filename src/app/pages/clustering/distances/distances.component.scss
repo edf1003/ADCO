@@ -9,11 +9,11 @@ $table-header-bg: #2e4b6a;
 table {
   width: 70%;
   border-collapse: collapse;
+  border: 2px solid black;
 
   th, td {
-    padding: 8px;
+    padding: 4px;
     text-align: center;
-    border: 1px solid #ddd;
   }
 
   th {
