@@ -10,7 +10,8 @@ table {
   border-collapse: collapse;
   border: 2px solid black;
 
-  th, td {
+  th,
+  td {
     padding: 4px;
     text-align: center;
   }
@@ -28,7 +29,6 @@ table {
     background-color: $table-bg;
   }
 }
-
 
 .tableForScroll {
   max-width: 100%;

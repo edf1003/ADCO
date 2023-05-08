@@ -1,6 +1,5 @@
 import { Component, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { forEach } from 'mathjs';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
@@ -8,10 +7,9 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 @Component({
   selector: 'app-dbscan',
   templateUrl: './dbscan.component.html',
-  styleUrls: ['./dbscan.component.scss']
+  styleUrls: ['./dbscan.component.scss'],
 })
 export class DbscanComponent {
-
   @Output() labels: number[] = [];
   distanceForm: FormGroup;
   distanceMax: number = 0;
@@ -20,7 +18,7 @@ export class DbscanComponent {
   distancesEuclNor: number[][] = [];
   distancesMaha: number[][] = [];
   initialPoints: number[][] = [];
-  distanceType: string = "";
+  distanceType: string = '';
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
   clusterIndex = 10;
@@ -28,36 +26,44 @@ export class DbscanComponent {
 
   constructor(
     private senddistances: sendDistances,
-    private sendDataTable: sendDataTable)
-  {
+    private sendDataTable: sendDataTable
+  ) {
     this.distanceForm = new FormGroup({
       distance: new FormControl(),
       minPoints: new FormControl(),
     });
-    this.distancesSub = this.senddistances.getEuclideanDistances().subscribe(datos => {
-      this.distancesEucl = datos;
-    });
-    this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
-      this.distancesEuclNor = datos;
-    });
-    this.distancesSub = this.senddistances.getMahalanobisDistances().subscribe(datos => {
-      this.distancesMaha = datos;
-    });
-    this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
-      this.initialPoints = datos;
-    });
-   }
+    this.distancesSub = this.senddistances
+      .getEuclideanDistances()
+      .subscribe((datos) => {
+        this.distancesEucl = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getEuclideanNormalizedDistances()
+      .subscribe((datos) => {
+        this.distancesEuclNor = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getMahalanobisDistances()
+      .subscribe((datos) => {
+        this.distancesMaha = datos;
+      });
+    this.initalPointsSub = this.sendDataTable
+      .getDatosTabla()
+      .subscribe((datos) => {
+        this.initialPoints = datos;
+      });
+  }
 
-
-  saveParameters(){
+  saveParameters() {
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
-    if (this.senddistances.getDistanceType() === "Euclidea normalizada") {
-      this.dbscan(this.distancesEuclNor, this.distanceMax, this.minPoints);}
-    else if (this.senddistances.getDistanceType() === "Euclidea") {
-      this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints); }
-    else if (this.senddistances.getDistanceType() === "Mahalanobis") {
-      this.dbscan(this.distancesMaha, this.distanceMax, this.minPoints); }
+    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
+      this.dbscan(this.distancesEuclNor, this.distanceMax, this.minPoints);
+    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
+      this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints);
+    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
+      this.dbscan(this.distancesMaha, this.distanceMax, this.minPoints);
+    }
     this.showResults = true;
   }
 
@@ -83,7 +89,15 @@ export class DbscanComponent {
         labels[i] = -2;
       } else {
         // Asignar a un nuevo cluster
-        this.assignCluster(i, neighbors, labels, this.clusterIndex, distances, eps, minPts);
+        this.assignCluster(
+          i,
+          neighbors,
+          labels,
+          this.clusterIndex,
+          distances,
+          eps,
+          minPts
+        );
         this.clusterIndex++;
       }
     }
@@ -91,7 +105,11 @@ export class DbscanComponent {
     this.labels = labels;
   }
 
-  findNeighbors(pointIndex: number, distances: number[][], eps: number): number[] {
+  findNeighbors(
+    pointIndex: number,
+    distances: number[][],
+    eps: number
+  ): number[] {
     const neighbors: number[] = [];
 
     for (let i = 0; i < distances.length; i++) {
@@ -103,7 +121,15 @@ export class DbscanComponent {
     return neighbors;
   }
 
-  assignCluster(pointIndex: number, neighbors: number[], labels: number[], clusterIndex: number, distances: number[][], eps: number, minPts: number): void {
+  assignCluster(
+    pointIndex: number,
+    neighbors: number[],
+    labels: number[],
+    clusterIndex: number,
+    distances: number[][],
+    eps: number,
+    minPts: number
+  ): void {
     labels[pointIndex] = clusterIndex;
 
     for (const neighborIndex of neighbors) {
@@ -118,7 +144,15 @@ export class DbscanComponent {
 
         if (newNeighbors.length >= minPts) {
           // Expandir cluster
-          this.assignCluster(neighborIndex, newNeighbors, labels, clusterIndex, distances, eps, minPts);
+          this.assignCluster(
+            neighborIndex,
+            newNeighbors,
+            labels,
+            clusterIndex,
+            distances,
+            eps,
+            minPts
+          );
         }
       }
     }

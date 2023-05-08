@@ -1,135 +1,274 @@
 <div class="descripcion">
   <h2>Definición</h2>
-    <p >ACP (Análisis de Componentes Principales), construye una transformación lineal que elige un nuevo sistema de coordenadas para el conjunto de datos original cuya varianza más grande se fija
-      en el primer eje (llamado el primer componente principal), la varianza grande en segundo lugar en el segundo eje y así sucesivamente. Para construir
-      esta transformación lineal, primero debe construir la matriz de covarianza o la matriz de coeficiente de correlación. Debido a la simetría de esta matriz,
-      existe una base adecuada para sus vectores propios. La transformación que convierte las coordenadas antiguas en las coordenadas de la nueva base es una
-      transformación lineal necesaria para reducir la dimensionalidad de los datos. Además, las coordenadas en la nueva base de datos producen el componente
-      factorial subyacente de los datos originales.</p>
-      <p>ACP es especialmente útil para reducir el tamaño de los conjuntos de datos. Los primeros componentes principales describen la mayor parte de la
-      varianza en los datos (cuanto más estrechamente correlacionadas están las variables iniciales). Estas subsecciones a veces contienen el aspecto
-      "más importante" de la información y se pueden omitir otros elementos. Existen diferentes métodos para estimar el número de componentes principales
-      significativos; El método más apropiado dependerá de la estructura de correlación en los datos originales.</p>
-  <br>
+  <p>
+    ACP (Análisis de Componentes Principales), construye una transformación
+    lineal que elige un nuevo sistema de coordenadas para el conjunto de datos
+    original cuya varianza más grande se fija en el primer eje (llamado el
+    primer componente principal), la varianza grande en segundo lugar en el
+    segundo eje y así sucesivamente. Para construir esta transformación lineal,
+    primero debe construir la matriz de covarianza o la matriz de coeficiente de
+    correlación. Debido a la simetría de esta matriz, existe una base adecuada
+    para sus vectores propios. La transformación que convierte las coordenadas
+    antiguas en las coordenadas de la nueva base es una transformación lineal
+    necesaria para reducir la dimensionalidad de los datos. Además, las
+    coordenadas en la nueva base de datos producen el componente factorial
+    subyacente de los datos originales.
+  </p>
+  <p>
+    ACP es especialmente útil para reducir el tamaño de los conjuntos de datos.
+    Los primeros componentes principales describen la mayor parte de la varianza
+    en los datos (cuanto más estrechamente correlacionadas están las variables
+    iniciales). Estas subsecciones a veces contienen el aspecto "más importante"
+    de la información y se pueden omitir otros elementos. Existen diferentes
+    métodos para estimar el número de componentes principales significativos; El
+    método más apropiado dependerá de la estructura de correlación en los datos
+    originales.
+  </p>
+  <br />
 
   <p><strong>Introduce el número de componentes principales:</strong></p>
-  <form [formGroup]="formulariodenumero" (submit)="setnumberofnewlabels()" class="listofinputs">
+  <form
+    [formGroup]="formulariodenumero"
+    (submit)="setnumberofnewlabels()"
+    class="listofinputs"
+  >
     <mat-form-field>
       <mat-label>Numero de CP</mat-label>
-      <input matInput [formControlName]="'numberofnewlabels'" type="number" required >
+      <input
+        matInput
+        [formControlName]="'numberofnewlabels'"
+        type="number"
+        required
+      />
     </mat-form-field>
-    <button mat-raised-button type="submit" id="submitButtom" color="primary" style="margin-left: 20px;">Introducir</button>
+    <button
+      mat-raised-button
+      type="submit"
+      id="submitButtom"
+      color="primary"
+      style="margin-left: 20px"
+    >
+      Introducir
+    </button>
   </form>
   <p>Recuerda que para obtener las gráficas, el número de CP debe ser 2 o 1.</p>
-  <p *ngIf="isMayor">El nuevo número de componentes principales, tiene que ser menor que el número de variables de la tabla original.</p>
+  <p *ngIf="isMayor">
+    El nuevo número de componentes principales, tiene que ser menor que el
+    número de variables de la tabla original.
+  </p>
 
-  <div style="display: flex;">
-    <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%;">
-      <div style="display: flex; align-items: baseline;">
+  <div style="display: flex">
+    <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%">
+      <div style="display: flex; align-items: baseline">
         <h2>Datos Finales:</h2>
-        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Estandarizar</button>
-        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Desestandarizar</button>
+        <button
+          *ngIf="!this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Estandarizar
+        </button>
+        <button
+          *ngIf="this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Desestandarizar
+        </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset1"></app-scartt-chart><br>
+      <app-scartt-chart [scarttChartData]="dataset1"></app-scartt-chart><br />
     </div>
-    <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%;">
-      <div style="display: flex; align-items: baseline;">
+    <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%">
+      <div style="display: flex; align-items: baseline">
         <h2>Datos Finales:</h2>
-        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Estandarizar</button>
-        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Desestandarizar</button>
+        <button
+          *ngIf="!this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Estandarizar
+        </button>
+        <button
+          *ngIf="this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Desestandarizar
+        </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset2"></app-scartt-chart><br>
+      <app-scartt-chart [scarttChartData]="dataset2"></app-scartt-chart><br />
     </div>
-    <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%;">
-      <div style="display: flex; align-items: baseline;">
+    <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%">
+      <div style="display: flex; align-items: baseline">
         <h2>Datos Finales Estandarizados:</h2>
-        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Estandarizar</button>
-        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Desestandarizar</button>
+        <button
+          *ngIf="!this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Estandarizar
+        </button>
+        <button
+          *ngIf="this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Desestandarizar
+        </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart><br>
+      <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart
+      ><br />
     </div>
-    <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%;">
-      <div style="display: flex; align-items: baseline;">
+    <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%">
+      <div style="display: flex; align-items: baseline">
         <h2>Datos Finales Estandarizados:</h2>
-        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Estandarizar</button>
-        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">Desestandarizar</button>
+        <button
+          *ngIf="!this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Estandarizar
+        </button>
+        <button
+          *ngIf="this.isStandarizezACP"
+          mat-button
+          color="primary"
+          style="margin: 10px"
+          (click)="standarizeACP()"
+        >
+          Desestandarizar
+        </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart><br>
+      <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart
+      ><br />
     </div>
-  </div><br><br>
+  </div>
+  <br /><br />
   <div *ngIf="sendIsPressed && !isMayor">
-    <div *ngIf="!isStandarizezACP" style="text-align: start; align-items: start;">
-      <div style="display: flex; align-items: baseline;">
-        <br><br><h2>Proyecciones sobre los Componentes Principales</h2>
-        <button mat-button color="primary" id="ShowACP" (click)="showPredictionsFun()">Ocultar</button>
+    <div
+      *ngIf="!isStandarizezACP"
+      style="text-align: start; align-items: start"
+    >
+      <div style="display: flex; align-items: baseline">
+        <br /><br />
+        <h2>Proyecciones sobre los Componentes Principales</h2>
+        <button
+          mat-button
+          color="primary"
+          id="ShowACP"
+          (click)="showPredictionsFun()"
+        >
+          Ocultar
+        </button>
       </div>
       <div *ngIf="showPredictions" class="tableForScroll">
         <table sty>
           <thead>
             <tr>
-              <th *ngFor="let i of lenghtOfData">
-                PC{{ i + 1 }}
-              </th>
+              <th *ngFor="let i of lenghtOfData">PC{{ i + 1 }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let row of resultPCA">
-              <td *ngFor="let pred of row">{{ pred | numberFormat }}  </td>
+              <td *ngFor="let pred of row">{{ pred | numberFormat }}</td>
             </tr>
           </tbody>
         </table>
-      </div><br>
+      </div>
+      <br />
     </div>
-    <div *ngIf="isStandarizezACP" >
-      <div style="display: flex; align-items: baseline;">
-        <br><br><h2>Proyecciones estandarizadas sobre los Componentes Principales</h2>
-        <button mat-button color="primary" id="ShowACP2" (click)="showPredictionsFun()">Ocultar</button>
+    <div *ngIf="isStandarizezACP">
+      <div style="display: flex; align-items: baseline">
+        <br /><br />
+        <h2>Proyecciones estandarizadas sobre los Componentes Principales</h2>
+        <button
+          mat-button
+          color="primary"
+          id="ShowACP2"
+          (click)="showPredictionsFun()"
+        >
+          Ocultar
+        </button>
       </div>
       <div *ngIf="showPredictions" class="tableForScroll">
         <table>
           <thead>
             <tr>
-              <th *ngFor="let i of lenghtOfData">
-                PC{{ i + 1 }}
-              </th>
+              <th *ngFor="let i of lenghtOfData">PC{{ i + 1 }}</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let row of resultPCAStand">
-              <td *ngFor="let vs of row">{{ vs | numberFormat }}  </td>
+              <td *ngFor="let vs of row">{{ vs | numberFormat }}</td>
             </tr>
           </tbody>
         </table>
-      </div><br>
+      </div>
+      <br />
     </div>
   </div>
-  <div class="PCA" *ngIf="sendIsPressed && !isMayor"><br><br>
-    <div style="display: flex; align-items: baseline;">
+  <div class="PCA" *ngIf="sendIsPressed && !isMayor">
+    <br /><br />
+    <div style="display: flex; align-items: baseline">
       <h2>Propiedades</h2>
-      <button mat-button color="primary" id="showProperties" (click)="showPropertiesTable()">Ocultar</button>
+      <button
+        mat-button
+        color="primary"
+        id="showProperties"
+        (click)="showPropertiesTable()"
+      >
+        Ocultar
+      </button>
     </div>
-    <div *ngIf="showProperties" style="display: flex; flex-direction: row; text-align: left;">
+    <div
+      *ngIf="showProperties"
+      style="display: flex; flex-direction: row; text-align: left"
+    >
       <table>
         <thead>
           <tr>
-            <th style="width: 10%;"></th>
-            <th>Varianza </th><th>Autovalores </th><th>Desviación Estandar</th>
+            <th style="width: 10%"></th>
+            <th>Varianza</th>
+            <th>Autovalores</th>
+            <th>Desviación Estandar</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let i of lenghtOfData">
-            <td>PC{{i+1}}</td>
-            <td>{{ pcaCumuVal[i] * 100 | number: '.1-2' }}%</td>
+            <td>PC{{ i + 1 }}</td>
+            <td>{{ pcaCumuVal[i] * 100 | number : ".1-2" }}%</td>
             <td>{{ pcaEigenValues[i] | numberFormat }}</td>
             <td>{{ pcaStandDev[i] | numberFormat }}</td>
           </tr>
         </tbody>
       </table>
-    </div><br><br>
+    </div>
+    <br /><br />
     <div>
-      <div style="display: flex; align-items: baseline;">
+      <div style="display: flex; align-items: baseline">
         <h2>Autovectores</h2>
-        <button mat-button color="primary" id="showEigenVectors" (click)="showEigenVectorsTable()">Ocultar</button>
+        <button
+          mat-button
+          color="primary"
+          id="showEigenVectors"
+          (click)="showEigenVectorsTable()"
+        >
+          Ocultar
+        </button>
       </div>
       <div *ngIf="showEigenVectors" class="tableForScroll">
         <table>
@@ -140,6 +279,7 @@
           </tbody>
         </table>
       </div>
-    </div><br><br>
+    </div>
+    <br /><br />
   </div>
 </div>

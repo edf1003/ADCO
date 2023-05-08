@@ -1,13 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'numberFormat'
+  name: 'numberFormat',
 })
 export class NumberFormatPipe implements PipeTransform {
-
   transform(value: number): string {
-    if (value === 0){
-      return "0";
+    if (value === 0) {
+      return '0';
     } else if (Math.abs(value) >= 1000) {
       return value.toExponential(3);
     } else if (Math.abs(value) <= 0.001) {
@@ -16,5 +15,4 @@ export class NumberFormatPipe implements PipeTransform {
       return value.toFixed(3);
     }
   }
-
 }

@@ -1,44 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { Dbscan } from '@turf/clusters-dbscan';
 
 @Component({
   selector: 'app-clustering-methods',
   templateUrl: './clustering-methods.component.html',
-  styleUrls: ['./clustering-methods.component.scss']
+  styleUrls: ['./clustering-methods.component.scss'],
 })
 export class ClusteringMethodsComponent implements OnInit {
+  clusteringMethods: string[] = ['DBSCAN', 'OPTICS', 'K-means', 'SOM'];
+  clusteringMethod: string = '';
 
-  clusteringMethods: string[] = ["DBSCAN", "OPTICS", "K-means", "SOM"];
-  clusteringMethod: string = "";
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  selectClustering(clusteringMethod: string){
+  selectClustering(clusteringMethod: string) {
     this.clusteringMethod = clusteringMethod;
-    if (this.clusteringMethod === "DBSCAN"){}
-    else if (this.clusteringMethod === "OPTICS"){}
-    else if (this.clusteringMethod === "K-means"){}
-    else if (this.clusteringMethod === "SOM"){}
+    if (this.clusteringMethod === 'DBSCAN') {
+    } else if (this.clusteringMethod === 'OPTICS') {
+    } else if (this.clusteringMethod === 'K-means') {
+    } else if (this.clusteringMethod === 'SOM') {
+    }
   }
-
-  /*--------------------- DBSCAN -----------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*--------------------- DBSCAN END -----------------------*/
 }

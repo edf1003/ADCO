@@ -1,11 +1,10 @@
-.listofinputs{
+.listofinputs {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  div{
+  div {
     margin-right: 20px;
   }
-
 }
 
 table {
@@ -14,7 +13,8 @@ table {
   counter-reset: rowNumber;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 8px;
   text-align: center;
   border-bottom: 1px solid black;
@@ -62,13 +62,12 @@ tr td:first-child:before {
   display: flex;
   flex-direction: row;
 
-    button{
-      margin-left: 20px;
-      height: fit-content;
-      align-self: center;
-    }
+  button {
+    margin-left: 20px;
+    height: fit-content;
+    align-self: center;
+  }
 }
-
 
 .tableForScroll {
   max-width: 100%;

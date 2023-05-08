@@ -7,10 +7,9 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 @Component({
   selector: 'app-optics',
   templateUrl: './optics.component.html',
-  styleUrls: ['./optics.component.scss']
+  styleUrls: ['./optics.component.scss'],
 })
 export class OpticsComponent implements OnInit {
-
   distanceForm: FormGroup;
   distanceMax: number = 0;
   minPoints: number = 0;
@@ -24,7 +23,6 @@ export class OpticsComponent implements OnInit {
   showResults: boolean = false;
   clusterIndex = 0;
 
-
   constructor(
     private senddistances: sendDistances,
     private sendDataTable: sendDataTable
@@ -33,31 +31,38 @@ export class OpticsComponent implements OnInit {
       distance: new FormControl(),
       minPoints: new FormControl(),
     });
-    this.distancesSub = this.senddistances.getEuclideanDistances().subscribe(datos => {
-      this.distancesEucl = datos;
-    });
-    this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
-      this.distancesEuclNor = datos;
-    });
-    this.distancesSub = this.senddistances.getMahalanobisDistances().subscribe(datos => {
-      this.distancesMaha = datos;
-    });
-    this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
-      this.initialPoints = datos;
-    });
+    this.distancesSub = this.senddistances
+      .getEuclideanDistances()
+      .subscribe((datos) => {
+        this.distancesEucl = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getEuclideanNormalizedDistances()
+      .subscribe((datos) => {
+        this.distancesEuclNor = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getMahalanobisDistances()
+      .subscribe((datos) => {
+        this.distancesMaha = datos;
+      });
+    this.initalPointsSub = this.sendDataTable
+      .getDatosTabla()
+      .subscribe((datos) => {
+        this.initialPoints = datos;
+      });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  saveParameters(){
+  saveParameters() {
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
-    if (this.senddistances.getDistanceType() === "Euclidea normalizada") {
+    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
       this.optics(this.distancesEuclNor, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === "Euclidea") {
+    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
       this.optics(this.distancesEucl, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === "Mahalanobis") {
+    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
       this.optics(this.distancesMaha, this.distanceMax, this.minPoints);
     }
     this.showResults = true;
@@ -90,7 +95,7 @@ export class OpticsComponent implements OnInit {
       } else {
         reachability[pointIdx] = 0;
         seeds = expandClusterOrder(pointIdx, neighbors, seeds);
-        seeds.forEach(seed => {
+        seeds.forEach((seed) => {
           const seedNeighbors = getNeighbors(seed);
           if (!processed[seed]) {
             update(seed, seedNeighbors, seeds);
@@ -99,19 +104,27 @@ export class OpticsComponent implements OnInit {
       }
     }
 
-    function expandClusterOrder(pointIdx: number, neighbors: number[], seeds: number[]): number[] {
-      reachability[pointIdx] = Math.max(...neighbors.map(neighborIdx => distances[pointIdx][neighborIdx]));
-      seeds = seeds.filter(seedIdx => seedIdx !== pointIdx);
-      seeds = seeds.concat(neighbors.filter(neighborIdx => {
-        if (!processed[neighborIdx]) {
-          const neighborNeighbors = getNeighbors(neighborIdx);
-          if (neighborNeighbors.length >= minPts) {
-            seeds.push(neighborIdx);
+    function expandClusterOrder(
+      pointIdx: number,
+      neighbors: number[],
+      seeds: number[]
+    ): number[] {
+      reachability[pointIdx] = Math.max(
+        ...neighbors.map((neighborIdx) => distances[pointIdx][neighborIdx])
+      );
+      seeds = seeds.filter((seedIdx) => seedIdx !== pointIdx);
+      seeds = seeds.concat(
+        neighbors.filter((neighborIdx) => {
+          if (!processed[neighborIdx]) {
+            const neighborNeighbors = getNeighbors(neighborIdx);
+            if (neighborNeighbors.length >= minPts) {
+              seeds.push(neighborIdx);
+            }
+            return true;
           }
-          return true;
-        }
-        return false;
-      }));
+          return false;
+        })
+      );
       return seeds;
     }
 
@@ -128,11 +141,14 @@ export class OpticsComponent implements OnInit {
       if (reachability[order[i]] !== NOISE && clusters[order[i]] === NOISE) {
         const cluster = [order[i]];
         for (let j = i + 1; j < n; j++) {
-          if (reachability[order[j]] !== NOISE && distances[order[i]][order[j]] <= epsilon) {
+          if (
+            reachability[order[j]] !== NOISE &&
+            distances[order[i]][order[j]] <= epsilon
+          ) {
             cluster.push(order[j]);
           }
         }
-        cluster.forEach(clusterPointIdx => {
+        cluster.forEach((clusterPointIdx) => {
           clusters[clusterPointIdx] = this.clusterIndex;
         });
         this.clusterIndex++;
@@ -141,5 +157,4 @@ export class OpticsComponent implements OnInit {
 
     this.labels = clusters;
   }
-
 }

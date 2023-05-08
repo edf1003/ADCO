@@ -6,10 +6,9 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-addvariables',
   templateUrl: './addvariables.component.html',
-  styleUrls: ['./addvariables.component.scss']
+  styleUrls: ['./addvariables.component.scss'],
 })
-export class AddvariablesComponent{
-
+export class AddvariablesComponent {
   valor: number = 0;
   inputsArray: any[] = new Array(this.valor); //Array para poder iterar sobre un numero "valor" de labels.
 
@@ -30,7 +29,7 @@ export class AddvariablesComponent{
   datosTabla: Array<Array<any>> = [];
   datosReset: Array<Array<any>> = []; //Array de objetros paquetededatos
   paquetedatos: string[] = []; //Array de datos de una fila
-  pcaStandDev:  Array<Array<number>> = [];
+  pcaStandDev: Array<Array<number>> = [];
 
   constructor(private sendData: sendDataTable) {
     this.formulariodecabeceras = new FormGroup({});
@@ -38,16 +37,15 @@ export class AddvariablesComponent{
   }
 
   guardarValor() {
-    if(this.valor>=10 || this.valor <= 0 || !this.valor ){
+    if (this.valor >= 10 || this.valor <= 0 || !this.valor) {
       var alerta = document.getElementById('alert');
-      if (alerta !== null){
+      if (alerta !== null) {
         alerta.style.opacity = '100%';
         this.valor = 0;
-
       }
     } else {
       var alerta = document.getElementById('alert');
-      if (alerta !== null){
+      if (alerta !== null) {
         alerta.style.opacity = '0%';
         this.disabledinput = true;
       }
@@ -56,14 +54,17 @@ export class AddvariablesComponent{
   }
 
   generarLabels() {
-    if(this.valor){
-      if (this.valor<10){
+    if (this.valor) {
+      if (this.valor < 10) {
         this.inputsArray = new Array(this.valor);
-        for (let i = 0;i < this.valor; i++) {
+        for (let i = 0; i < this.valor; i++) {
           const control = new FormControl('');
-          this.formulariodecabeceras.addControl("label" + i, control);
-          const controldata = new FormControl('',  Validators.compose([Validators.required, Validators.min(1)]));
-          this.formulariodedatos.addControl("data" + i, controldata );
+          this.formulariodecabeceras.addControl('label' + i, control);
+          const controldata = new FormControl(
+            '',
+            Validators.compose([Validators.required, Validators.min(1)])
+          );
+          this.formulariodedatos.addControl('data' + i, controldata);
         }
         this.optionFileBool = false;
         this.optionManualBool = !this.optionFileBool;
@@ -71,76 +72,76 @@ export class AddvariablesComponent{
     }
   }
 
-  creartabla(){
+  creartabla() {
     this.buttonPush = true;
-    for (let i = 0;i < this.valor; i++) {
-      if(this.formulariodecabeceras.get("label" + i)?.enabled){
-        this.cabeceraTabla.push(this.formulariodecabeceras.get("label" + i)?.value);
-        this.formulariodecabeceras.get("label" + i)?.disable()
+    for (let i = 0; i < this.valor; i++) {
+      if (this.formulariodecabeceras.get('label' + i)?.enabled) {
+        this.cabeceraTabla.push(
+          this.formulariodecabeceras.get('label' + i)?.value
+        );
+        this.formulariodecabeceras.get('label' + i)?.disable();
       }
     }
     this.isdisabledlabels = true;
-    if (this.datosTabla[0].length <= this.datosTabla.length){
+    if (this.datosTabla[0].length <= this.datosTabla.length) {
       this.isWiderThanHiger = true;
     } else {
       this.isWiderThanHiger = false;
     }
-
   }
 
-  setdata(){
-    this.paquetedatos = []
+  setdata() {
+    this.paquetedatos = [];
     this.anydataisempty = false;
-    for (let i = 0;i < this.valor; i++) {
-      this.paquetedatos.push(this.formulariodedatos.get("data" + i)?.value);
-      if(this.formulariodedatos.get("data" + i)?.value === ""){
-        this.anydataisempty = true
+    for (let i = 0; i < this.valor; i++) {
+      this.paquetedatos.push(this.formulariodedatos.get('data' + i)?.value);
+      if (this.formulariodedatos.get('data' + i)?.value === '') {
+        this.anydataisempty = true;
         var alerta = document.getElementById('alert2');
-        if (alerta !== null){
+        if (alerta !== null) {
           alerta.style.opacity = '100%';
         }
       }
-      this.formulariodedatos.get("data" + i)?.setValue("");
+      this.formulariodedatos.get('data' + i)?.setValue('');
     }
-    if(this.anydataisempty === false){
-      this.datosTabla.push(this.paquetedatos)
+    if (this.anydataisempty === false) {
+      this.datosTabla.push(this.paquetedatos);
       var alerta = document.getElementById('alert2');
-        if (alerta !== null){
-          alerta.style.opacity = '0%';
-        }
+      if (alerta !== null) {
+        alerta.style.opacity = '0%';
+      }
     }
-    if (this.datosTabla[0].length <= this.datosTabla.length){
+    if (this.datosTabla[0].length <= this.datosTabla.length) {
       this.isWiderThanHiger = true;
     } else {
       this.isWiderThanHiger = false;
     }
   }
 
-  deletecolumn(index: number){
+  deletecolumn(index: number) {
     this.setDatosReset();
-    this.datosTabla.splice(index,1);
-    if (this.datosTabla[0].length <= this.datosTabla.length){
+    this.datosTabla.splice(index, 1);
+    if (this.datosTabla[0].length <= this.datosTabla.length) {
       this.isWiderThanHiger = true;
     } else {
       this.isWiderThanHiger = false;
     }
   }
 
-  sendDatos(){
-      if (!this.isStandarized){
-        this.sendData.setDatosTabla(this.datosTabla);
-      }
-      else {
-        this.sendData.setDatosTabla(this.pcaStandDev);
-      }
+  sendDatos() {
+    if (!this.isStandarized) {
+      this.sendData.setDatosTabla(this.datosTabla);
+    } else {
+      this.sendData.setDatosTabla(this.pcaStandDev);
+    }
   }
 
-  resetDatos(){
+  resetDatos() {
     this.datosTabla = [];
-    for (let e of this.datosReset){
+    for (let e of this.datosReset) {
       this.datosTabla.push(e);
     }
-    if (this.datosTabla[0].length <= this.datosTabla.length){
+    if (this.datosTabla[0].length <= this.datosTabla.length) {
       this.isWiderThanHiger = true;
     } else {
       this.isWiderThanHiger = false;
@@ -148,8 +149,8 @@ export class AddvariablesComponent{
   }
 
   setDatosReset() {
-    if (this.isFirstTime === true){
-      for (let e of this.datosTabla){
+    if (this.isFirstTime === true) {
+      for (let e of this.datosTabla) {
         this.datosReset.push(e);
       }
       this.isFirstTime = false;
@@ -172,7 +173,7 @@ export class AddvariablesComponent{
       this.valor = this.cabeceraTabla.length;
       this.optionFileBool = true;
       this.optionManualBool = !this.optionFileBool;
-      if (this.datosTabla[0].length <= this.datosTabla.length){
+      if (this.datosTabla[0].length <= this.datosTabla.length) {
         this.isWiderThanHiger = true;
       } else {
         this.isWiderThanHiger = false;
@@ -200,7 +201,7 @@ export class AddvariablesComponent{
     for (let j = 0; j < nColumnas; j++) {
       let suma = 0;
       for (let i = 0; i < nFilas; i++) {
-        suma += Math.pow((this.datosTabla[i][j] - medias[j]), 2);
+        suma += Math.pow(this.datosTabla[i][j] - medias[j], 2);
       }
       desviaciones[j] = Math.sqrt(suma / nFilas);
     }
@@ -214,9 +215,10 @@ export class AddvariablesComponent{
     // Estandarizar los datos y agregarlos a la nueva matriz
     for (let i = 0; i < nFilas; i++) {
       for (let j = 0; j < nColumnas; j++) {
-        this.pcaStandDev[i][j] = (this.datosTabla[i][j] - medias[j]) / desviaciones[j];
+        this.pcaStandDev[i][j] =
+          (this.datosTabla[i][j] - medias[j]) / desviaciones[j];
       }
     }
-      this.isStandarized = !this.isStandarized;
-    }
+    this.isStandarized = !this.isStandarized;
+  }
 }

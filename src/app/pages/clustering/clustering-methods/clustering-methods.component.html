@@ -1,10 +1,15 @@
-<div class="selector"><br>
+<div class="selector">
+  <br />
   <p><strong>Elija el tipo de clustering.</strong></p>
   <mat-form-field appearance="fill">
-  <mat-label>Seleccione el tipo de distancia</mat-label>
+    <mat-label>Seleccione el tipo de distancia</mat-label>
     <mat-select [(ngModel)]="clusteringMethod">
-      <mat-option *ngFor="let clusteringMethod of clusteringMethods" [value]="clusteringMethod" (click)="selectClustering(clusteringMethod)">
-        {{clusteringMethod}}
+      <mat-option
+        *ngFor="let clusteringMethod of clusteringMethods"
+        [value]="clusteringMethod"
+        (click)="selectClustering(clusteringMethod)"
+      >
+        {{ clusteringMethod }}
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -2,15 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { footerAuth } from 'src/components/footer/footer.component';
-import { menuSelector } from 'src/components/menuSelector/menuSelector.component';
-import { pageTitle } from 'src/components/pageTitle/pageTitle.component';
-import { data } from '../app/pages/data/data.component'
+import { FooterBar } from 'src/components/footer-bar/footer-bar.component';
+import { menuSelector } from 'src/components/menu-selector/menu-selector.component';
+import { pageTitle } from 'src/components/page-title/page-title.component';
+import { data } from '../app/pages/data/data.component';
 import { AddvariablesComponent } from './pages/data/addvariables/addvariables.component';
 import { ScarttChartComponent } from '../components/scartt-chart/scartt-chart.component';
-import { NumberFormatPipe } from '../pipes/numberFormat'
-
-
+import { NumberFormatPipe } from '../pipes/numberFormat';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { information } from './pages/information/information.component';
@@ -38,13 +36,12 @@ import { DbscanComponent } from './pages/clustering/clustering-methods/dbscan/db
 import { OpticsComponent } from './pages/clustering/clustering-methods/optics/optics.component';
 import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/kmeans.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     information,
     menuSelector,
-    footerAuth,
+    FooterBar,
     pageTitle,
     data,
     AddvariablesComponent,
@@ -56,7 +53,7 @@ import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/km
     ClusteringMethodsComponent,
     DbscanComponent,
     OpticsComponent,
-    KmeansComponent
+    KmeansComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,10 +76,9 @@ import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/km
     ReactiveFormsModule,
     MatTableModule,
     NgChartsModule,
-    MatStepperModule
-
+    MatStepperModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PCAdata {
   private PCAdataSubject = new BehaviorSubject<number[][]>([]);
@@ -14,5 +14,4 @@ export class PCAdata {
   getDatosTabla() {
     return this.PCAdataSubject.asObservable();
   }
-
 }

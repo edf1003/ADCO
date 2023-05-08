@@ -7,10 +7,9 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 @Component({
   selector: 'app-kmeans',
   templateUrl: './kmeans.component.html',
-  styleUrls: ['./kmeans.component.scss']
+  styleUrls: ['./kmeans.component.scss'],
 })
 export class KmeansComponent implements OnInit {
-
   @Output() labels: number[] = [];
   distanceForm: FormGroup;
   numberOfClusters: number = 0;
@@ -18,7 +17,7 @@ export class KmeansComponent implements OnInit {
   distancesEuclNor: number[][] = [];
   distancesMaha: number[][] = [];
   initialPoints: number[][] = [];
-  distanceType: string = "";
+  distanceType: string = '';
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
   showResults: boolean = false;
@@ -30,31 +29,39 @@ export class KmeansComponent implements OnInit {
     this.distanceForm = new FormGroup({
       numberOfClusters: new FormControl(),
     });
-    this.distancesSub = this.senddistances.getEuclideanDistances().subscribe(datos => {
-      this.distancesEucl = datos;
-    });
-    this.distancesSub = this.senddistances.getEuclideanNormalizedDistances().subscribe(datos => {
-      this.distancesEuclNor = datos;
-    });
-    this.distancesSub = this.senddistances.getMahalanobisDistances().subscribe(datos => {
-      this.distancesMaha = datos;
-    });
-    this.initalPointsSub = this.sendDataTable.getDatosTabla().subscribe(datos => {
-      this.initialPoints = datos;
-    });
-   }
-
-  ngOnInit(): void {
+    this.distancesSub = this.senddistances
+      .getEuclideanDistances()
+      .subscribe((datos) => {
+        this.distancesEucl = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getEuclideanNormalizedDistances()
+      .subscribe((datos) => {
+        this.distancesEuclNor = datos;
+      });
+    this.distancesSub = this.senddistances
+      .getMahalanobisDistances()
+      .subscribe((datos) => {
+        this.distancesMaha = datos;
+      });
+    this.initalPointsSub = this.sendDataTable
+      .getDatosTabla()
+      .subscribe((datos) => {
+        this.initialPoints = datos;
+      });
   }
 
-  saveParameters(){
+  ngOnInit(): void {}
+
+  saveParameters() {
     this.numberOfClusters = this.distanceForm.get('numberOfClusters')!.value;
-    if (this.senddistances.getDistanceType() === "Euclidea normalizada") {
-      this.kMeans(this.distancesEuclNor, this.numberOfClusters);}
-    else if (this.senddistances.getDistanceType() === "Euclidea") {
-      this.kMeans(this.distancesEucl, this.numberOfClusters); }
-    else if (this.senddistances.getDistanceType() === "Mahalanobis") {
-      this.kMeans(this.distancesMaha, this.numberOfClusters); }
+    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
+      this.kMeans(this.distancesEuclNor, this.numberOfClusters);
+    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
+      this.kMeans(this.distancesEucl, this.numberOfClusters);
+    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
+      this.kMeans(this.distancesMaha, this.numberOfClusters);
+    }
     this.showResults = true;
   }
 
@@ -144,7 +151,11 @@ export class KmeansComponent implements OnInit {
     return centroids;
   }
 
-  updateCentroids(distances: number[][], assignments: number[], k: number): number[][] {
+  updateCentroids(
+    distances: number[][],
+    assignments: number[],
+    k: number
+  ): number[][] {
     const n = distances.length;
     const d = distances[0].length;
     const centroids = new Array(k);
@@ -175,5 +186,4 @@ export class KmeansComponent implements OnInit {
 
     return centroids;
   }
-
 }

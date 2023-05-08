@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class sendDataTable {
   private datosTablaSubject = new BehaviorSubject<number[][]>([]);
@@ -14,5 +14,4 @@ export class sendDataTable {
   getDatosTabla() {
     return this.datosTablaSubject.asObservable();
   }
-
 }
