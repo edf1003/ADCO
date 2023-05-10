@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
+import { ColorsToSend } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-optics',
@@ -156,5 +157,11 @@ export class OpticsComponent implements OnInit {
     }
 
     this.labels = clusters;
+  }
+
+  getColor(index: number): string {
+    var grupoElement = document.getElementById('grupo' + index);
+    grupoElement!.style.backgroundColor = ColorsToSend.getColor(index);
+    return ColorsToSend.getColor(index);
   }
 }

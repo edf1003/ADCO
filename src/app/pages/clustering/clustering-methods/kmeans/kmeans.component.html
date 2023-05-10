@@ -2,58 +2,33 @@
   <div style="display: flex; align-items: last baseline">
     <mat-form-field appearance="fill" style="margin-right: 10px">
       <mat-label>Número de clusters</mat-label>
-      <input
-        matInput
-        formControlName="numberOfClusters"
-        type="number"
-        required
-      />
+      <input matInput formControlName="numberOfClusters" type="number" [max]="initialPoints.length" min="1" required />
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary">Introducir</button>
+    <button mat-raised-button type="submit" color="primary"
+      [disabled]="initialPoints.length <= distanceForm.value.numberOfClusters">Introducir</button>
   </div>
 </form>
-<div *ngIf="showResults">
-  <div
-    style="display: flex; flex-direction: row; justify-content: space-between"
-  >
+<div *ngIf="showResults && initialPoints.length >= distanceForm.value.numberOfClusters">
+  <div style="display: flex; flex-direction: row; justify-content: space-between">
     <div style="width: 50%">
-      <div>
-        <h3><strong>Outliers:</strong></h3>
-        <span
-          *ngFor="let label of labels; let i = index"
-          style="display: inline-block"
-        >
-          <ng-container *ngIf="label === -2">{{ i + 1 }}, </ng-container>
-        </span>
-      </div>
-      <br />
-      <div
-        *ngFor="
+      <div *ngFor="
           let grupo of [].constructor(distanceForm.value.numberOfClusters);
           let i = index
-        "
-      >
-        <h3>
-          <strong>Grupo {{ i }}:</strong>
+        ">
+        <h3 id="grupo{{i}}">
+          <strong>Grupo {{ i }}:</strong><span style="opacity: 0%;">{{getColor(i)}}</span>
         </h3>
         <div>
-          <span
-            *ngFor="let label of labels; let i2 = index"
-            style="display: inline-block"
-          >
+          <span *ngFor="let label of labels; let i2 = index" style="display: inline-block">
             <ng-container *ngIf="label === i">{{ i2 + 1 }}, </ng-container>
           </span>
         </div>
-        <br />
+        <br><br>
       </div>
     </div>
-    <div style="width: 30%" *ngIf="initialPoints[0].length === 2">
-      <app-scartt-chart
-        [scarttChartData]="initialPoints"
-        [isClustering]="true"
-        [clusterMap]="labels"
-      ></app-scartt-chart
-      ><br />
+    <div style="width: 40%" *ngIf="initialPoints[0].length === 2">
+      <app-scartt-chart [scarttChartData]="initialPoints" [isClustering]="true"
+        [clusterMap]="labels"></app-scartt-chart><br />
     </div>
   </div>
 </div>

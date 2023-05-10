@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
+import { ColorsToSend } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-kmeans',
@@ -24,7 +25,8 @@ export class KmeansComponent implements OnInit {
 
   constructor(
     private senddistances: sendDistances,
-    private sendDataTable: sendDataTable
+    private sendDataTable: sendDataTable,
+    private colorToSend: ColorsToSend
   ) {
     this.distanceForm = new FormGroup({
       numberOfClusters: new FormControl(),
@@ -55,6 +57,9 @@ export class KmeansComponent implements OnInit {
 
   saveParameters() {
     this.numberOfClusters = this.distanceForm.get('numberOfClusters')!.value;
+    if (this.initialPoints.length <= this.numberOfClusters) {
+      return;
+    }
     if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
       this.kMeans(this.distancesEuclNor, this.numberOfClusters);
     } else if (this.senddistances.getDistanceType() === 'Euclidea') {
@@ -185,5 +190,11 @@ export class KmeansComponent implements OnInit {
     }
 
     return centroids;
+  }
+
+  getColor(index: number): string {
+    var grupoElement = document.getElementById('grupo' + index);
+    grupoElement!.style.backgroundColor = ColorsToSend.getColor(index);
+    return ColorsToSend.getColor(index);
   }
 }
