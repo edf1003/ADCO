@@ -35,6 +35,7 @@ import { ClusteringMethodsComponent } from './pages/clustering/clustering-method
 import { DbscanComponent } from './pages/clustering/clustering-methods/dbscan/dbscan.component';
 import { OpticsComponent } from './pages/clustering/clustering-methods/optics/optics.component';
 import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/kmeans.component';
+import { ResultsComponent } from './pages/results/results.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/km
     DbscanComponent,
     OpticsComponent,
     KmeansComponent,
+    ResultsComponent,
   ],
   imports: [
     BrowserModule,

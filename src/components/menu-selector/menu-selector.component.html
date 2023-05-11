@@ -1,34 +1,17 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Información"
-    ><app-page-information></app-page-information
-  ></mat-tab>
+  <mat-tab label="Información"><app-page-information></app-page-information></mat-tab>
   <mat-tab label="Empezar">
-    <mat-stepper
-      class="mat-horizontal-stepper"
-      [linear]="true"
-      #stepper
-      style="background: none"
-    >
+    <mat-stepper class="mat-horizontal-stepper" [linear]="true" #stepper style="background: none">
       <mat-step label="Datos">
         <app-data></app-data>
       </mat-step>
       <mat-step label="ACP">
         <app-acp></app-acp>
         <div style="display: flex; justify-content: flex-end">
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin: 10px"
-            matStepperPrevious
-          >
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
             Datos
           </button>
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin: 10px"
-            matStepperNext
-          >
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperNext>
             Clustering
           </button>
         </div>
@@ -36,47 +19,24 @@
       <mat-step label="Clustering">
         <app-clustering></app-clustering>
         <div style="display: flex; justify-content: flex-end">
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin: 10px"
-            matStepperPrevious
-          >
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
             ACP
           </button>
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin: 10px"
-            matStepperNext
-          >
-            Outliers
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperNext>
+            Resultados
           </button>
         </div>
       </mat-step>
-      <mat-step label="outliers">
-        <div style="display: flex; justify-content: flex-end">
-          <button
-            mat-raised-button
-            color="primary"
-            style="margin: 10px"
-            matStepperPrevious
-          >
-            Clustering
-          </button>
-        </div>
+      <mat-step label="Resultados">
+        <app-results></app-results>
       </mat-step>
     </mat-stepper>
   </mat-tab>
   <mat-tab disabled="">
     <ng-template mat-tab-label class="template">
-      <a
-        href="https://github.com/edf1003/TFG"
-        style="text-decoration: none; color: black"
-      >
+      <a href="https://github.com/edf1003/TFG" style="text-decoration: none; color: black">
         <img class="gitlogo" src="../../assets/img/gitlogo.jpg" />
         GitHub
       </a>
-    </ng-template></mat-tab
-  >
+    </ng-template></mat-tab>
 </mat-tab-group>

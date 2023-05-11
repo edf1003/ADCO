@@ -4,6 +4,7 @@ import { sendDataTable } from '../../services/sendDataTable.service';
 import { Subscription } from 'rxjs';
 import { PCA } from 'ml-pca';
 import { PCAdata } from '../../services/dataPCA.service';
+import { ResumeExcel } from 'src/app/services/resumeExcel.service';
 
 @Component({
   selector: 'app-acp',
@@ -32,16 +33,20 @@ export class AcpComponent implements OnDestroy, OnInit {
   showEigenVectors: boolean = true;
 
   //All PCA values
-  pcaCumuVal: any;
-  pcaEigenValues: any;
-  pcaEigenVectors: any;
-  pcaExplVar: any;
-  pcaStandDev: any;
-  resultPCA: any;
-  pcaInvert: any;
-  resultPCAStand: any;
+  pcaCumuVal: number[] = [];
+  pcaEigenValues: number[] = [];
+  pcaEigenVectors: number[][] = [];
+  pcaExplVar: number[] = [];
+  pcaStandDev: number[] = [];
+  resultPCA: number[][] = [];
+  pcaInvert: number[][] = [];
+  resultPCAStand: number[][] = [];
 
-  constructor(private sendData: sendDataTable, private pcadata: PCAdata) {
+  constructor(
+    private sendData: sendDataTable,
+    private pcadata: PCAdata,
+    private resumeExcel: ResumeExcel
+  ) {
     this.formulariodenumero = new FormGroup({});
     const control = new FormControl('');
     this.formulariodenumero.addControl('numberofnewlabels', control);
@@ -166,5 +171,13 @@ export class AcpComponent implements OnDestroy, OnInit {
     } else {
       showEigenVectors!.textContent = 'Mostrar';
     }
+  }
+
+  saveData() {
+    this.resumeExcel.addData('PCAProyecciones', this.resultPCA);
+    this.resumeExcel.addData('PCAAutovectores', this.pcaEigenVectors);
+    this.resumeExcel.addLineToSheet('PCAVarianza', this.pcaCumuVal);
+    this.resumeExcel.addLineToSheet('PCAutovalores', this.pcaEigenValues);
+    this.resumeExcel.addLineToSheet('PCADesviacionEstandar', this.pcaStandDev);
   }
 }

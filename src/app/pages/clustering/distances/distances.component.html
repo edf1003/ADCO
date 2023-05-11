@@ -3,22 +3,19 @@
   <mat-form-field appearance="fill">
     <mat-label>Seleccione el tipo de distancia</mat-label>
     <mat-select [(ngModel)]="distance">
-      <mat-option
-        *ngFor="let distance of distances"
-        [value]="distance"
-        (click)="selectDistance(distance)"
-      >
+      <mat-option *ngFor="let distance of distances" [value]="distance" (click)="selectDistance(distance)">
         {{ distance }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-raised-button color="primary" (click)="saveData()" style="margin-left: 20px;">Guardar
+    distancias</button>
 </div>
 <div *ngIf="distance === 'Euclidea'">
   <div style="display: flex; flex-direction: row; align-items: baseline">
     <h2>Distancias euclideas:</h2>
     <button mat-button color="primary" id="ShowEuDis" (click)="showEucDist()">
-      Mostrar</button
-    ><br />
+      Mostrar</button><br />
   </div>
   <div *ngIf="showEucDis" class="tableForScroll">
     <table>
@@ -42,14 +39,8 @@
 <div *ngIf="distance === 'Euclidea normalizada'">
   <div style="display: flex; flex-direction: row; align-items: baseline">
     <h2>Distancias euclideas normalizadas:</h2>
-    <button
-      mat-button
-      color="primary"
-      id="showEucNorDis"
-      (click)="showEucNorDist()"
-    >
-      Mostrar</button
-    ><br />
+    <button mat-button color="primary" id="showEucNorDis" (click)="showEucNorDist()">
+      Mostrar</button><br />
   </div>
   <div *ngIf="showEucNorDis" class="tableForScroll">
     <table>
@@ -74,8 +65,7 @@
   <div style="display: flex; flex-direction: row; align-items: baseline">
     <h2>Distancias de Mahalanobis:</h2>
     <button mat-button color="primary" id="ShowMahDis" (click)="showMahDist()">
-      Mostrar</button
-    ><br />
+      Mostrar</button><br />
   </div>
   <div *ngIf="showMahDis" class="tableForScroll">
     <table>

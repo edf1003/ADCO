@@ -2,23 +2,10 @@
 <div class="introducevariables">
   <mat-form-field appearance="fill">
     <mat-label>Introduce un valor</mat-label>
-    <input
-      matInput
-      [(ngModel)]="valor"
-      name="valor"
-      type="number"
-      required
-      maxlength="2"
-      id="labeltodisabeled"
-      [disabled]="disabledinput"
-    />
+    <input matInput [(ngModel)]="valor" name="valor" type="number" required maxlength="2" id="labeltodisabeled"
+      [disabled]="disabledinput" />
   </mat-form-field>
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="guardarValor()"
-    [disabled]="disabledinput || optionFileBool"
-  >
+  <button mat-raised-button color="primary" (click)="guardarValor()" [disabled]="disabledinput || optionFileBool">
     Enviar
   </button>
 </div>
@@ -39,23 +26,14 @@
 
 <div *ngIf="disabledinput && !optionFileBool">
   <p>Introduce el nombre de las diferentes variables:</p>
-  <form
-    [formGroup]="formulariodecabeceras"
-    (submit)="creartabla()"
-    class="listofinputs"
-  >
+  <form [formGroup]="formulariodecabeceras" (submit)="creartabla()" class="listofinputs">
     <div *ngFor="let input of inputsArray; let i = index">
       <mat-form-field>
         <mat-label>Variable {{ i }}</mat-label>
         <input matInput [formControlName]="'label' + i" type="text" required />
       </mat-form-field>
     </div>
-    <button
-      mat-raised-button
-      type="submit"
-      color="primary"
-      [disabled]="isdisabledlabels"
-    >
+    <button mat-raised-button type="submit" color="primary" [disabled]="isdisabledlabels">
       Enviar
     </button>
   </form>
@@ -64,20 +42,11 @@
 
   <div *ngIf="buttonPush && !optionFileBool">
     <p>Introduce el valor de las variables:</p>
-    <form
-      [formGroup]="formulariodedatos"
-      (submit)="setdata()"
-      class="listofinputs"
-    >
+    <form [formGroup]="formulariodedatos" (submit)="setdata()" class="listofinputs">
       <div *ngFor="let input of inputsArray; let i = index">
         <mat-form-field>
           <mat-label>Variable {{ i }}</mat-label>
-          <input
-            matInput
-            [formControlName]="'data' + i"
-            type="number"
-            required
-          />
+          <input matInput [formControlName]="'data' + i" type="number" required />
         </mat-form-field>
       </div>
       <button mat-raised-button type="submit" color="primary">
@@ -89,13 +58,8 @@
 </div>
 <br /><br />
 <div style="display: flex; justify-content: end">
-  <button
-    *ngIf="buttonPush || optionFileBool"
-    mat-raised-button
-    type="button"
-    color="primary"
-    (click)="standarizeDataTable()"
-  >
+  <button *ngIf="buttonPush || optionFileBool" mat-raised-button type="button" color="primary"
+    (click)="standarizeDataTable()">
     Estandarizar datos
   </button>
 </div>
@@ -114,13 +78,7 @@
         <td></td>
         <td *ngFor="let data of paquetededatos">{{ data | numberFormat }}</td>
         <td style="width: 20%">
-          <button
-            mat-flat-button
-            type="button"
-            color="warn"
-            style="margin-inline: 10px"
-            (click)="deletecolumn(i)"
-          >
+          <button mat-flat-button type="button" color="warn" style="margin-inline: 10px" (click)="deletecolumn(i)">
             Eliminar
           </button>
         </td>
@@ -131,13 +89,7 @@
         <td></td>
         <td *ngFor="let data of paquetededatos">{{ data | numberFormat }}</td>
         <td style="width: 20%">
-          <button
-            mat-flat-button
-            type="button"
-            color="warn"
-            style="margin-inline: 10px"
-            (click)="deletecolumn(i)"
-          >
+          <button mat-flat-button type="button" color="warn" style="margin-inline: 10px" (click)="deletecolumn(i)">
             Eliminar
           </button>
         </td>
@@ -151,25 +103,12 @@
     Los datos deben de contener un número mayor o igual de filas que de
     columnas.
   </p>
-  <button
-    *ngIf="buttonPush && optionFileBool"
-    mat-raised-button
-    type="button"
-    color="primary"
-    style="margin: 5px"
-    (click)="resetDatos()"
-  >
+  <button *ngIf="buttonPush && optionFileBool" mat-raised-button type="button" color="primary" style="margin: 5px"
+    (click)="resetDatos()">
     Restablecer Datos
   </button>
-  <button
-    *ngIf="(buttonPush || optionFileBool) && isWiderThanHiger"
-    matStepperNext
-    mat-raised-button
-    type="button"
-    color="primary"
-    style="margin: 5px"
-    (click)="sendDatos()"
-  >
+  <button *ngIf="(buttonPush || optionFileBool) && isWiderThanHiger" matStepperNext mat-raised-button type="button"
+    color="primary" style="margin: 5px" (click)="sendDatos()">
     Enviar Datos
   </button>
 </div>

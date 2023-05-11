@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import * as math from 'mathjs';
+import { ResumeExcel } from 'src/app/services/resumeExcel.service';
 
 @Component({
   selector: 'app-distances',
@@ -24,7 +25,8 @@ export class DistancesComponent implements OnInit {
 
   constructor(
     private initialData: sendDataTable,
-    private sendDistances: sendDistances
+    private sendDistances: sendDistances,
+    private resumeExcel: ResumeExcel
   ) {
     this.PCASub = this.initialData.getDatosTabla().subscribe((datos) => {
       this.initialDataset = datos;
@@ -219,5 +221,17 @@ export class DistancesComponent implements OnInit {
     var a = document.getElementById('ShowMahDis');
     if (!this.showMahDis) a!.textContent = 'Mostrar';
     else a!.textContent = 'Ocultar';
+  }
+
+  saveData() {
+    this.euclideanDistances();
+    this.calculateNormalizedDistances();
+    this.calculateMahalanobisDistances();
+    this.resumeExcel.addData('DistanciaEuclidea', this.euclideanDistaces);
+    this.resumeExcel.addData(
+      'DistanciaEuclideaNormalizada',
+      this.normalizedEuclideanDistances
+    );
+    this.resumeExcel.addData('DistanciaMahalanobis', this.mahalanobisDistances);
   }
 }

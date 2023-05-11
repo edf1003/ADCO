@@ -27,27 +27,12 @@
   <br />
 
   <p><strong>Introduce el número de componentes principales:</strong></p>
-  <form
-    [formGroup]="formulariodenumero"
-    (submit)="setnumberofnewlabels()"
-    class="listofinputs"
-  >
+  <form [formGroup]="formulariodenumero" (submit)="setnumberofnewlabels()" class="listofinputs">
     <mat-form-field>
       <mat-label>Numero de CP</mat-label>
-      <input
-        matInput
-        [formControlName]="'numberofnewlabels'"
-        type="number"
-        required
-      />
+      <input matInput [formControlName]="'numberofnewlabels'" type="number" required />
     </mat-form-field>
-    <button
-      mat-raised-button
-      type="submit"
-      id="submitButtom"
-      color="primary"
-      style="margin-left: 20px"
-    >
+    <button mat-raised-button type="submit" id="submitButtom" color="primary" style="margin-left: 20px">
       Introducir
     </button>
   </form>
@@ -61,22 +46,11 @@
     <div *ngIf="!isMayor && isOne && !isStandarizezACP" style="width: 40%">
       <div style="display: flex; align-items: baseline">
         <h2>Datos Finales:</h2>
-        <button
-          *ngIf="!this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px"
+          (click)="standarizeACP()">
           Estandarizar
         </button>
-        <button
-          *ngIf="this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">
           Desestandarizar
         </button>
       </div>
@@ -85,22 +59,11 @@
     <div *ngIf="!isMayor && isTwo && !isStandarizezACP" style="width: 40%">
       <div style="display: flex; align-items: baseline">
         <h2>Datos Finales:</h2>
-        <button
-          *ngIf="!this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px"
+          (click)="standarizeACP()">
           Estandarizar
         </button>
-        <button
-          *ngIf="this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">
           Desestandarizar
         </button>
       </div>
@@ -109,69 +72,37 @@
     <div *ngIf="!isMayor && isOne && isStandarizezACP" style="width: 40%">
       <div style="display: flex; align-items: baseline">
         <h2>Datos Finales Estandarizados:</h2>
-        <button
-          *ngIf="!this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px"
+          (click)="standarizeACP()">
           Estandarizar
         </button>
-        <button
-          *ngIf="this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">
           Desestandarizar
         </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart
-      ><br />
+      <app-scartt-chart [scarttChartData]="dataset1Stand"></app-scartt-chart><br />
     </div>
     <div *ngIf="!isMayor && isTwo && isStandarizezACP" style="width: 40%">
       <div style="display: flex; align-items: baseline">
         <h2>Datos Finales Estandarizados:</h2>
-        <button
-          *ngIf="!this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="!this.isStandarizezACP" mat-button color="primary" style="margin: 10px"
+          (click)="standarizeACP()">
           Estandarizar
         </button>
-        <button
-          *ngIf="this.isStandarizezACP"
-          mat-button
-          color="primary"
-          style="margin: 10px"
-          (click)="standarizeACP()"
-        >
+        <button *ngIf="this.isStandarizezACP" mat-button color="primary" style="margin: 10px" (click)="standarizeACP()">
           Desestandarizar
         </button>
       </div>
-      <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart
-      ><br />
+      <app-scartt-chart [scarttChartData]="dataset2Stand"></app-scartt-chart><br />
     </div>
   </div>
   <br /><br />
   <div *ngIf="sendIsPressed && !isMayor">
-    <div
-      *ngIf="!isStandarizezACP"
-      style="text-align: start; align-items: start"
-    >
+    <div *ngIf="!isStandarizezACP" style="text-align: start; align-items: start">
       <div style="display: flex; align-items: baseline">
         <br /><br />
         <h2>Proyecciones sobre los Componentes Principales</h2>
-        <button
-          mat-button
-          color="primary"
-          id="ShowACP"
-          (click)="showPredictionsFun()"
-        >
+        <button mat-button color="primary" id="ShowACP" (click)="showPredictionsFun()">
           Ocultar
         </button>
       </div>
@@ -195,12 +126,7 @@
       <div style="display: flex; align-items: baseline">
         <br /><br />
         <h2>Proyecciones estandarizadas sobre los Componentes Principales</h2>
-        <button
-          mat-button
-          color="primary"
-          id="ShowACP2"
-          (click)="showPredictionsFun()"
-        >
+        <button mat-button color="primary" id="ShowACP2" (click)="showPredictionsFun()">
           Ocultar
         </button>
       </div>
@@ -225,19 +151,11 @@
     <br /><br />
     <div style="display: flex; align-items: baseline">
       <h2>Propiedades</h2>
-      <button
-        mat-button
-        color="primary"
-        id="showProperties"
-        (click)="showPropertiesTable()"
-      >
+      <button mat-button color="primary" id="showProperties" (click)="showPropertiesTable()">
         Ocultar
       </button>
     </div>
-    <div
-      *ngIf="showProperties"
-      style="display: flex; flex-direction: row; text-align: left"
-    >
+    <div *ngIf="showProperties" style="display: flex; flex-direction: row; text-align: left">
       <table>
         <thead>
           <tr>
@@ -261,12 +179,7 @@
     <div>
       <div style="display: flex; align-items: baseline">
         <h2>Autovectores</h2>
-        <button
-          mat-button
-          color="primary"
-          id="showEigenVectors"
-          (click)="showEigenVectorsTable()"
-        >
+        <button mat-button color="primary" id="showEigenVectors" (click)="showEigenVectorsTable()">
           Ocultar
         </button>
       </div>
@@ -280,6 +193,7 @@
         </table>
       </div>
     </div>
-    <br /><br />
+    <br><br>
+    <button mat-raised-button color="primary" (click)="saveData()">Guardar resultados</button>
   </div>
 </div>

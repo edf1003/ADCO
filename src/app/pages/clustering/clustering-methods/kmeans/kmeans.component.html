@@ -19,8 +19,9 @@
           <strong>Grupo {{ i }}:</strong><span style="opacity: 0%;">{{getColor(i)}}</span>
         </h3>
         <div>
+          <span><strong>Puntos: </strong></span>
           <span *ngFor="let label of labels; let i2 = index" style="display: inline-block">
-            <ng-container *ngIf="label === i">{{ i2 + 1 }}, </ng-container>
+            <ng-container *ngIf="label === i">{{ i2 + 1 }}&nbsp;</ng-container>
           </span>
         </div>
         <br><br>

@@ -1,4 +1,4 @@
-<div class="content">
+<div class="descripcion">
   <h2>Definición</h2>
   <p>
     El Clustering, también conocido como análisis de grupos o agrupamiento, es
@@ -14,5 +14,7 @@
     realizan.
   </p>
   <app-distances></app-distances><br />
-  <app-clustering-methods></app-clustering-methods>
+  <app-clustering-methods id="clustering"></app-clustering-methods>
+  <button mat-button color="primary" (click)="convertHTMLtoPDF('clustering', 'Resultado.pdf')">Guardar
+    Resultados</button>
 </div>

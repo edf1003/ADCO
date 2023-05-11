@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { sendDataTable } from '../../../services/sendDataTable.service';
 import * as XLSX from 'xlsx';
+import { ResumeExcel } from 'src/app/services/resumeExcel.service';
 
 @Component({
   selector: 'app-addvariables',
@@ -31,7 +32,10 @@ export class AddvariablesComponent {
   paquetedatos: string[] = []; //Array de datos de una fila
   pcaStandDev: Array<Array<number>> = [];
 
-  constructor(private sendData: sendDataTable) {
+  constructor(
+    private sendData: sendDataTable,
+    private resumeExcel: ResumeExcel
+  ) {
     this.formulariodecabeceras = new FormGroup({});
     this.formulariodedatos = new FormGroup({});
   }
@@ -134,6 +138,10 @@ export class AddvariablesComponent {
     } else {
       this.sendData.setDatosTabla(this.pcaStandDev);
     }
+    const datosWithheader: Array<Array<any>> = [];
+    datosWithheader.push(this.cabeceraTabla);
+    this.datosTabla.forEach((e) => datosWithheader.push(e));
+    this.resumeExcel.addData('Datos', datosWithheader);
   }
 
   resetDatos() {
