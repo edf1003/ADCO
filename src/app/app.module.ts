@@ -38,6 +38,7 @@ import { OutliersComponent } from './pages/outliers/outliers.component';
 import { DistanciasComponent } from './pages/distancias/distancias.component';
 import { MahalanobisOutComponent } from './pages/outliers/mahalanobis-out/mahalanobis-out.component';
 import { DbscanOutComponent } from './pages/outliers/dbscan-out/dbscan-out.component';
+import { OpticsOutComponent } from './pages/outliers/optics-out/optics-out.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { DbscanOutComponent } from './pages/outliers/dbscan-out/dbscan-out.compo
     DistanciasComponent,
     MahalanobisOutComponent,
     DbscanOutComponent,
+    OpticsOutComponent,
   ],
   imports: [
     BrowserModule,
