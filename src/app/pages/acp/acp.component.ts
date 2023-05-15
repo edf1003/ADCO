@@ -174,10 +174,12 @@ export class AcpComponent implements OnDestroy, OnInit {
   }
 
   saveData() {
+    this.resumeExcel.clearExcel();
     this.resumeExcel.addData('PCAProyecciones', this.resultPCA);
     this.resumeExcel.addData('PCAAutovectores', this.pcaEigenVectors);
     this.resumeExcel.addLineToSheet('PCAVarianza', this.pcaCumuVal);
     this.resumeExcel.addLineToSheet('PCAutovalores', this.pcaEigenValues);
     this.resumeExcel.addLineToSheet('PCADesviacionEstandar', this.pcaStandDev);
+    this.resumeExcel.saveToFile();
   }
 }

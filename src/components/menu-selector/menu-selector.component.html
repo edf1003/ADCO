@@ -12,6 +12,17 @@
             Datos
           </button>
           <button mat-raised-button color="primary" style="margin: 10px" matStepperNext>
+            Distancias
+          </button>
+        </div>
+      </mat-step>
+      <mat-step label="Distancias">
+        <app-distancias></app-distancias>
+        <div style="display: flex; justify-content: flex-end">
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
+            ACP
+          </button>
+          <button mat-raised-button color="primary" style="margin: 10px" matStepperNext>
             Clustering
           </button>
         </div>
@@ -20,15 +31,15 @@
         <app-clustering></app-clustering>
         <div style="display: flex; justify-content: flex-end">
           <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
-            ACP
+            Distancias
           </button>
           <button mat-raised-button color="primary" style="margin: 10px" matStepperNext>
-            Resultados
+            Outliers
           </button>
         </div>
       </mat-step>
-      <mat-step label="Resultados">
-        <app-results></app-results>
+      <mat-step label="Outliers">
+        <app-outliers></app-outliers>
       </mat-step>
     </mat-stepper>
   </mat-tab>

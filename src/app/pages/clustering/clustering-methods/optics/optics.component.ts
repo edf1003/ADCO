@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
@@ -23,6 +23,7 @@ export class OpticsComponent implements OnInit {
   private initalPointsSub: Subscription;
   showResults: boolean = false;
   clusterIndex = 0;
+  @Input() distance: string = '';
 
   constructor(
     private senddistances: sendDistances,
@@ -59,11 +60,11 @@ export class OpticsComponent implements OnInit {
   saveParameters() {
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
-    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
+    if (this.distance === 'Euclidea normalizada') {
       this.optics(this.distancesEuclNor, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
+    } else if (this.distance === 'Euclidea') {
       this.optics(this.distancesEucl, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
+    } else if (this.distance === 'Mahalanobis') {
       this.optics(this.distancesMaha, this.distanceMax, this.minPoints);
     }
     this.showResults = true;

@@ -1,8 +1,18 @@
 <div class="selector">
   <br />
-  <p><strong>Elija el tipo de clustering.</strong> (Se debe de haber escogido un tipo de distancia previamente).</p>
+  <p><strong>Elija el tipo de distancia y clustering.</strong> (Se debe de haber pulsado el boton <strong>"generar
+      distancias"</strong>
+    en la ventana anterior).</p>
   <mat-form-field appearance="fill">
     <mat-label>Seleccione el tipo de distancia</mat-label>
+    <mat-select [(ngModel)]="distance">
+      <mat-option *ngFor="let distance of distances" [value]="distance" (click)="selectDistance(distance)">
+        {{ distance }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill" style="margin-left: 10px;">
+    <mat-label>Seleccione el tipo de clustering</mat-label>
     <mat-select [(ngModel)]="clusteringMethod">
       <mat-option *ngFor="let clusteringMethod of clusteringMethods" [value]="clusteringMethod"
         (click)="selectClustering(clusteringMethod)">
@@ -10,15 +20,16 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <button mat-raised-button style="margin-left: 10px;" color="primary" (click)="convertHTMLtoPDF()">Guardar
+    Resultados</button>
 </div>
 <div *ngIf="clusteringMethod === 'DBSCAN'">
-  <app-dbscan></app-dbscan>
+  <app-dbscan [distance]="distance" id="DBSCAN"></app-dbscan>
 </div>
 <div *ngIf="clusteringMethod === 'OPTICS'">
-  <app-optics></app-optics>
+  <app-optics [distance]="distance" id="OPTICS"></app-optics>
 </div>
 <div *ngIf="clusteringMethod === 'K-means'">
-  <app-kmeans></app-kmeans>
+  <app-kmeans [distance]="distance" id="K-means"></app-kmeans>
 </div>
 <div *ngIf="clusteringMethod === 'K-means'"></div>
-<div *ngIf="clusteringMethod === 'SOM'"></div>

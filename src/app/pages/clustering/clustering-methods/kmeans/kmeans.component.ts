@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
@@ -22,6 +22,7 @@ export class KmeansComponent implements OnInit {
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
   showResults: boolean = false;
+  @Input() distance: string = '';
 
   constructor(
     private senddistances: sendDistances,
@@ -60,11 +61,11 @@ export class KmeansComponent implements OnInit {
     if (this.initialPoints.length <= this.numberOfClusters) {
       return;
     }
-    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
+    if (this.distance === 'Euclidea normalizada') {
       this.kMeans(this.distancesEuclNor, this.numberOfClusters);
-    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
+    } else if (this.distance === 'Euclidea') {
       this.kMeans(this.distancesEucl, this.numberOfClusters);
-    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
+    } else if (this.distance === 'Mahalanobis') {
       this.kMeans(this.distancesMaha, this.numberOfClusters);
     }
     this.showResults = true;

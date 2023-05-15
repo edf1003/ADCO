@@ -35,6 +35,10 @@
     <button mat-raised-button type="submit" id="submitButtom" color="primary" style="margin-left: 20px">
       Introducir
     </button>
+    <button mat-raised-button type="button" style="margin-left: 15px; background-color: #0F753E; color: white;"
+      (click)="saveData()">
+      Exportar resultados
+    </button>
   </form>
   <p>Recuerda que para obtener las gráficas, el número de CP debe ser 2 o 1.</p>
   <p *ngIf="isMayor">
@@ -193,7 +197,5 @@
         </table>
       </div>
     </div>
-    <br><br>
-    <button mat-raised-button color="primary" (click)="saveData()">Guardar resultados</button>
   </div>
 </div>

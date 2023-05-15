@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 
 @Component({
   selector: 'app-clustering-methods',
@@ -6,19 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clustering-methods.component.scss'],
 })
 export class ClusteringMethodsComponent implements OnInit {
-  clusteringMethods: string[] = ['DBSCAN', 'OPTICS', 'K-means', 'SOM'];
+  clusteringMethods: string[] = ['DBSCAN', 'OPTICS', 'K-means'];
   clusteringMethod: string = '';
+  distances: string[] = ['Euclidea', 'Euclidea normalizada', 'Mahalanobis'];
+  @Output() distance: string = '';
 
-  constructor() {}
+  constructor(public resumePdf: ResumePdf) {}
 
   ngOnInit(): void {}
 
   selectClustering(clusteringMethod: string) {
     this.clusteringMethod = clusteringMethod;
-    if (this.clusteringMethod === 'DBSCAN') {
-    } else if (this.clusteringMethod === 'OPTICS') {
-    } else if (this.clusteringMethod === 'K-means') {
-    } else if (this.clusteringMethod === 'SOM') {
-    }
   }
+
+  selectDistance(distance: string) {
+    this.distance = distance;
+  }
+
+  convertHTMLtoPDF(){
+    this.resumePdf.convertHTMLtoPDF(this.clusteringMethod, 'Resultado.pdf')
+  }
+
 }

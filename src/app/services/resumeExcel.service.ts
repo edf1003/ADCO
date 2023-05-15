@@ -11,6 +11,10 @@ export class ResumeExcel {
     this.workbook = XLSX.utils.book_new();
   }
 
+  clearExcel() {
+    this.workbook = XLSX.utils.book_new();
+  }
+
   addData(sheetName: string, data: any[][]): void {
     const worksheet = XLSX.utils.aoa_to_sheet(data);
     XLSX.utils.book_append_sheet(this.workbook, worksheet, sheetName);

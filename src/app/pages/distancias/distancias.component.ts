@@ -6,11 +6,11 @@ import * as math from 'mathjs';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
 
 @Component({
-  selector: 'app-distances',
-  templateUrl: './distances.component.html',
-  styleUrls: ['./distances.component.scss'],
+  selector: 'app-distancias',
+  templateUrl: './distancias.component.html',
+  styleUrls: ['./distancias.component.scss'],
 })
-export class DistancesComponent implements OnInit {
+export class DistanciasComponent implements OnInit {
   distances: string[] = ['Euclidea', 'Euclidea normalizada', 'Mahalanobis'];
   distance: string = '';
   initialDataset: number[][] = [];
@@ -33,9 +33,17 @@ export class DistancesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  generarDistancias() {
     this.euclideanDistances();
     this.calculateNormalizedDistances();
+    this.calculateMahalanobisDistances();
+    this.sendDistances.setEuclideanDistances(this.euclideanDistaces);
+    this.sendDistances.setEuclideanNormalizedDistances(
+      this.normalizedEuclideanDistances
+    );
+    this.sendDistances.setMahalanobisDistances(this.mahalanobisDistances);
   }
 
   ngOnDestroy() {
@@ -194,7 +202,7 @@ export class DistancesComponent implements OnInit {
       for (let i = 0; i < dimensions; i++) {
         for (let j = 0; j < dimensions; j++) {
           covarianceMatrix[i][j] +=
-            ((point[i] - means[i]) * (point[j] - means[j])) / numPoints;
+            ((point[i] - means[i]) * (point[j] - means[j])) / (numPoints - 1);
         }
       }
     }
@@ -224,6 +232,7 @@ export class DistancesComponent implements OnInit {
   }
 
   saveData() {
+    this.resumeExcel.clearExcel();
     this.euclideanDistances();
     this.calculateNormalizedDistances();
     this.calculateMahalanobisDistances();
@@ -233,5 +242,6 @@ export class DistancesComponent implements OnInit {
       this.normalizedEuclideanDistances
     );
     this.resumeExcel.addData('DistanciaMahalanobis', this.mahalanobisDistances);
+    this.resumeExcel.saveToFile();
   }
 }

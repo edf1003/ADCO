@@ -138,10 +138,6 @@ export class AddvariablesComponent {
     } else {
       this.sendData.setDatosTabla(this.pcaStandDev);
     }
-    const datosWithheader: Array<Array<any>> = [];
-    datosWithheader.push(this.cabeceraTabla);
-    this.datosTabla.forEach((e) => datosWithheader.push(e));
-    this.resumeExcel.addData('Datos', datosWithheader);
   }
 
   resetDatos() {
@@ -228,5 +224,13 @@ export class AddvariablesComponent {
       }
     }
     this.isStandarized = !this.isStandarized;
+  }
+
+  saveDataTable() {
+    const datosWithheader: Array<Array<any>> = [];
+    datosWithheader.push(this.cabeceraTabla);
+    this.datosTabla.forEach((e) => datosWithheader.push(e));
+    this.resumeExcel.addData('Datos', datosWithheader);
+    this.resumeExcel.saveToFile();
   }
 }

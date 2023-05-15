@@ -1,0 +1,20 @@
+<div class="descripcion">
+  <h2>Definición:</h2>
+  <p>Un outlier, o valor atípico, se refiere a un punto de datos que se encuentra significativamente alejado del resto
+    de los datos en un conjunto. Puede ser una observación inusual, rara o incluso un error de medición. Los outliers
+    son relevantes en el contexto del clustering, que es una técnica de análisis de datos que agrupa puntos de datos
+    similares en grupos o clústeres. Los outliers pueden afectar negativamente el proceso de clustering, ya que pueden
+    introducir ruido o sesgar los resultados. Si un outlier no representa un patrón o comportamiento similar a los demás
+    puntos de datos en un clúster, puede influir en la forma en que se determinan los límites de los clústeres o incluso
+    ser considerado un clúster por sí mismo. </p>
+  <br><br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Seleccione el tipo de outlier</mat-label>
+    <mat-select [(ngModel)]="outlierMethod">
+      <mat-option *ngFor="let outlier of outliergMethods" [value]="outlier" (click)="selectMethod(outlier)">
+        {{ outlier }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

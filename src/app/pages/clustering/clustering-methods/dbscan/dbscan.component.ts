@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
@@ -24,6 +24,7 @@ export class DbscanComponent {
   private initalPointsSub: Subscription;
   clusterIndex = 10;
   showResults: boolean = false;
+  @Input() distance: string = '';
 
   constructor(
     private senddistances: sendDistances,
@@ -58,11 +59,11 @@ export class DbscanComponent {
   saveParameters() {
     this.distanceMax = this.distanceForm.get('distance')!.value;
     this.minPoints = this.distanceForm.get('minPoints')!.value;
-    if (this.senddistances.getDistanceType() === 'Euclidea normalizada') {
+    if (this.distance === 'Euclidea normalizada') {
       this.dbscan(this.distancesEuclNor, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === 'Euclidea') {
+    } else if (this.distance === 'Euclidea') {
       this.dbscan(this.distancesEucl, this.distanceMax, this.minPoints);
-    } else if (this.senddistances.getDistanceType() === 'Mahalanobis') {
+    } else if (this.distance === 'Mahalanobis') {
       this.dbscan(this.distancesMaha, this.distanceMax, this.minPoints);
     }
     this.showResults = true;

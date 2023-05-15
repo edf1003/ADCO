@@ -30,12 +30,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { AcpComponent } from './pages/acp/acp.component';
 import { NgChartsModule } from 'ng2-charts';
 import { ClusteringComponent } from './pages/clustering/clustering.component';
-import { DistancesComponent } from './pages/clustering/distances/distances.component';
 import { ClusteringMethodsComponent } from './pages/clustering/clustering-methods/clustering-methods.component';
 import { DbscanComponent } from './pages/clustering/clustering-methods/dbscan/dbscan.component';
 import { OpticsComponent } from './pages/clustering/clustering-methods/optics/optics.component';
 import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/kmeans.component';
-import { ResultsComponent } from './pages/results/results.component';
+import { OutliersComponent } from './pages/outliers/outliers.component';
+import { DistanciasComponent } from './pages/distancias/distancias.component';
+import { MahalanobisOutComponent } from './pages/outliers/mahalanobis-out/mahalanobis-out.component';
 
 @NgModule({
   declarations: [
@@ -50,12 +51,13 @@ import { ResultsComponent } from './pages/results/results.component';
     ScarttChartComponent,
     NumberFormatPipe,
     ClusteringComponent,
-    DistancesComponent,
     ClusteringMethodsComponent,
     DbscanComponent,
     OpticsComponent,
     KmeansComponent,
-    ResultsComponent,
+    OutliersComponent,
+    DistanciasComponent,
+    MahalanobisOutComponent,
   ],
   imports: [
     BrowserModule,
