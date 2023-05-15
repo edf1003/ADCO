@@ -1,1 +1,30 @@
-<p>mahalanobis-out works!</p>
+<form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
+  <div style="display: flex; align-items: last baseline">
+    <mat-form-field appearance="fill" style="margin-right: 10px">
+      <mat-label>Distancia máxima</mat-label>
+      <input matInput formControlName="distance" type="number" required>
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Introducir</button>
+  </div>
+</form><br>
+<div *ngIf="showResults">
+  <h3><strong>Outliers:</strong></h3><br>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Distancia</th>
+      <th>Coordenadas</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let distance of mahalanobisDistances; let i = index;">
+        <ng-container *ngIf="distance >= distanceMax">
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{distance}}</td>
+            <td>{{initialDataset[i]}}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

@@ -7,8 +7,8 @@
     introducir ruido o sesgar los resultados. Si un outlier no representa un patrón o comportamiento similar a los demás
     puntos de datos en un clúster, puede influir en la forma en que se determinan los límites de los clústeres o incluso
     ser considerado un clúster por sí mismo. </p>
-  <br><br>
-
+  <br>
+  <p><strong>Escoja el algoritmo de detección de outliers.</strong></p>
   <mat-form-field appearance="fill">
     <mat-label>Seleccione el tipo de outlier</mat-label>
     <mat-select [(ngModel)]="outlierMethod">
@@ -17,4 +17,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <div *ngIf="outlierMethod === 'Mahlanobis'">
+    <app-mahalanobis-out></app-mahalanobis-out>
+  </div>
 </div>
