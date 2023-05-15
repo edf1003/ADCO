@@ -1,0 +1,32 @@
+<form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
+  <div style="display: flex; align-items: last baseline">
+    <mat-form-field appearance="fill" style="margin-right: 10px">
+      <mat-label>Distancia máxima</mat-label>
+      <input matInput formControlName="distanceMax" type="number" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-right: 10px">
+      <mat-label>Puntos mínimos por grupo</mat-label>
+      <input matInput formControlName="minPoints" type="number" required />
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Introducir</button>
+  </div>
+</form>
+<div *ngIf="showResults">
+  <h3><strong>Outliers:</strong></h3><br>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Coordenadas</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let label of labels; let i = index;">
+        <ng-container *ngIf="label == -2">
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{initialPoints[i]}}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

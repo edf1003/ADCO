@@ -37,6 +37,7 @@ import { KmeansComponent } from './pages/clustering/clustering-methods/kmeans/km
 import { OutliersComponent } from './pages/outliers/outliers.component';
 import { DistanciasComponent } from './pages/distancias/distancias.component';
 import { MahalanobisOutComponent } from './pages/outliers/mahalanobis-out/mahalanobis-out.component';
+import { DbscanOutComponent } from './pages/outliers/dbscan-out/dbscan-out.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { MahalanobisOutComponent } from './pages/outliers/mahalanobis-out/mahala
     OutliersComponent,
     DistanciasComponent,
     MahalanobisOutComponent,
+    DbscanOutComponent,
   ],
   imports: [
     BrowserModule,
