@@ -7,7 +7,9 @@
     diferencias o distancias entre las coordenadas de los puntos en cada dimensión y proporcionan un valor numérico que
     representa la magnitud de la separación espacial entre ellos. La distancia es una herramienta fundamental en
     matemáticas, física, ciencias de datos y otros campos, y se utiliza para comparar objetos, analizar patrones, tomar
-    decisiones y resolver problemas en diversos contextos.</p><br><br>
+    decisiones y resolver problemas en diversos contextos.</p><br>
+  <p>Aquellas tablas de distancias cuyas dimensiones sean mayores a 20x20, deberán descargarse para visualizarse de
+    manera completa.</p><br>
   <div class="selector">
     <p><strong>Elija el tipo de distancia a aplicar.</strong></p>
     <mat-form-field appearance="fill">
@@ -28,24 +30,22 @@
   </div>
   <div *ngIf="distance === 'Euclidea'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias euclideas:</h2>
-      <button mat-button color="primary" id="ShowEuDis" (click)="showEucDist()">
-        Mostrar</button><br />
+      <h2>Distancias euclideas:</h2><br>
     </div>
-    <div *ngIf="showEucDis" class="tableForScroll">
+    <div class="tableForScroll">
       <table>
         <thead>
           <tr>
             <th></th>
-            <th *ngFor="let i of lenghtOfData">
+            <th *ngFor="let i of lenghtOfData.slice(0, 20)">
               {{ i + 1 }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of euclideanDistaces; let i = index">
+          <tr *ngFor="let row of euclideanDistaces.slice(0, 20); let i = index">
             <td>{{ i + 1 }}</td>
-            <td *ngFor="let dist of row">{{ dist | numberFormat }}</td>
+            <td *ngFor="let dist of row.slice(0, 20)">{{ dist | numberFormat }}</td>
           </tr>
         </tbody>
       </table>
@@ -53,24 +53,22 @@
   </div>
   <div *ngIf="distance === 'Euclidea normalizada'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias euclideas normalizadas:</h2>
-      <button mat-button color="primary" id="showEucNorDis" (click)="showEucNorDist()">
-        Mostrar</button><br />
+      <h2>Distancias euclideas normalizadas:</h2><br>
     </div>
-    <div *ngIf="showEucNorDis" class="tableForScroll">
+    <div class="tableForScroll">
       <table>
         <thead>
           <tr>
             <th></th>
-            <th *ngFor="let i of lenghtOfData">
+            <th *ngFor="let i of lenghtOfData.slice(0, 20)">
               {{ i + 1 }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of normalizedEuclideanDistances; let i = index">
+          <tr *ngFor="let row of normalizedEuclideanDistances.slice(0, 20); let i = index">
             <td>{{ i + 1 }}</td>
-            <td *ngFor="let dist of row">{{ dist | numberFormat }}</td>
+            <td *ngFor="let dist of row.slice(0, 20)">{{ dist | numberFormat }}</td>
           </tr>
         </tbody>
       </table>
@@ -78,24 +76,22 @@
   </div>
   <div *ngIf="distance === 'Mahalanobis'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias de Mahalanobis:</h2>
-      <button mat-button color="primary" id="ShowMahDis" (click)="showMahDist()">
-        Mostrar</button><br />
+      <h2>Distancias de Mahalanobis:</h2><br>
     </div>
-    <div *ngIf="showMahDis" class="tableForScroll">
+    <div class="tableForScroll">
       <table>
         <thead>
           <tr>
             <th></th>
-            <th *ngFor="let i of lenghtOfData">
+            <th *ngFor="let i of lenghtOfData.slice(0, 20)">
               {{ i + 1 }}
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of mahalanobisDistances; let i = index">
+          <tr *ngFor="let row of mahalanobisDistances.slice(0, 20); let i = index">
             <td>{{ i + 1 }}</td>
-            <td *ngFor="let dist of row">{{ dist | numberFormat }}</td>
+            <td *ngFor="let dist of row.slice(0, 20)">{{ dist | numberFormat }}</td>
           </tr>
         </tbody>
       </table>

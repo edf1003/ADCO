@@ -19,9 +19,6 @@ export class DistanciasComponent implements OnInit {
   mahalanobisDistances: number[][] = [];
   lenghtOfData: any;
   private PCASub: Subscription;
-  showEucDis: boolean = false;
-  showEucNorDis: boolean = false;
-  showMahDis: boolean = false;
 
   constructor(
     private initialData: sendDataTable,
@@ -208,27 +205,6 @@ export class DistanciasComponent implements OnInit {
     }
 
     return covarianceMatrix;
-  }
-
-  showEucDist() {
-    this.showEucDis = !this.showEucDis;
-    var a = document.getElementById('ShowEuDis');
-    if (!this.showEucDis) a!.textContent = 'Mostrar';
-    else a!.textContent = 'Ocultar';
-  }
-
-  showEucNorDist() {
-    this.showEucNorDis = !this.showEucNorDis;
-    var b = document.getElementById('showEucNorDis');
-    if (!this.showEucNorDis) b!.textContent = 'Mostrar';
-    else b!.textContent = 'Ocultar';
-  }
-
-  showMahDist() {
-    this.showMahDis = !this.showMahDis;
-    var a = document.getElementById('ShowMahDis');
-    if (!this.showMahDis) a!.textContent = 'Mostrar';
-    else a!.textContent = 'Ocultar';
   }
 
   saveData() {
