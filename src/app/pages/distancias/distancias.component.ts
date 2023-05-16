@@ -27,6 +27,7 @@ export class DistanciasComponent implements OnInit {
   ) {
     this.PCASub = this.initialData.getDatosTabla().subscribe((datos) => {
       this.initialDataset = datos;
+      this.generarDistancias();
     });
   }
 

@@ -1,16 +1,29 @@
 <form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
   <div style="display: flex; align-items: last baseline">
     <mat-form-field appearance="fill" style="margin-right: 10px">
-      <mat-label>Número máximo de outliers</mat-label>
-      <input matInput formControlName="numberOfOutliers" type="number" required />
-    </mat-form-field>
-    <mat-form-field appearance="fill" style="margin-right: 10px">
-      <mat-label>Número de vecinos</mat-label>
+      <mat-label>Número de vecinos más alejados</mat-label>
       <input matInput formControlName="numberOfNeighbors" type="number" required />
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary">Introducir</button>
+    <button mat-raised-button type="submit" color="primary"
+      [disabled]="distanceForm.value.numberOfNeighbors > initialPoints.length">Introducir</button>
   </div>
 </form>
-<div *ngFor="let e of outliers">
-  {{e}}
+<div *ngIf="showResults">
+  <h3><strong>Outliers:</strong></h3><br>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Coordenadas</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let kmean of outliers; let i = index;">
+        <ng-container *ngIf="kmean">
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{initialPoints[i]}}</td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
 </div>

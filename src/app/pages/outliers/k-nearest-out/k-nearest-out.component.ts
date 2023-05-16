@@ -11,12 +11,11 @@ import { sendDistances } from 'src/app/services/sendDistances.service';
 })
 export class KNearestOutComponent implements OnInit {
   distanceForm: FormGroup;
-  numberOfOutliers: number = 0;
   numberOfNeighbors: number = 0;
   showResults: boolean = false;
   initialPoints: number[][] = [];
   distancesEucl: number[][] = [];
-  outliers: number[][] = [];
+  outliers: boolean[] = [];
   private initalPointsSub: Subscription;
   private distancesSub: Subscription;
 
@@ -25,7 +24,6 @@ export class KNearestOutComponent implements OnInit {
     private senddistances: sendDistances
   ) {
     this.distanceForm = new FormGroup({
-      numberOfOutliers: new FormControl(),
       numberOfNeighbors: new FormControl(),
     });
     this.initalPointsSub = this.sendDataTable
@@ -43,44 +41,42 @@ export class KNearestOutComponent implements OnInit {
   ngOnInit(): void {}
 
   saveParameters() {
-    this.numberOfOutliers = this.distanceForm.get('numberOfOutliers')!.value;
     this.numberOfNeighbors = this.distanceForm.get('numberOfNeighbors')!.value;
     this.showResults = true;
-    this.getOutliers();
+    this.outliers = this.detectOutliers(
+      this.initialPoints,
+      this.distancesEucl,
+      this.numberOfNeighbors
+    );
   }
 
-  private getKNearestNeighbors(pointIndex: number): number[][] {
-    const distances = this.distancesEucl[pointIndex];
+  detectOutliers(
+    points: number[][],
+    distances: number[][],
+    k: number
+  ): boolean[] {
+    const distanceScores: number[] = [];
 
-    const sortedIndices = distances
+    // Calcular la distancia al k-ésimo vecino más cercano para cada punto
+    for (let i = 0; i < points.length; i++) {
+      const distancesToNeighbors = distances[i].slice(); // Copiar las distancias a los vecinos
+      distancesToNeighbors.sort((a, b) => a - b); // Ordenar las distancias de menor a mayor
+
+      const kthDistance = distancesToNeighbors[k - 1]; // Obtener la distancia al k-ésimo vecino más cercano
+      distanceScores.push(kthDistance);
+    }
+
+    // Ordenar los puntos según los puntajes de distancia
+    const sortedIndices = distanceScores
       .map((_, index) => index)
-      .sort((a, b) => distances[a] - distances[b])
-      .slice(0, this.numberOfNeighbors);
+      .sort((a, b) => distanceScores[b] - distanceScores[a]);
 
-    const kNearestNeighbors: number[][] = [];
-    for (const index of sortedIndices) {
-      kNearestNeighbors.push(this.initialPoints[index]);
+    // Determinar los outliers en base a los puntajes de distancia
+    const outlierFlags: boolean[] = Array(points.length).fill(false);
+    for (let i = 0; i < k; i++) {
+      outlierFlags[sortedIndices[i]] = true;
     }
 
-    return kNearestNeighbors;
-  }
-
-  getOutliers() {
-    const outliers: number[][] = [];
-
-    for (let i = 0; i < this.initialPoints.length; i++) {
-      const kNearestNeighbors = this.getKNearestNeighbors(i);
-      const distances = kNearestNeighbors.map(
-        (neighbor) =>
-          this.distancesEucl[i][this.initialPoints.indexOf(neighbor)]
-      );
-      const maxDistance = Math.max(...distances);
-
-      if (maxDistance > this.numberOfOutliers) {
-        outliers.push(this.initialPoints[i]);
-      }
-    }
-
-    this.outliers = outliers;
+    return outlierFlags;
   }
 }

@@ -40,6 +40,7 @@ import { MahalanobisOutComponent } from './pages/outliers/mahalanobis-out/mahala
 import { DbscanOutComponent } from './pages/outliers/dbscan-out/dbscan-out.component';
 import { OpticsOutComponent } from './pages/outliers/optics-out/optics-out.component';
 import { KNearestOutComponent } from './pages/outliers/k-nearest-out/k-nearest-out.component';
+import { LofOutComponent } from './pages/outliers/lof-out/lof-out.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { KNearestOutComponent } from './pages/outliers/k-nearest-out/k-nearest-o
     DbscanOutComponent,
     OpticsOutComponent,
     KNearestOutComponent,
+    LofOutComponent,
   ],
   imports: [
     BrowserModule,

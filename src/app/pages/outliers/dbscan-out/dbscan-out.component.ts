@@ -11,13 +11,12 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 })
 export class DbscanOutComponent implements OnInit {
   distanceForm: FormGroup;
-  labels: number[] = [];
   distanceMax: number = 0;
   minPoints: number = 0;
-  clusterIndex = 10;
+  clusterIndex: number = 0;
+  labels: number[] = [];
   distancesEucl: number[][] = [];
   initialPoints: number[][] = [];
-  distanceType: string = '';
   private distancesSub: Subscription;
   private initalPointsSub: Subscription;
   showResults: boolean = false;
@@ -53,7 +52,6 @@ export class DbscanOutComponent implements OnInit {
 
   dbscan(distances: number[][], eps: number, minPts: number) {
     const labels: number[] = [];
-    this.clusterIndex = 0;
 
     // Inicializar todas las etiquetas como no asignadas (-1)
     for (let i = 0; i < distances.length; i++) {
