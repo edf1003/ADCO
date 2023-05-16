@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
-import { ColorsToSend } from 'src/app/services/colors.service';
 
 @Component({
   selector: 'app-dbscan-out',

@@ -11,7 +11,7 @@ export class OutliersComponent implements OnInit {
     'Mahlanobis',
     'DBSCAN',
     'OPTICS',
-    'K-nearest',
+    'k-Nearest Neighbors',
     'LOF',
   ];
   outlierMethod: string = '';

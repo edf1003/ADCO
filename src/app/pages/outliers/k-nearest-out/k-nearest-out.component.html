@@ -1,0 +1,16 @@
+<form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
+  <div style="display: flex; align-items: last baseline">
+    <mat-form-field appearance="fill" style="margin-right: 10px">
+      <mat-label>Número máximo de outliers</mat-label>
+      <input matInput formControlName="numberOfOutliers" type="number" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="margin-right: 10px">
+      <mat-label>Número de vecinos</mat-label>
+      <input matInput formControlName="numberOfNeighbors" type="number" required />
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Introducir</button>
+  </div>
+</form>
+<div *ngFor="let e of outliers">
+  {{e}}
+</div>
