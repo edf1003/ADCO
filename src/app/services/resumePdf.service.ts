@@ -19,31 +19,28 @@ export class ResumePdf {
     };
 
     const createPDF = async (imageBase64: string): Promise<ArrayBuffer> => {
-      const doc = new jsPDF();
-      const pdfWidth = doc.internal.pageSize.getWidth();
-      const pdfHeight = doc.internal.pageSize.getHeight();
       const image = new Image();
+      image.src = imageBase64;
 
       return new Promise((resolve) => {
         image.onload = () => {
           const aspectRatio = image.width / image.height;
-          const maxWidth = pdfWidth - 40;
-          const maxHeight = pdfHeight;
-          let width = maxWidth;
-          let height = maxWidth / aspectRatio;
+          const width = image.width;
+          const height = image.height;
 
-          if (height > maxHeight) {
-            height = maxHeight;
-            width = height * aspectRatio;
-          }
+          const margin = 20;
+          const pageWidth = width + margin * 2;
+          const pageHeight = height + margin * 2;
 
-          const x = (pdfWidth - width) / 2;
+          const doc = new jsPDF({
+            orientation: width > height ? 'landscape' : 'portrait',
+            unit: 'px',
+            format: [pageWidth, pageHeight],
+          });
 
-          doc.addImage(image, 'PNG', x, 10, width, height);
+          doc.addImage(image, 'PNG', margin, margin, width, height);
           resolve(doc.output('arraybuffer'));
         };
-
-        image.src = imageBase64;
       });
     };
 
