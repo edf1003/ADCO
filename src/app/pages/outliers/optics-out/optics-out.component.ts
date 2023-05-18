@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 
 @Component({
   selector: 'app-optics-out',
@@ -23,7 +24,8 @@ export class OpticsOutComponent implements OnInit {
 
   constructor(
     private senddistances: sendDistances,
-    private sendDataTable: sendDataTable
+    private sendDataTable: sendDataTable,
+    public resumePdf: ResumePdf
   ) {
     this.distanceForm = new FormGroup({
       distance: new FormControl(),
@@ -138,5 +140,9 @@ export class OpticsOutComponent implements OnInit {
     }
 
     this.labels = clusters;
+  }
+
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF('OPTICS', 'Resultado.pdf');
   }
 }

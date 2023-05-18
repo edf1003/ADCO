@@ -2,7 +2,8 @@
   <div style="display: flex; align-items: last baseline">
     <mat-form-field appearance="fill" style="margin-right: 10px">
       <mat-label>Número de clusters</mat-label>
-      <input matInput formControlName="numberOfClusters" type="number" [max]="initialPoints.length" min="1" required />
+      <input matInput formControlName="numberOfClusters" type="number" [max]="initialPoints.length - 1" min="1"
+        required />
     </mat-form-field>
     <button mat-raised-button type="submit" color="primary"
       [disabled]="initialPoints.length <= distanceForm.value.numberOfClusters">Introducir</button>

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import * as math from 'mathjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 
 @Component({
   selector: 'app-mahalanobis-out',
@@ -17,7 +18,7 @@ export class MahalanobisOutComponent implements OnInit {
   distanceMax: number = 0;
   private PCASub: Subscription;
 
-  constructor(private initialData: sendDataTable) {
+  constructor(private initialData: sendDataTable, public resumePdf: ResumePdf) {
     this.PCASub = this.initialData.getDatosTabla().subscribe((datos) => {
       this.initialDataset = datos;
     });
@@ -124,5 +125,9 @@ export class MahalanobisOutComponent implements OnInit {
     }
 
     return covarianceMatrix;
+  }
+
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF('mahalanobis', 'Resultado.pdf');
   }
 }

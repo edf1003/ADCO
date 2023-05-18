@@ -74,4 +74,7 @@ tr td:first-child:before {
   overflow-x: auto;
   box-sizing: border-box;
   padding: 10px;
+  max-height: 50vh;
+  padding: 2em;
+  overflow: overlay;
 }

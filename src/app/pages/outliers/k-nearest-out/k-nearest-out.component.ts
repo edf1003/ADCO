@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 
@@ -21,7 +22,8 @@ export class KNearestOutComponent implements OnInit {
 
   constructor(
     private sendDataTable: sendDataTable,
-    private senddistances: sendDistances
+    private senddistances: sendDistances,
+    public resumePdf: ResumePdf
   ) {
     this.distanceForm = new FormGroup({
       numberOfNeighbors: new FormControl(),
@@ -78,5 +80,9 @@ export class KNearestOutComponent implements OnInit {
     }
 
     return outlierFlags;
+  }
+
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF('k-nearest', 'Resultado.pdf');
   }
 }

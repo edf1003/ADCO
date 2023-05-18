@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
-
 @Component({
   selector: 'app-outliers',
   templateUrl: './outliers.component.html',
