@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { ColorsToSend } from 'src/app/services/colors.service';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 
 @Component({
   selector: 'app-kmeans',
@@ -28,7 +29,8 @@ export class KmeansComponent implements OnInit {
   constructor(
     private senddistances: sendDistances,
     private sendDataTable: sendDataTable,
-    private colorToSend: ColorsToSend
+    private colorToSend: ColorsToSend,
+    public resumePdf: ResumePdf
   ) {
     this.distanceForm = new FormGroup({
       numberOfClusters: new FormControl(),
@@ -211,5 +213,9 @@ export class KmeansComponent implements OnInit {
     var grupoElement = document.getElementById('grupo' + index);
     grupoElement!.style.backgroundColor = ColorsToSend.getColor(index);
     return ColorsToSend.getColor(index);
+  }
+
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF('kmeans', 'Resultado.pdf');
   }
 }

@@ -224,6 +224,10 @@ export class AddvariablesComponent {
       }
     }
     this.isStandarized = !this.isStandarized;
+    var button = document.getElementById('standarize') as HTMLButtonElement;
+    this.isStandarized
+      ? (button.textContent = 'Desestandarizar datos')
+      : (button.textContent = 'Estandarizar datos');
   }
 
   saveDataTable() {

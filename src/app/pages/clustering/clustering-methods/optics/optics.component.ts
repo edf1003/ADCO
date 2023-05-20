@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { ColorsToSend } from 'src/app/services/colors.service';
+import { ResumePdf } from 'src/app/services/resumePdf.service';
 
 @Component({
   selector: 'app-optics',
@@ -27,7 +28,8 @@ export class OpticsComponent implements OnInit {
 
   constructor(
     private senddistances: sendDistances,
-    private sendDataTable: sendDataTable
+    private sendDataTable: sendDataTable,
+    public resumePdf: ResumePdf
   ) {
     this.distanceForm = new FormGroup({
       distance: new FormControl(),
@@ -164,5 +166,9 @@ export class OpticsComponent implements OnInit {
     var grupoElement = document.getElementById('grupo' + index);
     grupoElement!.style.backgroundColor = ColorsToSend.getColor(index);
     return ColorsToSend.getColor(index);
+  }
+
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF('optics', 'Resultado.pdf');
   }
 }

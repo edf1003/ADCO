@@ -156,21 +156,17 @@ export class AcpComponent implements OnDestroy, OnInit {
   showPropertiesTable() {
     this.showProperties = !this.showProperties;
     let showProperties = document.getElementById('showProperties');
-    if (this.showProperties) {
-      showProperties!.textContent = 'Ocultar';
-    } else {
-      showProperties!.textContent = 'Mostrar';
-    }
+    this.showProperties
+      ? (showProperties!.textContent = 'Ocultar')
+      : (showProperties!.textContent = 'Mostrar');
   }
 
   showEigenVectorsTable() {
     this.showEigenVectors = !this.showEigenVectors;
     let showEigenVectors = document.getElementById('showEigenVectors');
-    if (this.showEigenVectors) {
-      showEigenVectors!.textContent = 'Ocultar';
-    } else {
-      showEigenVectors!.textContent = 'Mostrar';
-    }
+    this.showEigenVectors
+      ? (showEigenVectors!.textContent = 'Ocultar')
+      : (showEigenVectors!.textContent = 'Mostrar');
   }
 
   saveData() {
