@@ -6,6 +6,6 @@ import { TranslationService } from '../../app/services/translation.service';
   templateUrl: './page-title.component.html',
   styleUrls: ['./page-title.component.scss'],
 })
-export class pageTitle {
+export class PageTitle {
   constructor(public translationService: TranslationService) {}
 }

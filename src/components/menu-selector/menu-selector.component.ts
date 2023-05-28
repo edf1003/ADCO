@@ -7,7 +7,7 @@ import { TranslationService } from '../../app/services/translation.service';
   templateUrl: './menu-selector.component.html',
   styleUrls: ['./menu-selector.component.scss'],
 })
-export class menuSelector {
+export class MenuSelector {
   isSpanishFlagVisible = true;
 
   constructor(
