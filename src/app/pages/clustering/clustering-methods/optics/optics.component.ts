@@ -5,6 +5,7 @@ import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { ColorsToSend } from 'src/app/services/colors.service';
 import { ResumePdf } from 'src/app/services/resumePdf.service';
+import { TranslationService } from '../../../../services/translation.service';
 
 @Component({
   selector: 'app-optics',
@@ -29,7 +30,8 @@ export class OpticsComponent implements OnInit {
   constructor(
     private senddistances: sendDistances,
     private sendDataTable: sendDataTable,
-    public resumePdf: ResumePdf
+    public resumePdf: ResumePdf,
+    public translationService: TranslationService
   ) {
     this.distanceForm = new FormGroup({
       distance: new FormControl(),

@@ -4,6 +4,7 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { sendDistances } from 'src/app/services/sendDistances.service';
 import * as math from 'mathjs';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-distancias',
@@ -23,7 +24,8 @@ export class DistanciasComponent implements OnInit {
   constructor(
     private initialData: sendDataTable,
     private sendDistances: sendDistances,
-    private resumeExcel: ResumeExcel
+    private resumeExcel: ResumeExcel,
+    public translationService: TranslationService
   ) {
     this.PCASub = this.initialData.getDatosTabla().subscribe((datos) => {
       this.initialDataset = datos;

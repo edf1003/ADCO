@@ -1,8 +1,8 @@
 <div class="selector">
   <br />
-  <p><strong>Elija el tipo de distancia y clustering.</strong></p>
+  <p><strong>{{ translationService.translateKey('clustering4') }}</strong></p>
   <mat-form-field appearance="fill">
-    <mat-label>Seleccione el tipo de distancia</mat-label>
+    <mat-label>{{ translationService.translateKey('clustering5') }}</mat-label>
     <mat-select [(ngModel)]="distance">
       <mat-option *ngFor="let distance of distances" [value]="distance" (click)="selectDistance(distance)">
         {{ distance }}
@@ -10,7 +10,7 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="fill" style="margin-left: 10px;">
-    <mat-label>Seleccione el tipo de clustering</mat-label>
+    <mat-label>{{ translationService.translateKey('clustering6') }}</mat-label>
     <mat-select [(ngModel)]="clusteringMethod">
       <mat-option *ngFor="let clusteringMethod of clusteringMethods" [value]="clusteringMethod"
         (click)="selectClustering(clusteringMethod)">

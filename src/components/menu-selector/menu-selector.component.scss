@@ -12,3 +12,21 @@
   width: 80%;
   margin: 0 auto;
 }
+
+$flag-size: 24px;
+$flag-spacing: 8px;
+
+.language {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  img {
+    width: $flag-size;
+    height: $flag-size;
+    margin-right: $flag-spacing;
+  }
+}

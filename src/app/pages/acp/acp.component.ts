@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PCA } from 'ml-pca';
 import { PCAdata } from '../../services/dataPCA.service';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-acp',
@@ -45,7 +46,8 @@ export class AcpComponent implements OnDestroy, OnInit {
   constructor(
     private sendData: sendDataTable,
     private pcadata: PCAdata,
-    private resumeExcel: ResumeExcel
+    private resumeExcel: ResumeExcel,
+    public translationService: TranslationService
   ) {
     this.formulariodenumero = new FormGroup({});
     const control = new FormControl('');
@@ -141,11 +143,11 @@ export class AcpComponent implements OnDestroy, OnInit {
     let showACP = document.getElementById('ShowACP');
     let showACP2 = document.getElementById('ShowACP2');
     if (this.showPredictions) {
-      showACP!.textContent = 'Ocultar';
-      showACP2!.textContent = 'Ocultar';
+      showACP!.textContent = this.translationService.translateKey('acp14');
+      showACP2!.textContent = this.translationService.translateKey('acp14');
     } else {
-      showACP!.textContent = 'Mostrar';
-      showACP2!.textContent = 'Mostrar';
+      showACP!.textContent = this.translationService.translateKey('acp14.2');
+      showACP2!.textContent = this.translationService.translateKey('acp14.2');
     }
   }
 
@@ -157,16 +159,20 @@ export class AcpComponent implements OnDestroy, OnInit {
     this.showProperties = !this.showProperties;
     let showProperties = document.getElementById('showProperties');
     this.showProperties
-      ? (showProperties!.textContent = 'Ocultar')
-      : (showProperties!.textContent = 'Mostrar');
+      ? (showProperties!.textContent =
+          this.translationService.translateKey('acp14'))
+      : (showProperties!.textContent =
+          this.translationService.translateKey('acp14.2'));
   }
 
   showEigenVectorsTable() {
     this.showEigenVectors = !this.showEigenVectors;
     let showEigenVectors = document.getElementById('showEigenVectors');
     this.showEigenVectors
-      ? (showEigenVectors!.textContent = 'Ocultar')
-      : (showEigenVectors!.textContent = 'Mostrar');
+      ? (showEigenVectors!.textContent =
+          this.translationService.translateKey('acp14'))
+      : (showEigenVectors!.textContent =
+          this.translationService.translateKey('acp14.2'));
   }
 
   saveData() {

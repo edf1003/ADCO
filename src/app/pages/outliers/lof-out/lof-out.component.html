@@ -2,10 +2,11 @@
   <form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
     <div style="display: flex; align-items: last baseline">
       <mat-form-field appearance="fill" style="margin-right: 10px">
-        <mat-label>Distancia máxima</mat-label>
+        <mat-label>{{ translationService.translateKey('outliers5') }}</mat-label>
         <input matInput formControlName="distance" type="number" required>
       </mat-form-field>
-      <button mat-raised-button type="submit" color="primary">Introducir</button>
+      <button mat-raised-button type="submit" color="primary">{{ translationService.translateKey('outliers7')
+        }}</button>
       <button mat-raised-button style="margin-left: 10px;"
         style="margin-left: 15px; background-color: #0F753E; color: white;" (click)="convertHTMLtoPDF()">
         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="2em" width="3em"
@@ -23,7 +24,7 @@
       <thead>
         <th>ID</th>
         <th>LOF</th>
-        <th>Coordenadas</th>
+        <th>{{ translationService.translateKey('outliers8') }}</th>
       </thead>
       <tbody>
         <ng-container *ngFor="let lof of results; let i = index;">

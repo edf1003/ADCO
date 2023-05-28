@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
+import { TranslationService } from '../../services/translation.service';
+
 @Component({
   selector: 'app-outliers',
   templateUrl: './outliers.component.html',
@@ -15,7 +17,10 @@ export class OutliersComponent implements OnInit {
   ];
   outlierMethod: string = '';
 
-  constructor(public resumeExcel: ResumeExcel) {}
+  constructor(
+    public resumeExcel: ResumeExcel,
+    public translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {}
 

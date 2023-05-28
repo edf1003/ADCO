@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ResumePdf } from 'src/app/services/resumePdf.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-clustering-methods',
@@ -12,7 +13,10 @@ export class ClusteringMethodsComponent implements OnInit {
   distances: string[] = ['Euclidea', 'Euclidea normalizada', 'Mahalanobis'];
   @Output() distance: string = '';
 
-  constructor(public resumePdf: ResumePdf) {}
+  constructor(
+    public resumePdf: ResumePdf,
+    public translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -24,8 +28,7 @@ export class ClusteringMethodsComponent implements OnInit {
     this.distance = distance;
   }
 
-  convertHTMLtoPDF(){
-    this.resumePdf.convertHTMLtoPDF(this.clusteringMethod, 'Resultado.pdf')
+  convertHTMLtoPDF() {
+    this.resumePdf.convertHTMLtoPDF(this.clusteringMethod, 'Resultado.pdf');
   }
-
 }

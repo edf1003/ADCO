@@ -1,11 +1,12 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Información"><app-page-information></app-page-information></mat-tab>
-  <mat-tab label="Empezar">
+  <mat-tab
+    label="{{ translationService.translateKey('menu1') }}"><app-page-information></app-page-information></mat-tab>
+  <mat-tab label="{{ translationService.translateKey('menu2') }}">
     <mat-stepper class="mat-horizontal-stepper" [linear]="true" #stepper style="background: none">
-      <mat-step label="Datos">
+      <mat-step label="{{ translationService.translateKey('menu3') }}">
         <app-data></app-data>
       </mat-step>
-      <mat-step label="ACP">
+      <mat-step label="{{ translationService.translateKey('menu4') }}">
         <app-acp></app-acp>
         <div style="display: flex; justify-content: flex-end">
           <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
@@ -26,7 +27,7 @@
           </button>
         </div>
       </mat-step>
-      <mat-step label="Distancias">
+      <mat-step label="{{ translationService.translateKey('menu5') }}">
         <app-distancias></app-distancias>
         <div style="display: flex; justify-content: flex-end">
           <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
@@ -47,7 +48,7 @@
           </button>
         </div>
       </mat-step>
-      <mat-step label="Clustering">
+      <mat-step label="{{ translationService.translateKey('menu6') }}">
         <app-clustering></app-clustering>
         <div style="display: flex; justify-content: flex-end">
           <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
@@ -68,7 +69,7 @@
           </button>
         </div>
       </mat-step>
-      <mat-step label="Outliers">
+      <mat-step label="{{ translationService.translateKey('menu7') }}">
         <app-outliers></app-outliers>
         <div style="display: flex; justify-content: flex-end">
           <button mat-raised-button color="primary" style="margin: 10px" matStepperPrevious>
@@ -89,5 +90,14 @@
         <img class="gitlogo" src="../../assets/img/gitlogo.jpg" />
         GitHub
       </a>
-    </ng-template></mat-tab>
+    </ng-template>
+  </mat-tab>
+  <mat-tab disabled="">
+    <ng-template mat-tab-label class="template">
+      <button class="language" (click)="toggleLanguage()">
+        <img src="../../assets/img/bandera-espana.png" *ngIf="!isSpanishFlagVisible" alt="España">
+        <img src="../../assets/img/bandera-inglaterra.png" *ngIf="isSpanishFlagVisible" alt="Inglaterra">
+      </button>
+    </ng-template>
+  </mat-tab>
 </mat-tab-group>

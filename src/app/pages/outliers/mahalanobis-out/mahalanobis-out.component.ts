@@ -4,6 +4,7 @@ import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import * as math from 'mathjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ResumePdf } from 'src/app/services/resumePdf.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-mahalanobis-out',
@@ -18,7 +19,11 @@ export class MahalanobisOutComponent implements OnInit {
   distanceMax: number = 0;
   private PCASub: Subscription;
 
-  constructor(private initialData: sendDataTable, public resumePdf: ResumePdf) {
+  constructor(
+    private initialData: sendDataTable,
+    public resumePdf: ResumePdf,
+    public translationService: TranslationService
+  ) {
     this.PCASub = this.initialData.getDatosTabla().subscribe((datos) => {
       this.initialDataset = datos;
     });

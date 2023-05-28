@@ -1,21 +1,17 @@
-<p>
-  El parámetro "Número mínimo de vecinos" es necesario para definir qué se
-  considera un "cluster" en el algoritmo OPTICS. Si un punto tiene al menos n
-  vecinos dentro del radio de búsqueda "Distancia máxima", se considera "core
-  point" y se agrega al cluster correspondiente. Si un punto no tiene
-  suficientes vecinos, se considera "outlier".
+<p>{{ translationService.translateKey('clustering16') }}
 </p>
 <form [formGroup]="distanceForm" (ngSubmit)="saveParameters()">
   <div style="display: flex; align-items: last baseline">
     <mat-form-field appearance="fill" style="margin-right: 10px">
-      <mat-label>Distancia máxima</mat-label>
+      <mat-label>{{ translationService.translateKey('clustering8') }}</mat-label>
       <input matInput formControlName="distance" type="number" required />
     </mat-form-field>
     <mat-form-field appearance="fill" style="margin-right: 10px">
-      <mat-label>Número mínimo de vecinos</mat-label>
+      <mat-label>{{ translationService.translateKey('clustering17') }}</mat-label>
       <input matInput formControlName="minPoints" type="number" required />
     </mat-form-field>
-    <button mat-raised-button type="submit" color="primary">Introducir</button>
+    <button mat-raised-button type="submit" color="primary">{{ translationService.translateKey('clustering10')
+      }}</button>
     <button mat-raised-button style="margin-left: 10px;"
       style="margin-left: 15px; background-color: #0F753E; color: white;" (click)="convertHTMLtoPDF()">
       <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="2em" width="3em"
@@ -28,12 +24,13 @@
   </div>
 </form>
 <div *ngIf="showResults">
-  <p>Existen {{ clusterIndex }} grupos de clustering.</p>
+  <p>{{ translationService.translateKey('clustering11') }} {{ clusterIndex }} {{
+    translationService.translateKey('clustering12') }}.</p>
   <div style="display: flex; flex-direction: row; justify-content: space-between" id="optics">
     <div style="width: 50%">
       <div>
         <h3 style="background-color: red;"><strong>Outliers:</strong></h3>
-        <span><strong>Puntos: </strong></span>
+        <span><strong>{{ translationService.translateKey('clustering13') }}: </strong></span>
         <span *ngFor="let label of labels; let i = index" style="display: inline-block">
           <ng-container *ngIf="label === -2">{{ i + 1 }}&nbsp;</ng-container>
         </span>
@@ -41,10 +38,11 @@
       <br />
       <div *ngFor="let grupo of [].constructor(clusterIndex); let i = index">
         <h3 id="grupo{{i}}">
-          <strong>Grupo {{ i }}:</strong><span style="opacity: 0%;">{{getColor(i)}}</span>
+          <strong>{{ translationService.translateKey('clustering14') }} {{ i }}:</strong><span
+            style="opacity: 0%;">{{getColor(i)}}</span>
         </h3>
         <div>
-          <span><strong>Puntos: </strong></span>
+          <span><strong>{{ translationService.translateKey('clustering13') }}: </strong></span>
           <span *ngFor="let label of labels; let i2 = index" style="display: inline-block">
             <ng-container *ngIf="label === i">{{ i2 + 1 }}&nbsp;</ng-container>
           </span>

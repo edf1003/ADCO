@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { sendDataTable } from '../../../services/sendDataTable.service';
 import * as XLSX from 'xlsx';
 import { ResumeExcel } from 'src/app/services/resumeExcel.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-addvariables',
@@ -34,7 +35,8 @@ export class AddvariablesComponent {
 
   constructor(
     private sendData: sendDataTable,
-    private resumeExcel: ResumeExcel
+    private resumeExcel: ResumeExcel,
+    public translationService: TranslationService
   ) {
     this.formulariodecabeceras = new FormGroup({});
     this.formulariodedatos = new FormGroup({});

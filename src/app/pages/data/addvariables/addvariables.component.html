@@ -1,67 +1,66 @@
-<h3>Número de variables:</h3>
+<h3>{{ translationService.translateKey('data2') }}:</h3>
 <div class="introducevariables">
   <mat-form-field appearance="fill">
-    <mat-label>Introduce un valor</mat-label>
+    <mat-label>{{ translationService.translateKey('data3') }}</mat-label>
     <input matInput [(ngModel)]="valor" name="valor" type="number" required maxlength="2" id="labeltodisabeled"
       [disabled]="disabledinput" />
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="guardarValor()" [disabled]="disabledinput || optionFileBool">
-    Enviar
+    {{ translationService.translateKey('data4') }}
   </button>
 </div>
 <p id="alert" style="opacity: 0%">
-  Por favor, escoge un número menor de 10 y mayor de 0. <br />
-  Para introducir más de 10 variables, utilize un fichero de Excel en formato
-  .xlsx
+  {{ translationService.translateKey('data5') }}
+  <br />
+  {{ translationService.translateKey('data6') }}
 </p>
 <div *ngIf="!optionManualBool">
   <div>
     <label for="file-upload" class="custom-file-upload">
-      <i class="fas fa-cloud-upload-alt"></i> Seleccionar archivo
+      <i class="fas fa-cloud-upload-alt"></i> {{ translationService.translateKey('data7') }}
     </label>
     <input id="file-upload" type="file" class="hidden-input" (change)="onFileSelected($event)" />
   </div>
   <br />
   <p>
-    Recuerda que el archivo debe de ser tipo Excel (.xlsx) y la primera fila
-    debe contener el nombre de las variables.
+    {{ translationService.translateKey('data8') }}
   </p>
 </div>
 <div *ngIf="disabledinput && !optionFileBool">
-  <p>Introduce el nombre de las diferentes variables:</p>
+  <p>{{ translationService.translateKey('data9') }}</p>
   <form [formGroup]="formulariodecabeceras" (submit)="creartabla()" class="listofinputs">
     <div *ngFor="let input of inputsArray; let i = index">
       <mat-form-field>
-        <mat-label>Variable {{ i }}</mat-label>
+        <mat-label>{{ translationService.translateKey('data10') }} {{ i }}</mat-label>
         <input matInput [formControlName]="'label' + i" type="text" required />
       </mat-form-field>
     </div>
     <button mat-raised-button type="submit" color="primary" [disabled]="isdisabledlabels">
-      Enviar
+      {{ translationService.translateKey('data4') }}
     </button>
   </form>
   <br /><br />
   <div *ngIf="buttonPush && !optionFileBool">
-    <p>Introduce el valor de las variables:</p>
+    <p>{{ translationService.translateKey('data11') }}</p>
     <form [formGroup]="formulariodedatos" (submit)="setdata()" class="listofinputs">
       <div *ngFor="let input of inputsArray; let i = index">
         <mat-form-field>
-          <mat-label>Variable {{ i }}</mat-label>
+          <mat-label>{{ translationService.translateKey('data10') }} {{ i }}</mat-label>
           <input matInput [formControlName]="'data' + i" type="number" required />
         </mat-form-field>
       </div>
       <button mat-raised-button type="submit" color="primary">
-        Introducir
+        {{ translationService.translateKey('data12') }}
       </button>
     </form>
-    <p id="alert2" style="opacity: 0%">No puedes introducir valores vacios.</p>
+    <p id="alert2" style="opacity: 0%">{{ translationService.translateKey('data13') }}</p>
   </div>
 </div>
 <br /><br />
 <div style="display: flex; justify-content: end">
   <button *ngIf="buttonPush || optionFileBool" mat-raised-button type="button" color="primary" id="standarize"
     (click)="standarizeDataTable()">
-    Estandarizar datos
+    {{ translationService.translateKey('data14') }}
   </button>
   <button *ngIf="buttonPush || optionFileBool" mat-raised-button type="button"
     style="margin-left: 15px; background-color: #0F753E; color: white;" (click)="saveDataTable()">
@@ -92,7 +91,7 @@
         <td *ngFor="let data of paquetededatos">{{ data | numberFormat }}</td>
         <td style="width: 20%">
           <button mat-flat-button type="button" color="warn" style="margin-inline: 10px" (click)="deletecolumn(i)">
-            Eliminar
+            {{ translationService.translateKey('data15') }}
           </button>
         </td>
       </tr>
@@ -103,7 +102,7 @@
         <td *ngFor="let data of paquetededatos">{{ data | numberFormat }}</td>
         <td style="width: 20%">
           <button mat-flat-button type="button" color="warn" style="margin-inline: 10px" (click)="deletecolumn(i)">
-            Eliminar
+            {{ translationService.translateKey('data15') }}
           </button>
         </td>
       </tr>
@@ -113,12 +112,11 @@
 <br /><br />
 <div class="buttonEnd">
   <p *ngIf="(buttonPush || optionFileBool) && !isWiderThanHiger">
-    Los datos deben de contener un número mayor o igual de filas que de
-    columnas.
+    {{ translationService.translateKey('data16') }}
   </p>
   <button *ngIf="buttonPush && optionFileBool" mat-raised-button type="button" color="primary" style="margin: 5px"
     (click)="resetDatos()">
-    Restablecer Datos
+    {{ translationService.translateKey('data17') }}
   </button>
   <button *ngIf="(buttonPush || optionFileBool) && isWiderThanHiger" matStepperNext mat-raised-button type="button"
     color="primary" style="margin: 5px" (click)="sendDatos()">

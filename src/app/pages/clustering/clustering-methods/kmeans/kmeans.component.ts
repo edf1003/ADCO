@@ -5,6 +5,7 @@ import { sendDistances } from 'src/app/services/sendDistances.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { ColorsToSend } from 'src/app/services/colors.service';
 import { ResumePdf } from 'src/app/services/resumePdf.service';
+import { TranslationService } from '../../../../services/translation.service';
 
 @Component({
   selector: 'app-kmeans',
@@ -30,7 +31,8 @@ export class KmeansComponent implements OnInit {
     private senddistances: sendDistances,
     private sendDataTable: sendDataTable,
     private colorToSend: ColorsToSend,
-    public resumePdf: ResumePdf
+    public resumePdf: ResumePdf,
+    public translationService: TranslationService
   ) {
     this.distanceForm = new FormGroup({
       numberOfClusters: new FormControl(),

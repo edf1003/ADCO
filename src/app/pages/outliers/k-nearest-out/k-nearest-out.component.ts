@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { ResumePdf } from 'src/app/services/resumePdf.service';
 import { sendDataTable } from 'src/app/services/sendDataTable.service';
 import { sendDistances } from 'src/app/services/sendDistances.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-k-nearest-out',
@@ -23,7 +24,8 @@ export class KNearestOutComponent implements OnInit {
   constructor(
     private sendDataTable: sendDataTable,
     private senddistances: sendDistances,
-    public resumePdf: ResumePdf
+    public resumePdf: ResumePdf,
+    public translationService: TranslationService
   ) {
     this.distanceForm = new FormGroup({
       numberOfNeighbors: new FormControl(),

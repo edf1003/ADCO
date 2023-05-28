@@ -41,7 +41,14 @@ import { DbscanOutComponent } from './pages/outliers/dbscan-out/dbscan-out.compo
 import { OpticsOutComponent } from './pages/outliers/optics-out/optics-out.component';
 import { KNearestOutComponent } from './pages/outliers/k-nearest-out/k-nearest-out.component';
 import { LofOutComponent } from './pages/outliers/lof-out/lof-out.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationService } from './services/translation.service';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -89,8 +96,16 @@ import { LofOutComponent } from './pages/outliers/lof-out/lof-out.component';
     MatTableModule,
     NgChartsModule,
     MatStepperModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [],
+  providers: [TranslationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

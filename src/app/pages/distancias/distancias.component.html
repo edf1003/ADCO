@@ -1,19 +1,12 @@
 <div class="descripcion">
-  <h2>Definición</h2>
+  <h2>{{ translationService.translateKey('distances1') }}</h2>
   <p>
-    La distancia entre dos puntos es una medida que cuantifica la separación o diferencia entre ellos,
-    independientemente de la cantidad de dimensiones en las que se encuentren. Puede ser calculada mediante diferentes
-    métodos, como la distancia euclidiana o la distancia de Manhattan, entre otros. Estos métodos evalúan las
-    diferencias o distancias entre las coordenadas de los puntos en cada dimensión y proporcionan un valor numérico que
-    representa la magnitud de la separación espacial entre ellos. La distancia es una herramienta fundamental en
-    matemáticas, física, ciencias de datos y otros campos, y se utiliza para comparar objetos, analizar patrones, tomar
-    decisiones y resolver problemas en diversos contextos.</p><br>
-  <p>Aquellas tablas de distancias cuyas dimensiones sean mayores a 20x20, deberán descargarse para visualizarse de
-    manera completa.</p><br>
+    {{ translationService.translateKey('distances2') }}</p><br>
+  <p>{{ translationService.translateKey('distances3') }}</p><br>
   <div class="selector">
-    <p><strong>Elija el tipo de distancia a aplicar.</strong></p>
+    <p><strong>{{ translationService.translateKey('distances4') }}</strong></p>
     <mat-form-field appearance="fill">
-      <mat-label>Seleccione el tipo de distancia</mat-label>
+      <mat-label>{{ translationService.translateKey('distances5') }}</mat-label>
       <mat-select [(ngModel)]="distance">
         <mat-option *ngFor="let distance of distances" [value]="distance" (click)="selectDistance(distance)">
           {{ distance }}
@@ -35,7 +28,7 @@
   </div>
   <div *ngIf="distance === 'Euclidea'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias euclideas:</h2><br>
+      <h2>{{ translationService.translateKey('distances6') }}</h2><br>
     </div>
     <div class="tableForScroll">
       <table>
@@ -58,7 +51,7 @@
   </div>
   <div *ngIf="distance === 'Euclidea normalizada'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias euclideas normalizadas:</h2><br>
+      <h2>{{ translationService.translateKey('distances7') }}</h2><br>
     </div>
     <div class="tableForScroll">
       <table>
@@ -81,7 +74,7 @@
   </div>
   <div *ngIf="distance === 'Mahalanobis'">
     <div style="display: flex; flex-direction: row; align-items: baseline">
-      <h2>Distancias de Mahalanobis:</h2><br>
+      <h2>{{ translationService.translateKey('distances8') }}</h2><br>
     </div>
     <div class="tableForScroll">
       <table>
