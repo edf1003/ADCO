@@ -183,6 +183,7 @@ export class ScarttChartComponent implements OnInit, OnChanges {
   }
 
   agregarPuntos() {
+    this.chartData = [];
     const puntos = this.scarttChartData.map(([xStr, yStr]) => {
       const x = +xStr;
       const y = +yStr;
