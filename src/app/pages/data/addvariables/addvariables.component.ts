@@ -233,10 +233,23 @@ export class AddvariablesComponent {
   }
 
   saveDataTable() {
+    this.standarizeDataTable();
+    this.isStandarized = !this.isStandarized;
+    var button = document.getElementById('standarize') as HTMLButtonElement;
+    this.isStandarized
+      ? (button.textContent = 'Desestandarizar datos')
+      : (button.textContent = 'Estandarizar datos');
+
     const datosWithheader: Array<Array<any>> = [];
     datosWithheader.push(this.cabeceraTabla);
     this.datosTabla.forEach((e) => datosWithheader.push(e));
+
+    const datosStandWithheader: Array<Array<any>> = [];
+    datosStandWithheader.push(this.cabeceraTabla);
+    this.pcaStandDev.forEach((e) => datosStandWithheader.push(e));
+
     this.resumeExcel.addData('Datos', datosWithheader);
+    this.resumeExcel.addData('DatosEstandarizados', datosStandWithheader);
     this.resumeExcel.saveToFile();
   }
 }

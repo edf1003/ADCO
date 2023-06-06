@@ -93,30 +93,29 @@ export class DistanciasComponent implements OnInit {
   }
 
   calculateNormalizedDistances() {
-    const distances: number[][] = [];
-    let maxDistance = 0;
+    const numRows = this.euclideanDistaces.length;
+    const numCols = this.euclideanDistaces[0].length;
 
-    // Calcula todas las distancias euclidianas entre cada par de puntos en el conjunto
-    for (let i = 0; i < this.initialDataset.length; i++) {
-      distances[i] = [];
-      for (let j = 0; j < this.initialDataset.length; j++) {
-        const distance = this.euclideanDistance(
-          this.initialDataset[i],
-          this.initialDataset[j]
-        );
-        distances[i][j] = distance;
-        if (distance > maxDistance) {
-          maxDistance = distance;
+    const normalizedDistances: number[][] = [];
+
+    let max = 0;
+    for (let i = 0; i < numRows; i++) {
+      for (let j = 0; j < numCols; j++) {
+        if (max < this.euclideanDistaces[i][j]) {
+          max = this.euclideanDistaces[i][j];
         }
       }
     }
-    // Normaliza las distancias dividiéndolas por la distancia máxima en el conjunto
-    for (let i = 0; i < this.initialDataset.length; i++) {
-      for (let j = 0; j < this.initialDataset.length; j++) {
-        distances[i][j] = distances[i][j] / maxDistance;
+
+    for (let i = 0; i < numRows; i++) {
+      normalizedDistances[i] = [];
+      for (let j = 0; j < numCols; j++) {
+        const normalizedDistance = this.euclideanDistaces[i][j] / max;
+        normalizedDistances[i][j] = normalizedDistance;
       }
     }
-    this.normalizedEuclideanDistances = distances;
+
+    this.normalizedEuclideanDistances = normalizedDistances;
   }
 
   calculateMahalanobisDistances() {
