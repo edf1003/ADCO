@@ -35,6 +35,7 @@ export class ResumeExcel {
   }
 
   downloadACP() {
+    this.workbook = XLSX.utils.book_new();
     this.addData('EjemploACP', [
       [
         'Ingresos anuales (miles)',
@@ -49,9 +50,11 @@ export class ResumeExcel {
       [110, 95, 9, 7],
     ]);
     XLSX.writeFile(this.workbook, 'EjemploACP.xlsx');
+    this.workbook = XLSX.utils.book_new();
   }
 
   downloadClustering() {
+    this.workbook = XLSX.utils.book_new();
     this.addData('EjemploClustering', [
       ['Ingresos mensuales (miles)', 'Gastos mensuales (miles)'],
       [12.5, 8.3],
@@ -66,5 +69,6 @@ export class ResumeExcel {
       [12.3, 7.8],
     ]);
     XLSX.writeFile(this.workbook, 'EjemploClustering.xlsx');
+    this.workbook = XLSX.utils.book_new();
   }
 }
