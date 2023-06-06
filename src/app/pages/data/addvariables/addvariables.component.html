@@ -15,11 +15,20 @@
   {{ translationService.translateKey('data6') }}
 </p>
 <div *ngIf="!optionManualBool">
-  <div>
-    <label for="file-upload" class="custom-file-upload">
-      <i class="fas fa-cloud-upload-alt"></i> {{ translationService.translateKey('data7') }}
-    </label>
-    <input id="file-upload" type="file" class="hidden-input" (change)="onFileSelected($event)" />
+  <div style="display: flex;">
+    <div>
+      <label for="file-upload" class="custom-file-upload">
+        <i class="fas fa-cloud-upload-alt"></i> {{ translationService.translateKey('data7') }}
+      </label>
+      <input id="file-upload" type="file" class="hidden-input" (change)="onFileSelected($event)" />
+    </div>
+    <div>
+      <button mat-raised-button color="secondary" style="margin-left: 10px; margin-right: 10px;"
+        (click)="downloadACP()">Ejemplo ACP</button>
+    </div>
+    <div>
+      <button mat-raised-button color="secondary" (click)="downloadClustering()">Ejemplo Clustering</button>
+    </div>
   </div>
   <br />
   <p>

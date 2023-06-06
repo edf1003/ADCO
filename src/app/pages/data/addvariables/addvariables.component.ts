@@ -252,4 +252,12 @@ export class AddvariablesComponent {
     this.resumeExcel.addData('DatosEstandarizados', datosStandWithheader);
     this.resumeExcel.saveToFile();
   }
+
+  downloadACP() {
+    this.resumeExcel.downloadACP();
+  }
+
+  downloadClustering() {
+    this.resumeExcel.downloadClustering();
+  }
 }

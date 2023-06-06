@@ -57,14 +57,6 @@ export class DistanciasComponent implements OnInit {
       { length: this.initialDataset.length },
       (_, i) => i
     );
-    this.euclideanDistances();
-    this.calculateNormalizedDistances();
-    this.calculateMahalanobisDistances();
-    this.sendDistances.setEuclideanDistances(this.euclideanDistaces);
-    this.sendDistances.setEuclideanNormalizedDistances(
-      this.normalizedEuclideanDistances
-    );
-    this.sendDistances.setMahalanobisDistances(this.mahalanobisDistances);
   }
 
   euclideanDistances() {
@@ -92,31 +84,57 @@ export class DistanciasComponent implements OnInit {
     return Math.sqrt(distance);
   }
 
+  /*------- Inicio Euclidea Normalizada ---------- */
+
   calculateNormalizedDistances() {
-    const numRows = this.euclideanDistaces.length;
-    const numCols = this.euclideanDistaces[0].length;
+    this.normalizedEuclideanDistances = [];
 
-    const normalizedDistances: number[][] = [];
+    for (let i = 0; i < this.initialDataset.length; i++) {
+      const distances: number[] = [];
 
-    let max = 0;
-    for (let i = 0; i < numRows; i++) {
-      for (let j = 0; j < numCols; j++) {
-        if (max < this.euclideanDistaces[i][j]) {
-          max = this.euclideanDistaces[i][j];
+      for (let j = 0; j < this.initialDataset.length; j++) {
+        if (i === j) {
+          distances.push(0);
+        } else {
+          const distance = this.calculateNormalizedEuclideanDistance(
+            this.initialDataset[i],
+            this.initialDataset[j]
+          );
+          distances.push(distance);
         }
       }
-    }
 
-    for (let i = 0; i < numRows; i++) {
-      normalizedDistances[i] = [];
-      for (let j = 0; j < numCols; j++) {
-        const normalizedDistance = this.euclideanDistaces[i][j] / max;
-        normalizedDistances[i][j] = normalizedDistance;
-      }
+      this.normalizedEuclideanDistances.push(distances);
     }
-
-    this.normalizedEuclideanDistances = normalizedDistances;
   }
+
+  calculateNormalizedEuclideanDistance(
+    point1: number[],
+    point2: number[]
+  ): number {
+    const normalizedPoint1 = this.normalizeData(point1);
+    const normalizedPoint2 = this.normalizeData(point2);
+
+    return this.euclideanDistance(normalizedPoint1, normalizedPoint2);
+  }
+
+  normalizeData(data: number[]): number[] {
+    let normalizedData: number[] = [];
+    for (let i = 0; i < this.initialDataset[0].length; i++) {
+      let max = -Infinity;
+      for (let j = 0; j < this.initialDataset.length; j++) {
+        if (this.initialDataset[j][i] > max) {
+          max = this.initialDataset[j][i];
+        }
+      }
+      normalizedData[i] = data[i] / max;
+    }
+    return normalizedData;
+  }
+
+  /*------- Fin Euclidea Normalizada ---------- */
+
+  /*------- Inicio Mahalanobis ---------- */
 
   calculateMahalanobisDistances() {
     const covarianceMatrix = this.calculateCovarianceMatrix(
@@ -149,8 +167,12 @@ export class DistanciasComponent implements OnInit {
     const invCovarianceMatrix = math.inv(covarianceMatrix);
     const transposedDiffVector = this.transposeVector(diffVector);
 
+    const firstMult = this.multiplyMatrixVector(
+      invCovarianceMatrix,
+      diffVector
+    );
     const resultMatrix = this.multiplyVectorMatrix(
-      this.multiplyVectorMatrix(diffVector, invCovarianceMatrix),
+      firstMult,
       transposedDiffVector
     );
 
@@ -158,24 +180,47 @@ export class DistanciasComponent implements OnInit {
   }
 
   subtractVectors(v1: number[], v2: number[]): number[] {
-    return v1.map((value, index) => value - v2[index]);
+    const difVectors: number[] = [];
+
+    for (let i = 0; i < v1.length; i++) {
+      difVectors[i] = v2[i] - v1[i];
+    }
+    return difVectors;
   }
 
   transposeVector(vector: number[]): number[][] {
-    return vector.map((value) => [value]);
+    const trasVectors: number[][] = [];
+
+    for (let i = 0; i < vector.length; i++) {
+      trasVectors.push([vector[i]]);
+    }
+    return trasVectors;
+  }
+
+  multiplyMatrixVector(matrix: number[][], vector: number[]): number[] {
+    const result: number[] = [];
+
+    for (let i = 0; i < matrix.length; i++) {
+      let sum = 0;
+      for (let j = 0; j < vector.length; j++) {
+        sum += matrix[i][j] * vector[j];
+      }
+      result.push(sum);
+    }
+
+    return result;
   }
 
   multiplyVectorMatrix(vector: number[], matrix: number[][]): number[] {
     const result: number[] = [];
 
-    for (let i = 0; i < matrix[0].length; i++) {
+    for (let i = 0; i < matrix.length; i++) {
       let sum = 0;
       for (let j = 0; j < vector.length; j++) {
         sum += vector[j] * matrix[j][i];
       }
       result.push(sum);
     }
-
     return result;
   }
 
@@ -187,7 +232,7 @@ export class DistanciasComponent implements OnInit {
     const means: number[] = new Array(dimensions).fill(0);
     for (const point of points) {
       for (let i = 0; i < dimensions; i++) {
-        means[i] += point[i] / numPoints;
+        means[i] += point[i] / points.length;
       }
     }
 
@@ -208,6 +253,8 @@ export class DistanciasComponent implements OnInit {
 
     return covarianceMatrix;
   }
+
+  /*------- Fin Mahalanobis ---------- */
 
   saveData() {
     this.resumeExcel.clearExcel();

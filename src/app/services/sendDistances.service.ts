@@ -22,7 +22,7 @@ export class sendDistances {
     this.euclideanNormalizedDistances.next(distances);
   }
 
-  getMahalanobisDistances() {
+  getEuclideanNormalizedDistances() {
     return this.euclideanNormalizedDistances.asObservable();
   }
 
@@ -30,7 +30,7 @@ export class sendDistances {
     this.mahalanobisDistances.next(distances);
   }
 
-  getEuclideanNormalizedDistances() {
+  getMahalanobisDistances() {
     return this.mahalanobisDistances.asObservable();
   }
 
