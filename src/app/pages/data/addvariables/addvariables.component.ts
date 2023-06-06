@@ -228,8 +228,8 @@ export class AddvariablesComponent {
     this.isStandarized = !this.isStandarized;
     var button = document.getElementById('standarize') as HTMLButtonElement;
     this.isStandarized
-      ? (button.textContent = 'Desestandarizar datos')
-      : (button.textContent = 'Estandarizar datos');
+      ? (button.textContent = this.translationService.translateKey('datos1'))
+      : (button.textContent = this.translationService.translateKey('datos2'));
   }
 
   saveDataTable() {
@@ -237,8 +237,8 @@ export class AddvariablesComponent {
     this.isStandarized = !this.isStandarized;
     var button = document.getElementById('standarize') as HTMLButtonElement;
     this.isStandarized
-      ? (button.textContent = 'Desestandarizar datos')
-      : (button.textContent = 'Estandarizar datos');
+      ? (button.textContent = this.translationService.translateKey('datos1'))
+      : (button.textContent = this.translationService.translateKey('datos2'));
 
     const datosWithheader: Array<Array<any>> = [];
     datosWithheader.push(this.cabeceraTabla);

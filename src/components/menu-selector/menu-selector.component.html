@@ -1,4 +1,9 @@
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center" style="padding-bottom: 50px; padding-top: 10px;" [selectedIndex]="1">
+  <mat-tab disabled="true">
+    <ng-template mat-tab-label class="template">
+      <img src="../../assets/img/ADCO.png" alt="ADCO" style="width: 180px; height: 150px; opacity: 100%;">
+    </ng-template>
+  </mat-tab>
   <mat-tab
     label="{{ translationService.translateKey('menu1') }}"><app-page-information></app-page-information></mat-tab>
   <mat-tab label="{{ translationService.translateKey('menu2') }}">

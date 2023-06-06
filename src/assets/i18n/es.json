@@ -102,5 +102,7 @@
   "outliers8": "Coordenadas",
   "outliers9": "Número de vecinos más alejados",
   "outliers10": "Distancia",
-  "outliers11": "Número mínimo de vecinos"
+  "outliers11": "Número mínimo de vecinos",
+  "datos1": "Desestandatizar datos",
+  "datos2": "Estandatizar datos"
 }

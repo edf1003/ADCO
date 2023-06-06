@@ -102,5 +102,7 @@
   "outliers8": "Coordinates",
   "outliers9": "Number of Farthest Neighbors",
   "outliers10": "Distance",
-  "outliers11": "Minimum Number of Neighbors"
+  "outliers11": "Minimum Number of Neighbors",
+  "datos1": "Destandardize data",
+  "datos2": "Standardize data"
 }
