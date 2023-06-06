@@ -1,11 +1,6 @@
 # Angular on Netlify Quick Start Template    
 ![netlify + angular logo](https://res.cloudinary.com/dzkoxrsdj/image/upload/v1646339469/angular_wzrs5o.png)
 
-This is a bare-bones Angular project that has everything you need to quickly deploy it to [Netlify](https://netlify.com). 
-
-Click this button and it will help you create a new repo, create a new Netlify project, and deploy!
-
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/angular-quickstart)
 
 ## Table of Contents:
 
@@ -22,10 +17,7 @@ Click this button and it will help you create a new repo, create a new Netlify p
 
 ## Setup
 
-Clone this repo with one of these options:
-- Click the 'Deploy to Netlify' button above
-- Click the 'Use this template' button at the top of the page
-- Or via the command line `git clone https://github.com/netlify-templates/angular-quickstart`
+Clone this repo with one of these options
 
 Then install the necessary packages and run the project locally to make sure everything works.
 
@@ -110,18 +102,8 @@ And lastly if you’d like to remove Cypress entirely, delete the entire `cypres
 npm uninstall cypress
 ```
 
-## Angular + Netlify Resources
 
-Here are some resources to help you on your Angular + Netlify coding fun!
-
-- [A video walkthrough of the Angular Quick Start Template](https://youtu.be/rNAiN94bBUs)
-- [A blog post on the Angular Quick Start Template](https://www.netlify.com/blog/get-started-with-angular-on-netlify-quickly)
-
-- [Angular on Netlify Configuration Docs](https://docs.netlify.com/configure-builds/common-configurations/angular/)
-- [Angular posts via the Netlify Blog](https://www.netlify.com/tags/angular/)
-- [Angular in the Jamstack Tutorials](https://explorers.netlify.com/learn/angular-in-the-jamstack)
-
-Hope this template helps :) Happy coding 👩🏻‍💻!
+Hope this template helps :) Enjoy the application and Happy coding 👩🏻‍💻!
 
 ---
 
