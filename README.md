@@ -19,11 +19,13 @@
 
 Clone this repo with one of these options
 
-Then install the necessary packages and run the project locally to make sure everything works.
+Then intsall Node.js version 18.16.0 LTS (https://nodejs.org/es)
+
+Finally install the necessary packages and run the project locally to make sure everything works.
 
 ```bash
 npm install
-ng serve
+npm run start
 ```
 
 Alternatively, you can run this locally with [the Netlify CLI](https://docs.netlify.com/cli/get-started/)'s `netlify dev` command for more options like receiving a live preview to share (`netlify dev --live`) and the ability to test [Netlify Functions](https://www.netlify.com/products/functions) and [redirects](https://docs.netlify.com/routing/redirects/). 
