@@ -50,7 +50,7 @@ export class ResumeExcel {
       [110, 95, 9, 7],
     ]);
     XLSX.writeFile(this.workbook, 'EjemploACP.xlsx');
-    this.workbook = XLSX.utils.book_new();
+    this.clearExcel();
   }
 
   downloadClustering() {
@@ -69,6 +69,6 @@ export class ResumeExcel {
       [12.3, 7.8],
     ]);
     XLSX.writeFile(this.workbook, 'EjemploClustering.xlsx');
-    this.workbook = XLSX.utils.book_new();
+    this.clearExcel();
   }
 }

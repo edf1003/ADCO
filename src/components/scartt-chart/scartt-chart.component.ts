@@ -192,8 +192,8 @@ export class ScarttChartComponent implements OnInit, OnChanges {
     this.chartData.push({
       data: puntos,
       label: 'Puntos',
-      pointRadius: 8,
-      pointHoverRadius: 8,
+      pointRadius: 4,
+      pointHoverRadius: 4,
       pointHoverBackgroundColor: '#73C6B6',
       pointBackgroundColor: '#73C6B6',
       pointBorderColor: '#73C6B6',
@@ -208,8 +208,8 @@ export class ScarttChartComponent implements OnInit, OnChanges {
     this.chartData.push({
       data: [scatterDataPoint],
       label: 'Puntos',
-      pointRadius: 8,
-      pointHoverRadius: 8,
+      pointRadius: 4,
+      pointHoverRadius: 4,
       pointHoverBackgroundColor: color,
       pointBackgroundColor: color,
       pointBorderColor: color,
