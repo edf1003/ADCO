@@ -1,112 +1,75 @@
-# ADCO Quick Start    
+# ADCO   
 ![ADCONEtlifyAngular](https://github.com/edf1003/ADCO/assets/93576373/32603c52-7331-4656-bd1c-5507f6104241)
 
+Esta es una aplicación web desarrollada en Angular con Node.js, Visual Studio y desplegada en Netlify. La aplicación se enfoca en el análisis de datos y ofrece varias funcionalidades, que incluyen análisis de componentes principales, cálculo de distancias, clustering y detección de outliers.
 
-## Table of Contents:
+La aplicación se encuentra actualmente desplegad y se puede consultar en: https://main--tfg-edf.netlify.app/
 
-- [Setup](#setup)
-- [Deploying](#deploying)
-- [Styling](#styling)
-  - [Notes on Styling](#notes-on-styling)
-  - [Remove Styling](#remove-styling)
-- [Testing](#testing)
-  - [Included Default Testing](#included-default-testing)
-  - [Removing Renovate](#removing-renovate)
-  - [Removing Cypress](#removing-cypress)
-- [Angular + Netlify Resources](#angular--netlify-resources)
-
-## Setup
-
-Clone this repo with one of these options
-
-Then intsall Node.js version 18.16.0 LTS (https://nodejs.org/es)
-
-Finally install the necessary packages and run the project locally to make sure everything works.
-
-```bash
-npm install
-npm run start
-```
-
-Alternatively, you can run this locally with [the Netlify CLI](https://docs.netlify.com/cli/get-started/)'s `netlify dev` command for more options like receiving a live preview to share (`netlify dev --live`) and the ability to test [Netlify Functions](https://www.netlify.com/products/functions) and [redirects](https://docs.netlify.com/routing/redirects/). 
-
-> 🚨 If you decide to change the project name be sure to change it everywhere in the project including the [Netlify configuration file, `netlify.toml`](./netlify.toml), as there are many places in Angular projects where the project name is used. A quick fix is to find/replace all instances of `angular-quickstart` with your project name.
-
-## Deploying
-
-There are a few ways to deploy this template:
-- Click the 'Deploy to Netlify' button above 
-- Use the `netlify deploy` command
-- Head to the [Netlify UI](https://app.netlify.com/) to deploy via GitHub or [drag and drop](https://app.netlify.com/drop) the project folder
-- Use the Netlify CLI's create from template command `netlify sites:create-template angular-quickstart` which will create a repo, Netlify project, and deploy it
-
-## Styling
-
-We've added some modern styling to this template using css within an external stylesheet, this will allow you to easily remove our styling and add in your own. 
-
-If you decide that you want to keep our styling you can review our style notes below. 
-
-### Notes on Styling
-
-The variables below give you the ability to change the gradient colors of the blobs and are interpolated into the URL string of the background-img within the body. 
-
-```css
-// Controls the blob blur gradient colors within the main tag's svg
---top-right-blur-1: #20C6B7;
---top-right-blur-2: #4D9ABF;
---bttm-left-blur-1: #de3641;
---bttm-left-blur-2: #e46b73;
-```
-
-## Remove Styling
-
-If you decide that our styling is not for you, all you'll need to do is remove the [demo-styling.scss](https://github.com/netlify-templates/angular-quickstart/blob/tn/designUpdates/src/demo-styling.scss) file. 
-
-## Testing
-
-### Included Default Testing
-
-We’ve included some tooling that helps us maintain these templates. This template currently uses:
-
-- [Renovate](https://www.mend.io/free-developer-tools/renovate/) - to regularly update our dependencies
-- [Cypress](https://www.cypress.io/) - to run tests against how the template runs in the browser
-- [Cypress Netlify Build Plugin](https://github.com/cypress-io/netlify-plugin-cypress) - to run our tests during our build process
-
-If your team is not interested in this tooling, you can remove them with ease!
-
-### Removing Renovate
-
-In order to keep our project up-to-date with dependencies we use a tool called [Renovate](https://github.com/marketplace/renovate). If you’re not interested in this tooling, delete the `renovate.json` file and commit that onto your main branch.
-
-### Removing Cypress
-
-For our testing, we use [Cypress](https://www.cypress.io/) for end-to-end testing. This makes sure that we can validate that our templates are rendering and displaying as we’d expect. By default, we have Cypress not generate deploy links if our tests don’t pass. If you’d like to keep Cypress and still generate the deploy links, go into your `netlify.toml` and delete the plugin configuration lines:
-
-```diff
-[[plugins]]
-  package = "netlify-plugin-cypress"
--  [plugins.inputs.postBuild]
--    enable = true
--
--  [plugins.inputs]
--    enable = false 
-```
-
-If you’d like to remove the `netlify-plugin-cypress` build plugin entirely, you’d need to delete the entire block above instead. And then make sure sure to remove the package from the dependencies using:
-
-```bash
-npm uninstall -D netlify-plugin-cypress
-```
-
-And lastly if you’d like to remove Cypress entirely, delete the entire `cypress` folder and the `cypress.config.ts` file. Then remove the dependency using:
-
-```bash
-npm uninstall cypress
-```
+## 🚀 Inicio rápido (VSC)
+- Clona el repositorio.
+- Instalar node.js en su version 18.16.0 LTS
+- Instala las dependencias utilizando el comando: npm install
+- Inicia la aplicación utilizando el comando: npm run start
+- Abre tu navegador web y accede a http://localhost:4200 para ver la aplicación en funcionamiento.
 
 
-Hope this template helps :) Enjoy the application and Happy coding 👩🏻‍💻!
 
----
+## 📖 Descripción
+Esta aplicación web proporciona un entorno para el análisis de datos utilizando técnicas como componentes principales, cálculo de distancias, clustering y detección de outliers. Permite cargar conjuntos de datos, realizar análisis estadísticos, visualizar y guardar los resultados de manera interactiva.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+
+
+## 🛠️ Tecnologías utilizadas
+La aplicación se desarrolló utilizando las siguientes tecnologías:
+
+- Angular: Framework de desarrollo web. Más información en angular.io.
+- Node.js: Entorno de ejecución de JavaScript en el lado del servidor. Más información en nodejs.org.
+- Visual Studio: Entorno de desarrollo integrado (IDE) utilizado para escribir y depurar el código. Más información en visualstudio.com.
+- Netlify: Herramienta de despliegue web gratuita. Más información en Netlify.com.
+
+
+
+## ✨ Funcionalidades
+La aplicación web ofrece las siguientes funcionalidades:
+
+- Análisis de componentes principales: Permite realizar el análisis de componentes principales (PCA) sobre conjuntos de datos cargados. Proporciona visualizaciones interactivas para explorar la varianza explicada por cada componente y los valores de carga de cada variable en los componentes principales.
+- Cálculo de distancias: Permite calcular diferentes medidas de distancia entre observaciones en conjuntos de datos, como la distancia euclíedea, la distancia de Mahalanobis, etc. Proporciona una interfaz para visualizar las distancias calculadas.
+- Clustering: Permite aplicar los siguientes algoritmos de clustering, DBSCAN, OPTICS y K-means, a los conjuntos de datos cargados. Proporciona visualizaciones para explorar los grupos resultantes y las características de cada cluster.
+- Detección de outliers: Permite identificar outliers en los conjuntos de datos utilizando diferentes métodos. Proporciona visualizaciones para identificar los puntos atípicos en los datos.
+
+
+
+## 🚧 Futuras mejoras
+En el futuro, se planea implementar las siguientes mejoras en la aplicación:
+
+- Mejorar la interfaz de usuario para facilitar la carga y exploración de conjuntos de datos.
+- Agregar más algoritmos de clustering y técnicas de detección de outliers.
+- Agregar nuevos idiomas a la internacionalización.
+- Adaptación multiplataforma.
+
+
+
+## 💻 Uso
+Para utilizar la aplicación en local, sigue estos pasos:
+
+1. Clona el repositorio en tu máquina local.
+2. Instala las dependencias ejecutando el siguiente comando: npm install
+3. Inicia la aplicación utilizando el siguiente comando: npm run start
+4. Abre tu navegador web y accede a http://localhost:4200 para utilizar la aplicación.
+
+Tambien puedes acceder a la aplicación en el siguiente enlace: https://main--tfg-edf.netlify.app/
+
+## 🤝 Contribuidores
+
+* Enrique Diez Fernández.
+
+
+## 📞 Soporte
+
+Para cualquier consulta o comentario, puedes ponerte en contacto con nosotros a través del correo electrónico: [edf1003@alu.ubu.es](https://edf1003@alu.ubu.es)
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT.
+
+## ¡Disfruta de ADCO! 😊
