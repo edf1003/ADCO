@@ -1,9 +1,9 @@
 # ADCO   
 ![ADCONEtlifyAngular](https://github.com/edf1003/ADCO/assets/93576373/32603c52-7331-4656-bd1c-5507f6104241)
 
-Esta es una aplicación web desarrollada en Angular con Node.js, Visual Studio y desplegada en Netlify. La aplicación se enfoca en el análisis de datos y ofrece varias funcionalidades, que incluyen análisis de componentes principales, cálculo de distancias, clustering y detección de outliers.
+Esta es una aplicación web desarrollada en Angular con Node.js, Visual Studio y desplegada en Netlify. La aplicación se enfoca en el análisis de datos y ofrece varias funcionalidades, que incluyen análisis de componentes principales, cálculo de distancias, análisis de clustering y detección de outliers.
 
-La aplicación se encuentra actualmente desplegad y se puede consultar en: https://main--tfg-edf.netlify.app/
+La aplicación se encuentra actualmente desplegada y se puede consultar en: https://main--tfg-edf.netlify.app/
 
 ## 🚀 Inicio rápido (VSC)
 - Clona el repositorio.
